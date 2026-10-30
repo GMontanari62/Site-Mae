@@ -6,6 +6,15 @@
 <title>CMG Engenharia &amp; Consultoria</title>
 <meta name="description" content="Engenharia Civil com mais de 35 anos de experiência em Belo Horizonte, MG. Projetos complementares, laudos especializados, vistorias e perícia técnica.">
 <meta name="theme-color" content="#F4F6F8">
+<link rel="canonical" href="https://cmgenge.com.br/">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="CMG Engenharia &amp; Consultoria">
+<meta property="og:title" content="CMG Engenharia &amp; Consultoria">
+<meta property="og:description" content="Engenharia Civil com mais de 35 anos de experiência em Belo Horizonte, MG. Projetos complementares, laudos especializados, vistorias e perícia técnica.">
+<meta property="og:url" content="https://cmgenge.com.br/">
+<meta property="og:image" content="https://cmgenge.com.br/assets/logo.png"><meta property="og:image:width" content="640"><meta property="og:image:height" content="376">
+<meta property="og:image:alt" content="Logotipo da CMG Engenharia &amp; Consultoria">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +23,7 @@
 /* Identidade "aço arquitetônico": fundo branco gelo, azul aço institucional, prata e grafite em linhas e bordas.
    O azul técnico (#287D9B) é só detalhe: hover, pontos de conexão e indicadores. */
 :root{
- --steel:#182A3A;--graph:#3F4A54;--silver:#A7B0B7;--silver-l:#D9DEE2;--ice:#F4F6F8;--white:#fff;--tech:#287D9B;
+ --steel:#182A3A;--graph:#3F4A54;--silver:#A7B0B7;--silver-l:#D9DEE2;--ice:#F4F6F8;--white:#fff;--tech:#287D9B;--tech-t:#1F6E8C;
  --hair:#D9DEE2;--ease:cubic-bezier(.22,1,.36,1);--hh:84px;
  --ff:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
@@ -26,13 +35,17 @@ h1,h2,h3,h4{font-family:var(--ff);color:var(--steel);font-weight:800;line-height
 h1{font-size:clamp(2.25rem,5.4vw,4.25rem)}h2{font-size:clamp(1.65rem,3.2vw,2.5rem)}h3{font-size:clamp(1.1rem,1.8vw,1.35rem)}
 :focus-visible{outline:2px solid var(--tech);outline-offset:3px}
 .skip{position:fixed;left:16px;top:-60px;z-index:100;background:var(--steel);color:#fff;padding:8px 16px;transition:top 0.3s var(--ease)}.skip:focus{top:12px}
+main:focus,.view h1:focus{outline:none}
+main{display:block}
+.noscript-note{position:relative;z-index:2;padding:150px 24px 0;margin-bottom:-60px;background:var(--ice);color:var(--steel);font-weight:600;text-align:center}.noscript-note a{text-decoration:underline;text-underline-offset:3px}
 /* fundo: blueprint estático (fallback) + canvas 3D por cima */
 #fb{position:fixed;inset:0;z-index:0;pointer-events:none;
  background:linear-gradient(var(--silver-l) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,var(--silver-l) 1px,transparent 1px) 0 0/56px 56px;
  -webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 88%);mask-image:linear-gradient(90deg,transparent 30%,#000 88%);opacity:.5;inset:-90px 0}
 #fb::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800' fill='none' stroke='%23A7B0B7' stroke-width='1.2'%3E%3Cpath d='M440 720V260l180-100v560M440 260l180 100M440 420l180 100M440 580l180 100M440 260l180-100M620 160h120v560H620'/%3E%3Cpath d='M440 720h300' stroke='%233F4A54' stroke-opacity='.5'/%3E%3Ccircle cx='440' cy='260' r='4' fill='%23287D9B' stroke='none'/%3E%3Ccircle cx='620' cy='360' r='4' fill='%23287D9B' stroke='none'/%3E%3C/svg%3E") right 4% center/min(62vw,820px) no-repeat}
-#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
+#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;opacity:0;transition:opacity .5s ease}
 #bg3d.on{opacity:1}
+.g3d #fb::after{opacity:0;transition:opacity .5s ease}  /* com o 3D ativo, o desenho estático de reserva sai; a malha fica */
 @media(min-width:981px){#bg3d{-webkit-mask-image:linear-gradient(90deg,transparent 38%,#000 60%);mask-image:linear-gradient(90deg,transparent 38%,#000 60%)}}
 #app{position:relative;z-index:1}
 .in{width:100%;max-width:1200px;margin-inline:auto;padding-inline:max(24px,env(safe-area-inset-left,0px))}
@@ -68,7 +81,7 @@ h1{font-size:clamp(2.25rem,5.4vw,4.25rem)}h2{font-size:clamp(1.65rem,3.2vw,2.5re
 .dd-sp a:nth-child(1){--n:0}.dd-sp a:nth-child(2){--n:1}.dd-sp a:nth-child(3){--n:2}.dd-sp a:nth-child(4){--n:3}.dd-sp a:nth-child(5){--n:4}.dd-sp a:nth-child(6){--n:5}
 .dd-t{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;padding:12px 8px;background:none;border:0;font:700 .95rem var(--ff);color:var(--steel);text-align:left;cursor:pointer}
 .dd-t::after{content:"";width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);opacity:.6;flex:none}
-.dd-s:hover>.dd-t,.dd-s:focus-within>.dd-t,.dd-s.open>.dd-t{color:var(--tech)}
+.dd-s:hover>.dd-t,.dd-s:focus-within>.dd-t,.dd-s.open>.dd-t{color:var(--tech-t)}
 .dd-sp a,.dd-p>.dd-all{position:relative;display:block;padding:8px 0;font-size:.95rem;color:var(--steel)}
 .dd-p>.dd-all{margin:8px 8px 0;padding:16px 0 8px;border-top:1px solid var(--hair);font-weight:700}
 .dd.shut>.dd-p,.dd.shut .dd-sp{visibility:hidden;pointer-events:none;transition:visibility 0s linear .45s}
@@ -76,10 +89,10 @@ h1{font-size:clamp(2.25rem,5.4vw,4.25rem)}h2{font-size:clamp(1.65rem,3.2vw,2.5re
 .dd.shut .dd-sp::before{clip-path:inset(-1px 100% -1px -1px round 24px);transition-delay:.04s}.dd.shut .dd-s.flip>.dd-sp::before{clip-path:inset(-1px -1px -1px 100% round 24px)}
 .dd.shut .dd-t,.dd.shut .dd-p>.dd-all,.dd.shut .dd-sp a{opacity:0;translate:-8px 0;transition:opacity 0.25s var(--ease) var(--cd),translate 0.25s var(--ease) var(--cd),color 0.3s var(--ease),transform 0.3s var(--ease)}
 .dd.shut>a::before{transform:none;opacity:.6}
-.dd-sp a:hover,.dd-p>.dd-all:hover{color:var(--tech);transform:translateX(4px)}
+.dd-sp a:hover,.dd-p>.dd-all:hover{color:var(--tech-t);transform:translateX(4px)}
 .dd-sp a::before,.dd-t::before{content:"";position:absolute;left:-12px;top:50%;width:2px;height:16px;margin-top:-8px;background:var(--tech);opacity:0;transform:translateX(-6px) scaleY(.4);transition:opacity 0.3s var(--ease),transform 0.35s var(--ease)}
 .dd-t::before{left:-4px}
-.dd-lk::after{display:none}.dd-lk:hover{color:var(--tech)}.dd-lk:hover::before{opacity:1;transform:none}
+.dd-lk::after{display:none}.dd-lk:hover{color:var(--tech-t)}.dd-lk:hover::before{opacity:1;transform:none}
 .dd-sp a:hover::before,.dd-s:hover>.dd-t::before,.dd-s:focus-within>.dd-t::before{opacity:1;transform:none}
 /* botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 32px;font:700 .8rem var(--ff);letter-spacing:.09em;text-transform:uppercase;border:1px solid transparent;border-radius:3px;cursor:pointer;transition:background-color 0.35s var(--ease),border-color 0.35s var(--ease),color 0.35s var(--ease),transform 0.35s var(--ease),box-shadow 0.35s var(--ease)}
@@ -118,7 +131,7 @@ h1{font-size:clamp(2.25rem,5.4vw,4.25rem)}h2{font-size:clamp(1.65rem,3.2vw,2.5re
 .sh{margin-bottom:48px;max-width:680px}.sh p{margin-top:16px;color:var(--graph)}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hair);background:var(--white)}
 .pillars>div{padding:40px 32px;border-left:1px solid var(--hair)}.pillars>div:first-child{border-left:0}
-.pillars h3{margin-bottom:8px}.pillars h3 span{display:block;font:700 .72rem var(--ff);letter-spacing:.16em;color:var(--tech);margin-bottom:16px}
+.pillars h3{margin-bottom:8px}.pillars h3 span{display:block;font:700 .72rem var(--ff);letter-spacing:.16em;color:var(--tech-t);margin-bottom:16px}
 .quote{display:grid;grid-template-columns:minmax(0,1fr);max-width:860px}
 blockquote{border-left:3px solid var(--silver);padding-left:32px}blockquote p{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.6;color:var(--steel);font-weight:500}blockquote footer{margin-top:24px;font:700 .9rem var(--ff);color:var(--graph);letter-spacing:.04em}
 /* cartões de serviço */
@@ -127,24 +140,24 @@ blockquote{border-left:3px solid var(--silver);padding-left:32px}blockquote p{fo
 .card::before{content:"";position:absolute;left:-1px;top:-1px;width:28px;height:28px;border-left:2px solid var(--steel);border-top:2px solid var(--steel);transition:border-color 0.4s var(--ease),width 0.5s var(--ease),height 0.5s var(--ease)}
 .card:hover{border-color:var(--silver);transform:translateY(-4px);box-shadow:0 18px 40px rgba(24,42,58,.09)}.card:hover::before{border-color:var(--tech);width:44px;height:44px}
 .ic{width:46px;height:46px;border:1px solid var(--silver-l);border-radius:3px;display:grid;place-items:center;color:var(--steel);background:var(--ice);transition:color 0.35s var(--ease),border-color 0.35s var(--ease),background-color 0.35s var(--ease)}
-.card:hover .ic{color:var(--tech);border-color:var(--tech);background:#fff}
+.card:hover .ic{color:var(--tech-t);border-color:var(--tech);background:#fff}
 .card .r-t{font:800 1.12rem/1.25 var(--ff);color:var(--steel);letter-spacing:-.01em}
 .card .r-d{font-size:.95rem;line-height:1.6;color:var(--graph);flex:1}
 .card .r-n{font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:16px;border-top:1px solid var(--silver-l)}
-.arw{color:var(--steel);transition:transform 0.4s var(--ease),color 0.3s var(--ease)}.card:hover .arw{transform:translateX(5px);color:var(--tech)}
+.arw{color:var(--steel);transition:transform 0.4s var(--ease),color 0.3s var(--ease)}.card:hover .arw{transform:translateX(5px);color:var(--tech-t)}
 .grp{margin-bottom:72px}.grp h3{margin:40px 0 24px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--graph)}
-.by{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.by span{margin-right:8px;font-weight:700;color:var(--steel)}.by a{padding:8px 24px;border:1px solid var(--silver);background:#fff;border-radius:3px;font-weight:600;font-size:.92rem;color:var(--steel);transition:border-color 0.3s var(--ease),color 0.3s var(--ease),transform 0.3s var(--ease)}.by a:hover{border-color:var(--tech);color:var(--tech);transform:translateY(-2px)}
+.by{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.by span{margin-right:8px;font-weight:700;color:var(--steel)}.by a{padding:8px 24px;border:1px solid var(--silver);background:#fff;border-radius:3px;font-weight:600;font-size:.92rem;color:var(--steel);transition:border-color 0.3s var(--ease),color 0.3s var(--ease),transform 0.3s var(--ease)}.by a:hover{border-color:var(--tech);color:var(--tech-t);transform:translateY(-2px)}
 /* páginas internas */
 .ph{padding-top:var(--hh);border-bottom:1px solid var(--hair)}
 .view:not(#v-home) .blk{background:linear-gradient(90deg,rgba(244,246,248,.93) 0%,rgba(244,246,248,.9) 58%,rgba(244,246,248,.78) 100%)}
 .blk:has(.teaser){background:rgba(244,246,248,.88)}
 .ph .in{padding-block:56px}
 @media(min-width:768px){.ph .in{padding-block:88px 64px}}
-.crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:.85rem;color:#5d6872;margin-bottom:32px}.crumbs a:hover{color:var(--tech)}.crumbs b{font-weight:700;color:var(--steel)}
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:.85rem;color:#5d6872;margin-bottom:32px}.crumbs a:hover{color:var(--tech-t)}.crumbs b{font-weight:700;color:var(--steel)}
 .ph h1{max-width:20ch;font-size:clamp(2rem,4.6vw,3.4rem)}.lead{margin-top:24px;font-size:1.15rem;color:var(--graph);max-width:56ch}
 .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px}
 .cat{border:1px solid var(--hair);background:var(--white);padding:32px;display:flex;flex-direction:column;gap:24px;min-height:230px;border-radius:3px;transition:border-color 0.4s var(--ease),transform 0.5s var(--ease),box-shadow 0.5s var(--ease)}
-.cat:hover{border-color:var(--silver);transform:translateY(-4px);box-shadow:0 18px 40px rgba(24,42,58,.09)}.cat h2{font-size:clamp(1.3rem,2.2vw,1.7rem)}.cat p{flex:1}.more{display:inline-flex;gap:16px;align-items:center;font-weight:700;color:var(--steel)}.cat:hover .arw{color:var(--tech);transform:translateX(5px)}
+.cat:hover{border-color:var(--silver);transform:translateY(-4px);box-shadow:0 18px 40px rgba(24,42,58,.09)}.cat h2{font-size:clamp(1.3rem,2.2vw,1.7rem)}.cat p{flex:1}.more{display:inline-flex;gap:16px;align-items:center;font-weight:700;color:var(--steel)}.cat:hover .arw{color:var(--tech-t);transform:translateX(5px)}
 .svc{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:64px;align-items:start}
 .svc article h2{font-size:clamp(1.4rem,2.4vw,1.9rem);margin:56px 0 24px}.svc article h2:first-child{margin-top:0}.svc article p{margin-bottom:24px;max-width:66ch}
 .plain{list-style:none;padding:0;max-width:66ch}.plain li{padding:16px 0 16px 32px;border-bottom:1px solid var(--hair);position:relative}.plain li:first-child{border-top:1px solid var(--hair)}.plain li::before{content:"";position:absolute;left:4px;top:24px;width:10px;height:10px;border:1.5px solid var(--steel);transform:rotate(45deg) scale(.7)}
@@ -153,7 +166,7 @@ blockquote{border-left:3px solid var(--silver);padding-left:32px}blockquote p{fo
 .stamp dl{padding:8px 24px}.stamp dt{font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872;margin-top:16px}.stamp dd{font-weight:700;color:var(--steel);padding-bottom:16px;border-bottom:1px solid var(--silver-l)}.stamp dd:last-of-type{border-bottom:0}
 .stamp .btn{margin:8px 24px 24px;width:calc(100% - 48px)}
 .stamp .btn-y+.btn-o{margin-top:0;margin-bottom:24px}.stamp .btn-y:has(+.btn-o){margin-bottom:16px}
-.back{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-weight:700;color:var(--steel);transition:color 0.3s var(--ease)}.back:hover{color:var(--tech)}
+.back{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-weight:700;color:var(--steel);transition:color 0.3s var(--ease)}.back:hover{color:var(--tech-t)}
 aside{min-width:0}
 /* sobre */
 .about{padding:120px 0 72px}
@@ -184,23 +197,28 @@ aside{min-width:0}
 .band h2{color:var(--steel);max-width:20ch}.band p{color:var(--graph);margin-top:12px;max-width:48ch}
 /* contato */
 .ct{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
-.cdl{border-top:1px solid var(--hair)}.cdl>div{padding:24px 0;border-bottom:1px solid var(--hair)}.cdl dt{font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872}.cdl dd{font:700 1.15rem/1.45 var(--ff);color:var(--steel);overflow-wrap:anywhere}.cdl a{transition:color 0.3s var(--ease)}.cdl a:hover{color:var(--tech)}.cdl .ul{text-decoration:underline;text-underline-offset:4px}
+.cdl{border-top:1px solid var(--hair)}.cdl>div{padding:24px 0;border-bottom:1px solid var(--hair)}.cdl dt{font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872}.cdl dd{font:700 1.15rem/1.45 var(--ff);color:var(--steel);overflow-wrap:anywhere}.cdl a{transition:color 0.3s var(--ease)}.cdl a:hover{color:var(--tech-t)}.cdl .ul{text-decoration:underline;text-underline-offset:4px}
 form{border:1px solid var(--hair);border-top:3px solid var(--steel);background:var(--white);padding:clamp(24px,4vw,48px);border-radius:3px;box-shadow:0 20px 50px rgba(24,42,58,.06)}form h2{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:32px}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:24px}.f{margin-bottom:24px;min-width:0}
 label{display:block;font:700 .78rem var(--ff);letter-spacing:.06em;color:var(--steel);margin-bottom:8px}
 input,textarea,select{width:100%;font:inherit;font-size:1rem;padding:13px 16px;border:1px solid var(--hair);background:#fff;color:var(--graph);border-radius:3px;transition:border-color 0.3s var(--ease),box-shadow 0.3s var(--ease)}
-input::placeholder,textarea::placeholder{color:#8b949c}
+input::placeholder,textarea::placeholder{color:#66717b;opacity:1}
 input:hover,textarea:hover,select:hover{border-color:var(--silver)}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tech);box-shadow:0 0 0 3px rgba(40,125,155,.15)}textarea{min-height:130px;resize:vertical}input[type=file]{font-size:.9rem;padding:8px}
 input[type=file]::file-selector-button{font:inherit;font-weight:700;margin-right:16px;padding:8px 16px;border:1px solid var(--silver);background:var(--ice);color:var(--steel);border-radius:3px;cursor:pointer}
-form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);background:rgba(40,125,155,.07);margin-bottom:24px;color:var(--steel);font-weight:600}
+form .btn{width:100%}.fmsg{padding:16px 24px;border:1px solid var(--tech);background:rgba(40,125,155,.07);margin-bottom:24px;color:var(--steel);font-weight:600}
+.fmsg.err{border-color:#9a2a2a;border-left-width:4px;background:rgba(154,42,42,.06)}.fmsg a{text-decoration:underline;text-underline-offset:3px}.fmsg[hidden]{display:none}
+.hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.fhint{display:block;margin-top:6px;font-size:.85rem;line-height:1.5;color:#5d6872}
+.fbtn[aria-disabled="true"]{opacity:.7;cursor:progress;pointer-events:none}
+.falt{margin-top:24px;padding-top:16px;border-top:1px solid var(--hair);font-size:.95rem;color:var(--graph)}.falt a{font-weight:700;color:var(--steel);text-decoration:underline;text-underline-offset:3px}.falt a:hover{color:var(--tech-t)}
 .legal{max-width:860px}.legal h2{font-size:1.45rem;margin:48px 0 16px}.legal p,.legal li{margin-bottom:8px;max-width:70ch}.legal ul{padding-left:24px}.legal a{text-decoration:underline;text-underline-offset:3px}
 /* rodapé */
 #app>footer{background:var(--steel);color:var(--silver-l);position:relative}
 .fg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);gap:40px 64px;padding-block:48px 32px;align-items:start}
 .fn{display:flex;flex-wrap:wrap;gap:8px 24px}.fn a{padding:4px 0!important}
 .fc{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 24px;padding-top:16px;border-top:1px solid rgba(167,176,183,.25)}.fc a{font-weight:700;color:#fff}
-.fl{display:inline-block;margin-bottom:16px}.fl img{width:120px;height:auto}
+.fl{display:inline-block;margin-bottom:16px}.fl img{width:130px;height:auto}
 #app>footer h4{font:700 .72rem var(--ff);letter-spacing:.16em;text-transform:uppercase;color:var(--silver);margin-bottom:16px}#app>footer p,#app>footer a{display:block;font-size:.95rem}#app>footer .fg a:not(.btn){padding:4px 0;transition:color 0.3s var(--ease),transform 0.3s var(--ease)}#app>footer .fg a:not(.btn):hover{color:#fff;transform:translateX(4px)}
 .nm{font:800 1.2rem/1.2 var(--ff);color:#fff;margin-bottom:8px}
 .rod{border-top:1px solid rgba(167,176,183,.25)}.rod .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:24px;font-size:.88rem;color:var(--silver)}
@@ -257,6 +275,68 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
 #v-home .stats .c{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--silver-l);color:var(--steel);font-size:.82rem;font-weight:600;line-height:1.4}
 @media(max-width:640px){#v-home .stats{grid-template-columns:1fr}#v-home .stats .grp{margin-right:0}#v-home .stats div{padding:24px 0;border-top:1px solid var(--hair)}#v-home .stats div:first-child{border-top:0}}
 @media(max-width:980px){#v-home .pillars>div{padding:32px 0;border-left:0;border-top:1px solid var(--silver)}#v-home .pillars>div:first-child{border-top:0;padding-top:8px}#v-home .pillars>div:last-child{padding-bottom:8px}#v-home .teaser .foto{margin-inline:auto}}
+/* Sobre a Engenheira (desktop) */
+.cred{display:none}.cta-d{display:none}
+@media(min-width:981px){
+#v-sobre .about{padding:128px 0 88px}
+#v-sobre .about-g{grid-template-columns:minmax(0,1fr) 360px;column-gap:72px;row-gap:0;align-items:start;grid-template-rows:auto auto auto auto auto auto 1fr}
+#v-sobre .about-t{display:contents}
+#v-sobre .about-t h1{grid-column:1;grid-row:1}
+#v-sobre .who{grid-column:1;grid-row:2;margin:12px 0 24px}
+#v-sobre .about-t>p:nth-of-type(2){grid-column:1;grid-row:3;margin-bottom:0}
+#v-sobre .about-t>p{max-width:66ch}
+#v-sobre .foto{grid-column:2;grid-row:1/5;align-self:start;margin-bottom:32px;padding:0;border:0;background:none;border-radius:4px;overflow:hidden;width:360px;position:static}
+#v-sobre .foto img{display:block;height:auto}
+#v-sobre .cred{align-self:end;display:grid;grid-column:1;grid-row:4;margin:32px 0 32px;border-block:1px solid var(--silver)}
+#v-sobre .cred>div{padding:20px 24px 20px 0}
+#v-sobre .cred b{font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.05;margin-bottom:6px;letter-spacing:-.02em}
+#v-sobre .cred span{font-size:.92rem;font-weight:600;color:var(--graph)}
+#v-sobre .about-t>p:nth-of-type(3){grid-column:1;grid-row:5;margin-bottom:20px}
+#v-sobre .about-t>p:nth-of-type(4){grid-column:1;grid-row:6;margin-bottom:0}
+#v-sobre .spec{grid-column:2;grid-row:5/8;align-self:start;margin:0;max-width:none;border-top:0;padding:12px 24px;background:rgba(246,248,250,.96);border-radius:4px}
+#v-sobre .spec .dup{display:none}
+#v-sobre .spec div{display:block;padding:0 0 8px;border:0}#v-sobre .spec div:last-child{padding-bottom:0}
+#v-sobre .spec div+div{padding-top:8px;border-top:1px solid var(--silver-l)}
+#v-sobre .spec dt{padding:0 0 3px}
+#v-sobre .spec dd{font-weight:600;line-height:1.45}
+#v-sobre .spec .pr dd{display:block;font-weight:600}
+#v-sobre .spec .pr .ln{display:inline}
+#v-sobre .spec .pr .w{display:inline;white-space:normal}
+#v-sobre .spec .pr .w::before{content:none}
+#v-sobre .spec .pr .w::after{content:", "}
+#v-sobre .spec .pr .ln:last-child .w:last-child::after{content:none}
+#v-sobre .cta-d{display:flex;grid-column:1;grid-row:7;align-self:end;margin-top:32px}#v-sobre .sob-b{display:none}
+}
+/* Home refinada (desktop): composição e unidade visual */
+@media(min-width:981px){
+#v-home .hero{justify-content:center}
+#v-home .hero-in{padding-block:96px 24px}
+#v-home .blk:has(.pillars){padding-block:56px}
+#v-home .pillars>div{padding:8px 48px}
+#v-home .pillars h3 span{margin-bottom:20px}
+#v-home .pillars h3{font-size:1.2rem;margin-bottom:12px}
+#v-home .pillars p{max-width:32ch}
+#v-home .blk.w{padding-block:44px}
+#v-home .quote{max-width:760px}
+#v-home blockquote p{font-size:clamp(1.15rem,1.7vw,1.4rem);line-height:1.6;text-wrap:pretty}
+#v-home blockquote footer{margin-top:20px}
+#v-home .teaser{gap:56px;align-items:center}
+#v-home .teaser .foto{padding:0;border:0;background:none;border-radius:4px;overflow:hidden;width:300px}
+#v-home .teaser .foto img{display:block}
+#v-home .teaser h2{margin-bottom:0}
+#v-home .stats{margin:28px 0 0;border-block:1px solid var(--silver)}
+#v-home .stats>div{padding:20px 24px 20px 0}
+#v-home .stats b{font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.05;margin-bottom:6px;letter-spacing:-.02em}
+#v-home .stats>div>span:not(.grp){font-size:.92rem;font-weight:600;color:var(--graph)}
+#v-home .stats .grp{display:block;margin:12px 0 0;padding-top:12px;border-top:1px solid var(--silver-l);font-size:.82rem;line-height:1.5;color:var(--graph)}
+#v-home .stats .grp small{display:block;margin-bottom:2px;font-size:.68rem}
+#v-home .stats .c{display:inline;padding:0;border-radius:0;background:none;color:inherit;font-size:inherit;font-weight:500}
+#v-home .stats .c+.c::before{content:" · "}
+#v-home .teaser .cta{margin-top:28px}
+#v-home .band .in{padding-block:48px;gap:40px}
+#v-home .band h2{margin:0;max-width:none}
+#v-home .band p{margin-top:10px}
+}
 .svc .hl{margin:32px 0 0;padding:8px 0 8px 24px;border-left:3px solid var(--steel)}.svc .hl p{font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.5;font-weight:700;color:var(--steel);max-width:none}
 /* Serviços: página compacta (etapa 31) */
 #v-servicos .ph .in{padding-block:56px 24px}
@@ -264,7 +344,7 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
 #v-servicos .lead{margin-top:8px;font-size:1rem}
 #v-servicos .blk{padding-block:32px 48px}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.svc-hint{display:none;align-items:center;gap:8px;margin:0 0 24px;font-size:.82rem;color:var(--silver-d,#7d8791);letter-spacing:.01em}
+.svc-hint{display:none;align-items:center;gap:8px;margin:0 0 24px;font-size:.82rem;color:#5d6872;letter-spacing:.01em}
 @media(hover:hover){.svc-hint{display:flex}}
 .tab{padding:10px 24px;border:1px solid var(--silver);border-radius:999px;background:#fff;font:600 .88rem var(--ff);color:var(--steel);cursor:pointer;transition:background-color 0.35s var(--ease),color 0.35s var(--ease),border-color 0.35s var(--ease),transform 0.35s var(--ease)}
 .tab:hover{border-color:var(--steel);transform:translateY(-1px)}
@@ -285,12 +365,39 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
 #v-servicos .card:hover .r-d,#v-servicos .card:focus-visible .r-d{opacity:1;clip-path:inset(0 -30px -40px -30px)}
 #v-servicos .card:hover,#v-servicos .card:focus-visible{z-index:6}
 }
-}
 #v-servicos .card .r-n{padding-top:12px;margin-top:0}
 @media(max-width:1040px){#v-servicos .cards{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){#v-servicos .cards{grid-template-columns:1fr}#v-servicos .blk{padding-block:24px 40px}}
 @keyframes hit{0%,55%{border-color:var(--tech);box-shadow:0 0 0 4px rgba(40,125,155,.2)}100%{border-color:var(--hair);box-shadow:0 0 0 0 rgba(40,125,155,0)}}
 #v-servicos .card.hit{animation:hit 2.2s var(--ease)}
+/* Catálogo de serviços (desktop) */
+@media(min-width:981px){
+#v-servicos .ph .in{padding-block:56px 16px}
+#v-servicos .blk{padding-block:24px 56px}
+#v-servicos .svc-hint{display:none}
+#v-servicos .tabs{margin-bottom:32px}
+#v-servicos .tab[aria-pressed="true"]{box-shadow:inset 0 -3px 0 var(--tech)}
+#v-servicos .grp{margin-bottom:48px}
+#v-servicos .grp:last-of-type{margin-bottom:40px}
+#v-servicos .sh{margin-bottom:24px}
+#v-servicos .sh p{max-width:62ch}
+#v-servicos .grp h3{margin:36px 0 16px}
+#v-servicos .sh+h3{margin-top:0}
+#v-servicos .cards{gap:20px}
+#v-servicos .cards.c3{grid-template-columns:repeat(3,1fr)}
+#v-servicos .cards.c2{grid-template-columns:repeat(2,1fr)}
+#v-servicos .cards.c1{grid-template-columns:repeat(2,1fr)}
+#v-servicos .card,#v-servicos .card:hover,#v-servicos .card:focus-visible{padding:24px 28px 20px;grid-template-columns:40px 1fr;grid-template-rows:auto 1fr auto;row-gap:12px;align-items:start;z-index:auto}
+#v-servicos .card .r-t{align-self:center;font-size:1.05rem;line-height:1.25}
+#v-servicos .card .r-d,#v-servicos .card:hover .r-d,#v-servicos .card:focus-visible .r-d{position:static;grid-column:1/-1;width:auto;height:auto;margin:0;padding:0;clip:auto;clip-path:none;white-space:normal;overflow:visible;background:none;border:0;border-radius:0;box-shadow:none;opacity:1;pointer-events:auto;font-size:.92rem;line-height:1.55;color:var(--graph);transition:none}
+#v-servicos .card .r-n{margin-top:4px;padding-top:12px}
+#v-servicos .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(24,42,58,.08)}
+#v-servicos .card:hover::before{width:36px;height:36px}
+#v-servicos .card:focus-visible{outline:2px solid var(--tech);outline-offset:3px;border-color:var(--tech)}
+#v-servicos .cards.c1 .card,#v-servicos .cards.c1 .card:hover,#v-servicos .cards.c1 .card:focus-visible{grid-template-columns:40px 1fr auto;grid-template-rows:auto auto;padding-bottom:24px}
+#v-servicos .card>.arw{grid-column:3;grid-row:1;align-self:center}
+#v-servicos .cta{margin-top:8px}
+}
 .npills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
 .npill{font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872;background:rgba(255,255,255,.6);border:1px solid var(--silver);border-radius:999px;padding:8px 16px;text-align:left}
 .svc article{min-width:0}
@@ -309,16 +416,402 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
 .svc article h2.on::after{transform:scaleX(1)}
 .ph{position:relative;overflow:hidden}
 .ph::after{content:"";position:absolute;left:0;bottom:0;width:160px;height:1px;background:linear-gradient(90deg,transparent,var(--tech));animation:trace 1.3s 0.15s var(--ease) both;pointer-events:none}
+/* Páginas individuais de serviço (desktop) */
+@media(min-width:981px){
+.view[id^="v-s-"] .ph .in{padding-block:56px 32px}
+.view[id^="v-s-"] .crumbs{margin-bottom:20px}
+.view[id^="v-s-"] .ph h1{max-width:none;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;text-wrap:balance}
+.view[id^="v-s-"] .lead{margin-top:12px}
+.view[id^="v-s-"] .npills{margin-top:16px}
+.view[id^="v-s-"] .blk{padding-block:48px 80px}
+.view[id^="v-s-"] .svc{grid-template-columns:minmax(0,1fr) 360px;column-gap:72px}
+.view[id^="v-s-"] .svc article h2{margin:0 0 20px}
+.view[id^="v-s-"] .svc article h2::after{display:none}
+.view[id^="v-s-"] .svc article p{max-width:66ch;margin-bottom:16px}
+.view[id^="v-s-"] .svc article p:last-of-type{margin-bottom:0}
+.view[id^="v-s-"] .svc article h2~h2{margin-top:48px}
+.view[id^="v-s-"] .plain{max-width:66ch}
+.view[id^="v-s-"] .plain li{padding:6px 0 6px 24px;border:0}
+.view[id^="v-s-"] .plain li:first-child{border:0}
+.view[id^="v-s-"] .plain li::before{left:2px;top:17px;width:6px;height:6px;border:0;background:var(--tech);border-radius:50%;transform:none}
+.view[id^="v-s-"] .stamp{top:104px;border:0;border-radius:4px;background:rgba(246,248,250,.96);box-shadow:0 1px 0 var(--silver-l),0 12px 32px rgba(24,42,58,.08);padding:24px}
+.view[id^="v-s-"] .stamp h2{background:none;color:var(--steel);padding:0 0 12px;font-size:.8rem;letter-spacing:.14em;border-bottom:1px solid var(--silver)}
+.view[id^="v-s-"] .stamp dl{padding:0}
+.view[id^="v-s-"] .stamp dt{margin-top:0;padding-top:14px;font-size:.68rem}
+.view[id^="v-s-"] .stamp dd{padding:2px 0 14px;font-weight:600;line-height:1.45;border-bottom:1px solid var(--silver-l)}
+.view[id^="v-s-"] .stamp dd:last-of-type{border-bottom:0;padding-bottom:20px}
+.view[id^="v-s-"] .stamp .btn{width:100%;margin:0;text-align:center;line-height:1.35;white-space:normal;padding:14px 20px}
+.view[id^="v-s-"] .stamp .btn-y:has(+.btn-o){margin-bottom:12px}
+.view[id^="v-s-"] .stamp .btn-y+.btn-o{margin-bottom:0}
+}
+/* Contato (desktop) */
+@media(min-width:981px){
+#v-contato .ph .in{padding-block:56px 32px}
+#v-contato .crumbs{margin-bottom:20px}
+#v-contato .ph h1{max-width:none;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;text-wrap:balance}
+#v-contato .lead{margin-top:12px}
+#v-contato .blk{padding-block:40px 80px}
+#v-contato .ct{column-gap:56px;align-items:start}
+#v-contato .cdl>div{padding:18px 0}
+#v-contato .cdl dt{margin-bottom:4px}
+#v-contato .cl{display:inline-flex;align-items:center;gap:12px}
+#v-contato .cl .ci{flex:none;color:var(--tech-t)}
+#v-contato .cl:focus-visible{outline:2px solid var(--tech);outline-offset:4px;border-radius:2px}
+#v-contato .cwa .cl{font-size:1.25rem}
+#v-contato .cwa .cl .ci{width:22px;height:22px;color:var(--steel)}
+#v-contato form{padding:32px 36px;box-shadow:0 8px 24px rgba(24,42,58,.05);background:rgba(255,255,255,.97)}
+#v-contato form h2{margin-bottom:20px}
+#v-contato .f{margin-bottom:18px}
+#v-contato .f2{gap:20px}
+#v-contato .f2 .f{margin-bottom:18px}
+#v-contato .f input,#v-contato .f select,#v-contato .f textarea{min-width:0;max-width:100%;text-overflow:ellipsis}
+#v-contato .f input[type=email]{overflow-x:auto;text-overflow:clip}
+#v-contato .f input[type=file]{text-overflow:clip}
+#v-contato select{padding-right:12px}
+#v-contato textarea{min-height:110px}
+#v-contato .falt{margin-top:20px}
+}
+/* Cabeçalho e rodapé (desktop) */
+@media(min-width:981px){
+.cap{border-radius:calc(64px - 59px*var(--p));border-color:rgba(167,176,183,calc(.9*var(--p)));box-shadow:0 4px 14px rgba(24,42,58,calc(.07*var(--p)))}
+.fg{padding-block:32px 20px;gap:28px 64px}
+.fl{margin-bottom:12px}
+#app>footer h4{margin-bottom:12px}
+.nm{margin-bottom:6px}
+.fc{margin-top:12px;padding-top:10px;gap:6px 28px}
+.fc a{display:inline-flex!important;align-items:center;gap:8px}
+.fc .fi{flex:none;width:18px;height:18px}
+.fc a:hover{color:var(--silver-l)}
+.rod .in{padding-block:12px;gap:8px 24px}
+}
+/* Dropdown de Serviços e botão do cabeçalho (desktop) */
+@media(min-width:981px){
+.dd-p::before,.dd-sp::before{background:rgba(250,252,253,.97);border:1px solid rgba(167,176,183,.9);border-radius:5px;box-shadow:0 6px 20px rgba(24,42,58,.09);clip-path:inset(-1px -1px 100% -1px round 5px)}
+.dd-sp::before{clip-path:inset(-1px 100% -1px -1px round 5px)}
+.dd-s.flip>.dd-sp::before{clip-path:inset(-1px -1px -1px 100% round 5px)}
+.dd:hover>.dd-p::before,.dd:focus-within>.dd-p::before,.dd-s:hover>.dd-sp::before,.dd-s:focus-within>.dd-sp::before,.dd-s.open>.dd-sp::before{clip-path:inset(-1px -1px -1px -1px round 5px)}
+.dd.shut>.dd-p::before{clip-path:inset(-1px -1px 100% -1px round 5px)}
+.dd.shut .dd-sp::before{clip-path:inset(-1px 100% -1px -1px round 5px)}.dd.shut .dd-s.flip>.dd-sp::before{clip-path:inset(-1px -1px -1px 100% round 5px)}
+.dd-p{top:calc(100% + 8px);width:300px;padding:12px 16px}
+.dd-s{position:static}
+.dd-sp{left:100%;top:0;width:max-content;max-width:var(--sw,400px);padding:12px 24px}
+.dd-s.flip>.dd-sp{left:auto;right:100%}
+.dd-sp::after{left:-20px;width:20px}.dd-s.flip>.dd-sp::after{left:auto;right:-20px}
+.dd-sp a{white-space:nowrap}
+.dd-sp a:hover::before{left:-16px}
+.menu>a.btn{padding:13px 28px;border-radius:5px}
+.top.sc .menu>a.btn{padding:10px 24px}
+}
+/* Notebooks e telas baixas (desktop): espaços proporcionais à altura útil, sem alturas fixas nem escala */
+@media(min-width:981px){
+#v-sobre{--pw:clamp(300px,calc(18.75vh + 160px),360px)}
+#v-sobre .about{padding:clamp(124px,16vh,132px) 0 clamp(40px,7vh,88px)}
+#v-sobre .about-g{grid-template-columns:minmax(0,1fr) var(--pw);column-gap:clamp(48px,5.4vw,72px)}
+#v-sobre .about-t h1{font-size:clamp(2rem,min(4vw,7vh),3.4rem)}
+#v-sobre .who{margin:clamp(6px,1.2vh,12px) 0 clamp(12px,2.4vh,24px)}
+#v-sobre .about-t>p{max-width:none;line-height:1.7}
+#v-sobre .foto{width:var(--pw);margin-bottom:clamp(16px,3vh,32px)}
+#v-sobre .cred{margin:clamp(16px,3vh,32px) 0}
+#v-sobre .cred>div{padding:clamp(12px,2vh,20px) 24px clamp(12px,2vh,20px) 0}
+#v-sobre .cred b{font-size:clamp(1.7rem,min(3.2vw,5.4vh),2.6rem)}
+#v-sobre .about-t>p:nth-of-type(3){margin-bottom:clamp(10px,1.8vh,20px)}
+#v-sobre .cta-d{margin-top:clamp(16px,3vh,32px);align-self:start}
+#v-sobre .spec{padding-block:10px}
+#v-sobre .spec div{padding-bottom:6px}
+#v-sobre .spec div+div{padding-top:6px}
+#v-sobre .spec dd{line-height:1.38}
+.view[id^="v-s-"] .ph .in{padding-block:clamp(40px,4.6vh,48px) clamp(14px,2.4vh,32px)}
+.view[id^="v-s-"] .crumbs{margin-bottom:clamp(8px,1.6vh,20px)}
+.view[id^="v-s-"] .ph h1{font-size:clamp(1.75rem,min(3.6vw,6.2vh),3rem)}
+.view[id^="v-s-"] .lead{margin-top:clamp(4px,1vh,12px)}
+.view[id^="v-s-"] .npills{margin-top:clamp(8px,1.6vh,16px)}
+.view[id^="v-s-"] .npill{padding-block:clamp(5px,.9vh,8px)}
+.view[id^="v-s-"] .blk{padding-block:clamp(24px,4vh,48px) clamp(32px,5vh,80px)}
+.view[id^="v-s-"] .svc{grid-template-columns:minmax(0,1fr) clamp(320px,26vw,360px);column-gap:clamp(40px,5vw,72px)}
+.view[id^="v-s-"] .svc article h2{font-size:clamp(1.3rem,min(2.2vw,3.6vh),1.9rem);margin-bottom:clamp(10px,2vh,20px)}
+.view[id^="v-s-"] .svc article h2~h2{margin-top:clamp(22px,4vh,40px)}
+.view[id^="v-s-"] .svc article p{max-width:none;line-height:1.7;margin-bottom:clamp(10px,1.6vh,16px)}
+.view[id^="v-s-"] .svc article p:last-of-type{margin-bottom:0}
+.view[id^="v-s-"] .svc .hl{margin-top:clamp(16px,2.8vh,32px)}
+.view[id^="v-s-"] .plain{max-width:none}
+.view[id^="v-s-"] .plain li{padding-block:clamp(3px,.7vh,6px)}
+.view[id^="v-s-"] .plain li::before{top:clamp(11px,1.5vh,17px)}
+.view[id^="v-s-"] .stamp{padding:clamp(14px,2.4vh,24px) 24px;top:96px}
+.view[id^="v-s-"] .stamp h2{padding-bottom:clamp(8px,1.4vh,12px)}
+.view[id^="v-s-"] .stamp dt{padding-top:clamp(8px,1.4vh,14px)}
+.view[id^="v-s-"] .stamp dd{padding-bottom:clamp(8px,1.4vh,14px)}
+.view[id^="v-s-"] .stamp dd:last-of-type{padding-bottom:clamp(12px,2vh,20px)}
+.view[id^="v-s-"] .stamp .btn{padding-block:clamp(10px,1.6vh,14px)}
+#v-contato .ph .in{padding-block:clamp(40px,4.6vh,48px) clamp(14px,2.4vh,32px)}
+#v-contato .crumbs{margin-bottom:clamp(8px,1.6vh,20px)}
+#v-contato .ph h1{font-size:clamp(1.75rem,min(3.6vw,6.2vh),3rem)}
+#v-contato .lead{margin-top:clamp(4px,1vh,12px)}
+#v-contato .blk{padding-block:clamp(24px,3.6vh,40px) clamp(32px,5vh,80px)}
+#v-contato .cdl>div{padding-block:clamp(12px,1.8vh,18px)}
+#v-contato form{padding:clamp(20px,3vh,32px) 36px}
+#v-contato form h2{margin-bottom:clamp(12px,2vh,20px)}
+#v-contato .f,#v-contato .f2 .f{margin-bottom:clamp(12px,1.8vh,18px)}
+#v-contato textarea{min-height:clamp(84px,11vh,110px)}
+}
+/* Páginas de serviço (desktop): normas na coluna direita e espaços compactos */
+.npills-d{display:none}
+@media(min-width:981px){
+.view[id^="v-s-"] .ph .npills{display:none}
+.view[id^="v-s-"] .npills-d{display:flex;gap:6px;margin:0 0 clamp(10px,1.6vh,14px)}
+.view[id^="v-s-"] .npills-d .npill{padding:clamp(4px,.7vh,6px) 12px;font-size:.66rem;letter-spacing:.12em}
+.view[id^="v-s-"] .ph .in{padding-block:clamp(40px,4.6vh,48px) clamp(8px,1.4vh,14px)}
+.view[id^="v-s-"] .crumbs{margin-bottom:clamp(4px,.9vh,8px)}
+.view[id^="v-s-"] .ph h1{font-size:clamp(1.7rem,min(3.4vw,5.8vh),2.8rem);line-height:1.08}
+.view[id^="v-s-"] .lead{margin-top:2px;font-size:1.05rem}
+.view[id^="v-s-"] .blk{padding-top:clamp(16px,2.8vh,28px)}
+.view[id^="v-s-"] .svc article h2{margin-bottom:clamp(12px,1.6vh,14px)}
+.view[id^="v-s-"] .svc article h2~h2{margin-top:clamp(18px,3vh,28px);font-size:clamp(1.15rem,1.7vw,1.35rem)}
+.view[id^="v-s-"] .svc article p{line-height:1.62;margin-bottom:clamp(8px,1.3vh,12px)}
+.view[id^="v-s-"] .plain li{padding-block:2px;line-height:1.55}
+.view[id^="v-s-"] .plain li::before{top:11px}
+.view[id^="v-s-"] .stamp dt{padding-top:clamp(8px,1.2vh,12px)}
+.view[id^="v-s-"] .stamp dd{padding-bottom:clamp(8px,1.2vh,12px)}
+.view[id^="v-s-"] .stamp dd:last-of-type{padding-bottom:clamp(12px,1.8vh,16px)}
+.view[id^="v-s-"] .stamp .btn{padding-block:clamp(9px,1.4vh,12px)}
+}
+/* Páginas de serviço v2 (desktop): rodapé fora da primeira tela, diferenciais na base, normas em lista */
+@media(min-width:981px){
+.view[id^="v-s-"]:not([hidden]){display:flex;flex-direction:column;min-height:100vh;min-height:100svh}
+.view[id^="v-s-"]>.blk{flex:1 0 auto}
+.view[id^="v-s-"] .svc{align-items:stretch}
+.view[id^="v-s-"] .svc article{display:flex;flex-direction:column}
+.view[id^="v-s-"] .svc article p:last-of-type{margin-bottom:clamp(20px,3.2vh,32px)}
+.view[id^="v-s-"] .svc article h2~h2{margin-top:auto}
+.view[id^="v-s-"] .npills-d{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:5px}
+.view[id^="v-s-"] .npills-d .npill{display:block;width:100%;box-sizing:border-box;border-radius:8px;padding:clamp(4px,.6vh,6px) 14px;font-size:.68rem;line-height:1.35}
+}
+/* Engenharia Social (desktop): citação na coluna direita, abaixo do painel */
+.hl-d{display:none}
+@media(min-width:981px){
+#v-s-engenharia-social article .hl{display:none}
+#v-s-engenharia-social .hl-d{display:block;margin:0 0 clamp(8px,1.2vh,12px);padding:clamp(10px,1.5vh,14px) 18px;border-left:4px solid var(--tech);border-radius:0 4px 4px 0;background:rgba(250,252,253,.97);box-shadow:0 1px 0 var(--silver-l),0 8px 22px rgba(24,42,58,.07)}
+#v-s-engenharia-social .hl-d p{font-size:1.12rem;line-height:1.45;font-weight:600;color:var(--steel);max-width:none;margin:0}
+#v-s-engenharia-social aside{position:sticky;top:96px;align-self:start}
+#v-s-engenharia-social .stamp{position:static}
+#v-s-engenharia-social .svc article p:last-of-type{margin-bottom:clamp(20px,3.2vh,32px)}
+}
+@media(min-width:981px) and (max-height:620px){#v-s-engenharia-social aside{position:static}}
+/* Sobre a Engenheira v6 (desktop): biografia em sequência, credenciais e botões ao fim, rodapé fora da primeira tela */
+@media(min-width:981px){
+#v-sobre:not([hidden]){display:flex;flex-direction:column;min-height:100vh;min-height:100svh}
+#v-sobre .about{flex:1 0 auto}
+#v-sobre .about-g{grid-template-rows:repeat(7,auto)}
+#v-sobre .about-t>p:nth-of-type(3){grid-column:1;grid-row:4;margin-bottom:clamp(8px,1.4vh,14px)}
+#v-sobre .about-t>p:nth-of-type(4){grid-column:1;grid-row:5;margin-bottom:0}
+#v-sobre .about-t>p:nth-of-type(2){margin-bottom:clamp(8px,1.4vh,14px)}
+#v-sobre .cred{grid-row:6;align-self:start;margin:clamp(14px,2.4vh,26px) 0 0}
+#v-sobre .cta-d{grid-row:7;align-self:start;margin-top:clamp(16px,2.6vh,28px)}
+#v-sobre .foto{grid-row:1/5;margin-bottom:clamp(14px,2.4vh,24px)}
+#v-sobre .cred>div{padding-block:clamp(8px,1.5vh,14px)}
+#v-sobre .cred b{font-size:clamp(1.55rem,min(2.8vw,4.8vh),2.3rem);margin-bottom:4px}
+#v-sobre .spec{grid-row:5/8}
+}
+/* Sobre a Engenheira v7 (desktop): foto proporcional à altura, espaços regulares, sem distribuição automática */
+@media(min-width:981px){
+#v-sobre{--cw:clamp(280px,24vw,320px);--pw:var(--cw)}
+#v-sobre .about-g{grid-template-columns:minmax(0,1fr) var(--cw)}
+#v-sobre .foto{justify-self:center}
+#v-sobre .spec{width:var(--pw);box-sizing:border-box;justify-self:center}
+#v-sobre .about{padding:120px 0 clamp(28px,5vh,64px)}
+#v-sobre .about-g{grid-template-rows:repeat(6,auto) 1fr}
+#v-sobre .who{margin:clamp(4px,.8vh,8px) 0 clamp(8px,1.4vh,14px)}
+#v-sobre .foto{grid-row:1/-1;align-self:start;margin:0}
+#v-sobre .spec{grid-row:1/-1;align-self:start;margin-top:calc(var(--pw)*4/3 + clamp(10px,1.4vh,14px))}
+#v-sobre .cred{margin-top:clamp(10px,1.8vh,18px)}
+#v-sobre .cta-d{margin-top:clamp(12px,2vh,20px);align-self:end}
+#v-sobre .rv{opacity:1;transform:none}
+#v-sobre .spec{padding-block:8px}
+}
+.pr-d{display:none}
+@media(min-width:981px){
+#v-sobre .spec .pr-m{display:none}
+#v-sobre .spec{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between}
+#v-sobre .pr-d{display:block;grid-column:1;grid-row:6;align-self:start;margin-top:clamp(8px,1.4vh,12px)}
+#v-sobre .pr-d b{display:block;font:700 .7rem var(--ff);letter-spacing:.14em;text-transform:uppercase;color:#5d6872;margin-bottom:4px}
+#v-sobre .pr-d span{display:block;font-size:.92rem;font-weight:600;color:var(--steel);line-height:1.5}
+#v-sobre .pr-d .t{font-style:normal;white-space:nowrap}
+#v-sobre .pr-d .t:not(:last-child)::after{content:"\00b7";margin:0 .15em 0 .25em;font-weight:700;color:var(--graph)}
+#v-sobre .about-g{grid-template-rows:repeat(7,auto) 1fr}
+#v-sobre .cred{grid-row:7;margin-top:clamp(8px,1.3vh,12px)}
+#v-sobre .cred>div{padding-block:clamp(6px,1.2vh,10px)}
+#v-sobre .cta-d{grid-row:8;margin-top:clamp(10px,1.6vh,14px)}
+}
+@media(min-width:981px){
+#v-sobre .cred b{font-size:clamp(1.4rem,min(2.3vw,4vh),1.95rem);margin-bottom:3px}
+#v-sobre .cred>div{padding-block:clamp(4px,.9vh,7px)}
+#v-sobre .spec{padding:6px 20px}
+#v-sobre .spec div{padding-bottom:5px}
+#v-sobre .spec div+div{padding-top:5px}
+}
+@media(min-width:981px) and (max-width:1365px){#v-sobre .pr-d .t:not(:last-child)::after{content:none}#v-sobre .pr-d .t{margin-right:.9em}}
+/* Contato v3 (desktop): compactação leve */
+@media(min-width:981px){
+#v-contato .ph .in{padding-block:clamp(40px,4.6vh,48px) clamp(10px,1.6vh,14px)}
+#v-contato .crumbs{margin-bottom:clamp(4px,.9vh,8px)}
+#v-contato .ph h1{margin-top:0;line-height:1.08;font-size:clamp(1.7rem,min(3.4vw,5.8vh),2.8rem)}
+#v-contato .lead{margin-top:2px;font-size:1.05rem}
+#v-contato .blk{padding-block:clamp(14px,2.4vh,22px) clamp(28px,4.5vh,64px)}
+#v-contato .ct{column-gap:clamp(36px,4vw,48px)}
+#v-contato .cdl>div{padding-block:clamp(8px,1.3vh,12px)}
+#v-contato .cdl dt{margin-bottom:2px}
+#v-contato form{padding:clamp(16px,2.4vh,24px) 32px}
+#v-contato form h2{margin-bottom:clamp(12px,1.6vh,14px)}
+#v-contato .f,#v-contato .f2 .f{margin-bottom:clamp(10px,1.5vh,14px)}
+#v-contato label{margin-bottom:6px}
+#v-contato textarea{min-height:clamp(72px,9vh,92px)}
+#v-contato .f:has(#anexo){margin-bottom:clamp(10px,1.5vh,14px)}
+#v-contato .fhint{margin-top:4px;line-height:1.45}
+#v-contato .falt{margin-top:clamp(12px,1.8vh,16px);padding-top:clamp(10px,1.4vh,12px)}
+}
+/* Ícones de Contato e do e-mail do rodapé */
+.ci-d,.fi-e{display:none}
+@media(min-width:981px){
+#v-contato .ci-d{display:block;flex:none;width:20px;height:20px;color:var(--tech-t)}
+#v-contato .cdl .ic-row{display:flex;align-items:flex-start;gap:12px}
+#v-contato .cdl .ic-row .ci-d{margin-top:3px}
+.fc .fi-e{display:block}
+}
+/* Animações de entrada, saída e botões (Sobre, serviços e Contato; desktop) */
+@media(min-width:981px){
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}}
+@keyframes pgOut{to{opacity:0;transform:translateY(-10px)}}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving){animation:none}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]).leaving{animation:pgOut .17s var(--ease) both;pointer-events:none}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .rv{opacity:1;transform:none;transition:none}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving) :is(#v-sobre .about-t>h1,#v-sobre .who,.ph .in){animation:pgIn .45s var(--ease) backwards}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving) :is(#v-sobre .about-t>p:not(.who),#v-contato .cdl,.svc article){animation:pgIn .45s var(--ease) .05s backwards}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving) :is(#v-sobre .foto,#v-sobre .spec){animation:pgIn .45s var(--ease) .09s backwards}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving) :is(#v-sobre .pr-d,#v-sobre .cred,#v-sobre .cta-d){animation:pgIn .45s var(--ease) .14s backwards}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]):not(.leaving) :is(#v-contato form,.svc aside){animation:pgIn .45s var(--ease) .1s backwards}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn{transition:transform .2s var(--ease),box-shadow .2s var(--ease),background-color .22s var(--ease),border-color .22s var(--ease),color .22s var(--ease)}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn-y:hover,:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn-y:focus-visible{background:#0F1E2B;border-color:rgba(40,125,155,.7);color:#fff;transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,30,43,.26)}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn-o:hover,:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn-o:focus-visible{background:#fff;border-color:var(--steel);color:var(--steel);transform:translateY(-2px);box-shadow:0 6px 14px rgba(24,42,58,.12)}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn:active{transform:translateY(0) scale(.98);box-shadow:0 2px 6px rgba(24,42,58,.18);transition-duration:.08s}
+:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn[aria-disabled="true"],:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn:disabled{transform:none;box-shadow:none;pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn:hover,:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn:focus-visible,:is(#v-sobre,#v-contato,.view[id^="v-s-"]) .btn:active{transform:none}}
+/* Botões da Home e do cabeçalho: padrão de animação (desktop) */
+@media(min-width:981px){
+#v-home .btn:not(.rv),.menu>a.btn{transition:transform .2s var(--ease),box-shadow .2s var(--ease),background-color .22s var(--ease),border-color .22s var(--ease),color .22s var(--ease)}
+.menu>a.btn{transition:transform .2s var(--ease),box-shadow .2s var(--ease),background-color .22s var(--ease),border-color .22s var(--ease),color .22s var(--ease),padding .5s var(--ease)}
+#v-home .btn-y:hover,#v-home .btn-y:focus-visible{background:#0F1E2B;border-color:rgba(40,125,155,.7);color:#fff;transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,30,43,.26)}
+.menu>a.btn-y:hover,.menu>a.btn-y:focus-visible{background:#0F1E2B;border-color:rgba(40,125,155,.7);color:#fff;transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 8px 18px rgba(15,30,43,.26)}
+#v-home .btn-o:hover,#v-home .btn-o:focus-visible{background:#fff;border-color:var(--steel);color:var(--steel);transform:translateY(-2px);box-shadow:0 6px 14px rgba(24,42,58,.12)}
+#v-home .btn:active,.menu>a.btn:active{transform:translateY(0) scale(.98);box-shadow:0 2px 6px rgba(24,42,58,.18);transition-duration:.08s}
+}
+@media(min-width:981px) and (prefers-reduced-motion:reduce){#v-home .btn:hover,#v-home .btn:focus-visible,#v-home .btn:active,.menu>a.btn:hover,.menu>a.btn:focus-visible,.menu>a.btn:active{transform:none}}
+/* Acabamento visual (desktop): respiro sob o logo, entrada dos cartões, rótulos legíveis, proteção da biografia */
+@media(min-width:981px){
+.view[id^="v-s-"] .ph .in,#v-contato .ph .in{padding-top:52px}
+#v-sobre .about{padding-top:130px}
+#v-servicos .card.rv{transition-duration:.6s}
+#v-servicos .card.rv:not(.on){transform:translateY(16px)}
+.idx,.pillars h3 span,.card .r-n,.stamp dt,.view[id^="v-s-"] .stamp dt,.spec dt,#v-sobre .spec dt,.cdl dt,#v-contato .cdl dt,.npill,.view[id^="v-s-"] .npills-d .npill,#v-sobre .pr-d b,.bar small,#v-home .stats .grp small{font-size:.75rem}
+#v-sobre .about-g{position:relative;isolation:isolate}
+#v-sobre .about-g::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:-20px;bottom:-20px;left:-40px;right:calc(var(--cw) + clamp(48px,5.4vw,72px) - 56px);background:rgba(246,248,250,.84);-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 64px),transparent),linear-gradient(180deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 64px),transparent),linear-gradient(180deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-composite:intersect}
+}
+/* Páginas de serviço (desktop): espaço entre o texto e os diferenciais, de 24 a 48 px */
+@media(min-width:981px){
+.view[id^="v-s-"] .svc article h2~h2{margin-top:0;order:2}
+.view[id^="v-s-"] .svc article .plain{order:2}
+.view[id^="v-s-"] .svc article::after{content:"";order:1;flex:1 1 0;min-height:0;max-height:calc(48px - clamp(20px,3.2vh,32px))}
+}
+
+/* Rodapé desktop: três colunas (marca, navegação, contato) */
+@media(min-width:981px){
+#app>footer .fg{grid-template-columns:minmax(0,1fr) minmax(0,.7fr) minmax(0,1.5fr);gap:0 56px;padding-block:36px 24px;align-items:start}
+#app>footer .fcol{display:contents}
+#app>footer .fa-b{display:none}
+#app>footer .fl{margin-bottom:12px}#app>footer .fl img{width:132px}
+#app>footer .nm{font-weight:700;font-size:1.1rem;margin-bottom:6px}
+#app>footer .fg>div>p:not(.nm){color:var(--silver-l);font-weight:400}
+#app>footer h4,#app>footer .fh{margin:2px 0 14px}
+#app>footer .fn{flex-direction:column;gap:0}
+#app>footer .fn a{padding:5px 0!important;line-height:1.35;font-weight:500;color:#fff}
+#app>footer .fc{margin:0;padding:0;border:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:0}
+#app>footer .fc .fh{display:block;margin:2px 0 14px}
+#app>footer .fc a{font-weight:500;padding:5px 0;gap:10px;align-items:flex-start;line-height:1.35}
+#app>footer .fc a span{padding-top:1px}
+#app>footer .fc .fi{width:20px;height:20px;margin-top:0;stroke-width:2}
+#app>footer .fc a[href*="wa.me"]{order:1}#app>footer .fc a[href^="tel"]{order:2}#app>footer .fc a[href^="mailto"]{order:3}
+#app>footer .fc .fa-c{display:flex;order:4;gap:10px;align-items:flex-start;padding:5px 0 0;color:var(--silver-l);font-weight:400;line-height:1.45;margin:0}
+#app>footer .fc .fa-c span{padding-top:0}
+#app>footer .rod .in{padding-block:12px;font-size:.84rem}
+}
+.fh,.fa-c{display:none}
+
+/* Contato desktop: hierarquia, formulário compacto e microinterações dos contatos */
+.fbr{display:none}
+@media(min-width:981px){
+#v-contato .fbr{display:inline}
+#v-contato .falt{line-height:1.7}
+#v-contato form{padding:clamp(18px,2.6vh,26px) 30px;box-shadow:0 6px 18px rgba(24,42,58,.05)}
+#v-contato form h2{font-size:clamp(1.25rem,1.9vw,1.5rem);margin-bottom:clamp(12px,1.6vh,14px)}
+#v-contato .f,#v-contato .f2 .f{margin-bottom:clamp(8px,1.3vh,12px)}
+#v-contato .f:has(#anexo){margin-bottom:clamp(8px,1.3vh,12px)}
+#v-contato label{margin-bottom:5px}
+#v-contato .falt{margin-top:clamp(10px,1.5vh,14px);padding-top:clamp(8px,1.2vh,12px)}
+#v-contato .cdl::before{content:"Fale com a Engenheira";display:block;font:700 .72rem var(--ff);letter-spacing:.16em;text-transform:uppercase;color:#5d6872;padding-bottom:clamp(8px,1.2vh,12px)}
+#v-contato .cdl{display:flex;flex-direction:column}#v-contato .cdl::before{order:-2}#v-contato .cdl .cwa{order:-1}
+#v-contato .cdl dd.ic-row{font-weight:400;font-size:1.05rem}
+#v-contato .cdl>div:last-child dd{font-size:.88rem;color:var(--graph)}
+#v-contato .cdl>div:last-child dt{color:#6b757e}
+#v-contato .cdl .cl{position:relative;margin:-6px -10px;padding:6px 10px;border-radius:6px;background:rgba(40,125,155,0);transition:background-color .22s var(--ease);color:var(--steel)}
+#v-contato .cdl .cl .ci,#v-contato .cdl .cl span{transition:transform .22s var(--ease)}
+#v-contato .cdl .cl::after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:2px;border-radius:2px;background:var(--tech);transform:scaleX(0);transform-origin:left center;transition:transform .25s var(--ease)}
+#v-contato .cdl .cl:hover,#v-contato .cdl .cl:focus-visible{background:rgba(40,125,155,.08);color:var(--steel)}
+#v-contato .cdl .cl:hover::after,#v-contato .cdl .cl:focus-visible::after{transform:scaleX(1)}
+#v-contato .cdl .cl:hover span,#v-contato .cdl .cl:focus-visible span{transform:translateX(3px)}
+#v-contato .cdl .cl:hover .ci,#v-contato .cdl .cl:focus-visible .ci{transform:translateX(3px) scale(1.1)}
+#v-contato .cdl .cwa .cl:hover,#v-contato .cdl .cwa .cl:focus-visible{background:rgba(40,125,155,.11)}
+#v-contato .cdl .cwa .cl:hover span,#v-contato .cdl .cwa .cl:focus-visible span{transform:translateX(4px)}
+#v-contato .cdl .cwa .cl:hover .ci,#v-contato .cdl .cwa .cl:focus-visible .ci{transform:translateX(4px) scale(1.16)}
+#v-contato .cdl .cl:focus-visible{outline:2px solid var(--tech);outline-offset:2px;border-radius:6px}
+}
+@media(min-width:981px) and (prefers-reduced-motion:reduce){
+#v-contato .cdl .cl,#v-contato .cdl .cl .ci,#v-contato .cdl .cl span,#v-contato .cdl .cl::after{transition:none}
+#v-contato .cdl .cl:hover span,#v-contato .cdl .cl:focus-visible span,#v-contato .cdl .cl:hover .ci,#v-contato .cdl .cl:focus-visible .ci,#v-contato .cdl .cwa .cl:hover span,#v-contato .cdl .cwa .cl:focus-visible span,#v-contato .cdl .cwa .cl:hover .ci,#v-contato .cdl .cwa .cl:focus-visible .ci{transform:none}
+}
+
+/* Cabeçalho desktop: logo completa no topo, só o símbolo CMG ao rolar (troca cruzada) */
+.bsym{display:none}
+@media(min-width:981px){
+.brand .bsym{display:block;position:absolute;left:0;top:0;width:56.51%;height:98.15%;opacity:0;pointer-events:none;transition:opacity .22s cubic-bezier(.7,0,.8,.4)}
+.brand .bfull{transition:opacity .22s cubic-bezier(.2,.7,.3,1)}
+.top.cp .bsym{transition-timing-function:cubic-bezier(.2,.7,.3,1)}
+.top.cp .bfull{transition-timing-function:cubic-bezier(.7,0,.8,.4)}
+.top.cp .bsym{opacity:1}
+.top.cp .bfull{opacity:0}
+}
+@media(min-width:981px) and (prefers-reduced-motion:reduce){.brand .bsym,.brand .bfull{transition:none}}
+
+/* Cabeçalho compacto (desktop): a barra estreita com a rolagem, no ritmo da logo */
+@media(min-width:981px){.cap{max-width:calc(1180px - 250px*var(--p));padding-left:calc(32px - 4px*var(--p));padding-right:calc(16px + 12px*var(--p));justify-content:flex-start}
+/* compacto: margens de ~28px nas pontas, vão flexível entre logo e menu e separação maior entre os links e o botão */
+.cap>.menu{margin-left:auto;gap:calc(16px + 36px*var(--p))}
+.brand{margin-right:calc(-.846*(92px - 44px*var(--p))*var(--p))}}
+
+/* Régua técnica (desktop): traços de início e fim, um pouco mais altos que os internos */
+@media(min-width:981px){.rule::before,.rule::after{content:"";position:absolute;bottom:0;width:1px;height:12px;background:var(--silver)}.rule::before{left:0}.rule::after{right:0}}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"CMG Engenharia & Consultoria","url":"https://cmgenge.com.br/","logo":"https://cmgenge.com.br/assets/logo.png","image":"https://cmgenge.com.br/assets/logo.png","description":"Engenharia Civil com mais de 35 anos de experiência em Belo Horizonte, MG. Projetos complementares, laudos especializados, vistorias e perícia técnica.","telephone":"+55 31 98866-0712","email":"carla@cmgenge.com.br","address":{"@type":"PostalAddress","streetAddress":"Avenida Del Rey, 111 - Sala 101 C, Caiçara","addressLocality":"Belo Horizonte","addressRegion":"MG","postalCode":"30775-240","addressCountry":"BR"},"areaServed":{"@type":"State","name":"Minas Gerais"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"}],"employee":{"@type":"Person","name":"Carla Maria Montanari Gonçalves","jobTitle":"Engenheira Civil"}}
+</script>
+<noscript><style>.burger{display:none}#v-home[hidden],#v-contato[hidden]{display:block}.view{animation:none}.hero{min-height:0}.hero-in{padding-bottom:56px}</style></noscript>
 </head>
 <body>
-<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<a class="skip" id="skip" href="#conteudo">Ir para o conteúdo</a>
 <div id="fb" aria-hidden="true"></div>
 <canvas id="bg3d" aria-hidden="true"></canvas>
 <div id="app">
 <header class="top" id="top"><div class="cap">
- <a class="brand" href="#home" aria-label="CMG Projetos & Consultoria, página inicial"><img src="assets/logo.png" alt="CMG Projetos & Consultoria" width="105" height="62"></a>
- <button class="burger" id="bg" aria-label="Abrir menu" aria-expanded="false" aria-controls="mn"><i></i><i></i><i></i></button>
+ <a class="brand" href="#home" aria-label="CMG Engenharia & Consultoria, página inicial"><img class="bfull" src="assets/logo-header.png" alt="" width="179" height="92" decoding="async"><img class="bsym" src="assets/logo-header-symbol.png" alt="" aria-hidden="true" width="264" height="236" decoding="async"></a>
+ <button class="burger" id="bg" aria-label="Menu" aria-expanded="false" aria-controls="mn"><i></i><i></i><i></i></button>
  <nav class="menu" id="mn" aria-label="Principal"><div class="links" id="lk">
   <a href="#home" data-r="home">Home</a><a href="#sobre" data-r="sobre">Sobre</a>
   <div class="dd"><a href="#servicos" data-r="servicos">Serviços</a><div class="dd-p"><div class="dd-s"><button type="button" class="dd-t" aria-haspopup="true" aria-expanded="false">Projetos Complementares</button><div class="dd-sp"><a href="#s-estrutural">Estrutura de Concreto e Alvenaria</a><a href="#s-hidrossanitarias">Instalações Hidrossanitárias</a><a href="#s-eletricas">Instalações Elétricas de Baixa Tensão</a></div></div><div class="dd-s"><button type="button" class="dd-t" aria-haspopup="true" aria-expanded="false">Vistoria e Perícia</button><div class="dd-sp"><a href="#s-reforma">Vistoria de Reforma</a><a href="#s-cautelar">Vistoria Cautelar</a><a href="#s-entrega">Vistoria de Entrega de Imóvel</a><a href="#s-nbr15575">Vistoria de Atendimento à NBR 15575</a><a href="#s-inspecao">Inspeção Predial</a><a href="#s-pericia">Perícia Estrutural e Análise de Patologias</a></div></div><a class="dd-t dd-lk" href="#s-engenharia-social">Engenharia Social</a><a class="dd-all" href="#servicos">Ver Todos os Serviços</a></div></div>
@@ -326,7 +819,7 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
   <a class="btn btn-y" href="#contato">Solicitar Orçamento</a>
  </nav>
 </div></header>
-<main id="conteudo"><div class="view" id="v-home" data-title="Início" hidden>
+<main id="conteudo" tabindex="-1"><noscript><p class="noscript-note">Este site usa JavaScript para trocar de página. Sem ele, mostramos o início e o contato abaixo. Fale conosco: <a href="tel:+5531988660712">+55 (31) 98866-0712</a> · <a href="mailto:carla@cmgenge.com.br">carla@cmgenge.com.br</a> · Avenida Del Rey, 111 - Sala 101 C, Caiçara, Belo Horizonte / MG.</p></noscript><div class="view" id="v-home" data-title="Início" hidden>
 <section class="hero"><div class="in hero-in"><div>
  <div class="idx">Engenharia civil · Belo Horizonte, MG</div>
  <h1>Precisão em cada projeto.</h1>
@@ -337,14 +830,14 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
 </section>
 <section class="blk"><div class="in">
  <div class="pillars">
-  <div><h3><span>01</span>Precisão em cada projeto</h3><p>Cada projeto é desenvolvido com base nas mais rigorosas normas técnicas.</p></div>
-  <div><h3><span>02</span>Experiência em cada decisão</h3><p>Mais de 35 anos de experiência no mercado, com atendimento personalizado e consultoria especializada.</p></div>
-  <div><h3><span>03</span>Confiança em cada etapa</h3><p>Suporte técnico completo durante todo o projeto, com prazos de entrega otimizados.</p></div>
+  <div><h3><span>01</span>Rigor técnico</h3><p>Cada projeto é desenvolvido com base nas mais rigorosas normas técnicas.</p></div>
+  <div><h3><span>02</span>Experiência</h3><p>Mais de 35 anos de experiência no mercado, com atendimento personalizado e consultoria especializada.</p></div>
+  <div><h3><span>03</span>Acompanhamento</h3><p>Suporte técnico completo durante todo o projeto, com prazos de entrega otimizados.</p></div>
  </div>
 </div></section>
 <section class="blk w"><div class="in"><div class="idx">Compromisso</div><div class="quote"><blockquote><p>Cada projeto que assinamos e cada laudo que entregamos carrega mais do que técnica, carrega responsabilidade, visão e compromisso com o futuro. Atuamos com precisão, ética e inteligência para transformar necessidades em soluções seguras, sustentáveis e personalizadas. Porque engenharia, para nós, é construir confiança em cada etapa.</p><footer>— Carla Montanari</footer></blockquote></div></div></section>
 <section class="blk"><div class="in teaser">
- <figure class="foto"><img src="assets/carla-3x4.jpg" alt="Carla Maria Montanari Gonçalves, engenheira civil" width="300" height="400" loading="lazy"></figure>
+ <figure class="foto"><img src="assets/carla-3x4.jpg" alt="Carla Maria Montanari Gonçalves, engenheira civil" width="300" height="400" loading="lazy" decoding="async"></figure>
  <div><div class="idx">Sobre a Engenheira</div><h2>Carla Maria Montanari Gonçalves</h2><span class="dim"></span>
   <p style="margin-top:24px;max-width:60ch">Engenheira Civil com mais de 35 anos de experiência no setor da construção civil, atuando com excelência na elaboração de projetos estruturais em concreto armado, alvenaria autoportante e instalações prediais. Mestre em Engenharia de Estruturas, aplico conhecimento técnico profundo para desenvolver soluções seguras, eficientes e alinhadas às melhores práticas do mercado.</p>
   <div class="stats"><div><b>35+</b><span>anos de experiência</span><span class="grp"><small>Técnica</small><span class="c">Experiência</span><span class="c">Precisão</span><span class="c">Segurança</span></span></div><div><b>CREA</b><span>60936/D — Ativo</span><span class="grp"><small>Conduta</small><span class="c">Responsabilidade</span><span class="c">Ética</span><span class="c">Compromisso</span></span></div><div><b>Mestre</b><span>em Engenharia de Estruturas</span><span class="grp"><small>Relacionamento</small><span class="c">Atendimento personalizado</span></span></div></div>
@@ -357,102 +850,109 @@ form .btn{width:100%}#ok{padding:16px 24px;border:1px solid var(--tech);backgrou
   <h1>Sobre a Engenheira</h1>
   <p class="who">Carla Maria Montanari Gonçalves</p>
   <p>Engenheira Civil com mais de 35 anos de experiência no setor da construção civil, atuando com excelência na elaboração de projetos estruturais em concreto armado, alvenaria autoportante e instalações prediais. Mestre em Engenharia de Estruturas, aplico conhecimento técnico profundo para desenvolver soluções seguras, eficientes e alinhadas às melhores práticas do mercado.</p>
+  <div class="stats cred"><div><b>35+</b><span>anos de experiência</span></div><div><b>CREA</b><span>60936/D — Ativo</span></div><div><b>Mestre</b><span>em Engenharia de Estruturas</span></div></div>
   <p>Tenho atuação consolidada na realização de vistorias técnicas e na elaboração de laudos especializados, prezando pela análise minuciosa das condições construtivas, diagnóstico de patologias e recomendações de intervenção com responsabilidade técnica. Possuo CREA ativo, reforçando meu compromisso com a ética, legalidade e qualidade em todas as fases dos projetos e serviços que executo.</p>
   <p>Ao longo da minha trajetória, contribuo para o sucesso de empreendimentos residenciais, comerciais e institucionais, sempre focando na integração entre estrutura e arquitetura, na conformidade com normas técnicas e na otimização de recursos.</p>
-  <dl class="spec"><div><dt>Registro</dt><dd>CREA 60936/D - Ativo</dd></div><div><dt>Experiência</dt><dd>35+ anos de experiência na construção civil</dd></div><div><dt>Formação</dt><dd>Mestre em Engenharia de Estruturas</dd></div><div><dt>Especialidade</dt><dd>Especialista em Laudos Técnicos e Vistorias</dd></div><div><dt>Atuação</dt><dd>Empreendimentos residenciais, comerciais e institucionais</dd></div><div><dt>Método</dt><dd>Engenharia diagnóstica e laudos conclusivos</dd></div><div class="pr"><dt>Princípios</dt><dd><span class="ln"><span class="w">Experiência</span><span class="w">Precisão</span><span class="w">Responsabilidade</span><span class="w">Ética</span></span><span class="ln"><span class="w">Compromisso</span><span class="w">Segurança</span><span class="w">Atendimento personalizado</span></span></dd></div></dl>
-  
+  <div class="pr-d"><b>Princípios</b><span><i class="t">Experiência</i> <i class="t">Precisão</i> <i class="t">Responsabilidade</i> <i class="t">Ética</i> <i class="t">Compromisso</i> <i class="t">Segurança</i> <i class="t">Atendimento personalizado</i></span></div>
+  <dl class="spec"><div class="dup"><dt>Registro</dt><dd>CREA 60936/D - Ativo</dd></div><div class="dup"><dt>Experiência</dt><dd>35+ anos de experiência na construção civil</dd></div><div class="dup"><dt>Formação</dt><dd>Mestre em Engenharia de Estruturas</dd></div><div><dt>Especialidade</dt><dd>Especialista em Laudos Técnicos e Vistorias</dd></div><div><dt>Atuação</dt><dd>Empreendimentos residenciais, comerciais e institucionais</dd></div><div><dt>Método</dt><dd>Engenharia diagnóstica e laudos conclusivos</dd></div><div class="pr pr-m"><dt>Princípios</dt><dd><span class="ln"><span class="w">Experiência</span><span class="w">Precisão</span><span class="w">Responsabilidade</span><span class="w">Ética</span></span><span class="ln"><span class="w">Compromisso</span><span class="w">Segurança</span><span class="w">Atendimento personalizado</span></span></dd></div></dl>
+  <div class="cta cta-d"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Conheça Nossos Serviços</a></div>
  </div>
- <figure class="foto"><img src="assets/carla-3x4.jpg" alt="Carla Maria Montanari Gonçalves, engenheira civil" width="360" height="480"></figure>
+ <figure class="foto"><img src="assets/carla-3x4.jpg" alt="Carla Maria Montanari Gonçalves, engenheira civil" width="360" height="480" decoding="async"></figure>
 </div><div class="in sob-b"><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Conheça Nossos Serviços</a></div></div></section></div><div class="view" id="v-servicos" data-title="Nossos Serviços" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <b>Serviços</b></nav><h1>Nossos Serviços</h1><p class="lead">Soluções completas com responsabilidade técnica e precisão</p></div></header>
 <section class="blk"><div class="in">
  <div class="tabs" role="group" aria-label="Filtrar serviços por categoria"><button type="button" class="tab" data-t="all" aria-pressed="true">Todos</button><button type="button" class="tab" data-t="projetos" aria-pressed="false">Projetos Complementares</button><button type="button" class="tab" data-t="vistoria" aria-pressed="false">Vistoria e Perícia</button><button type="button" class="tab" data-t="social" aria-pressed="false">Engenharia Social</button></div>
  <p class="svc-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.1"/></svg>Passe o mouse sobre um serviço para ver uma breve descrição.</p>
- <div class="grp" data-g="projetos"><div class="sh"><h2>Projetos Complementares</h2><p>Elaboração técnica com rigor normativo para segurança, eficiência e integração estrutural em edificações.</p></div><div class="cards"><a class="card" href="#s-estrutural"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16M4 19h16M12 5v14M8 9h8M8 15h8"/></svg></span><span class="r-t">Estrutura de Concreto e Alvenaria</span><span class="r-d">Dimensionamento de concreto armado e alvenaria autoportante.</span><span class="r-n"><span>NBR 6118</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-hidrossanitarias"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 5.5 6.8 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9.8 9 7 12 3z"/></svg></span><span class="r-t">Instalações Hidrossanitárias</span><span class="r-d">Projetos de água fria, esgoto sanitário e drenagem predial.</span><span class="r-n"><span>NBR 8160</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-eletricas"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13h6l-1 9 8-11h-6l1-9z"/></svg></span><span class="r-t">Instalações Elétricas de Baixa Tensão</span><span class="r-d">Circuitos, quadros de distribuição e segurança elétrica.</span><span class="r-n"><span>NBR 5410</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></div>
+ <div class="grp" data-g="projetos"><div class="sh"><h2>Projetos Complementares</h2><p>Elaboração técnica com rigor normativo para segurança, eficiência e integração estrutural em edificações.</p></div><div class="cards c3"><a class="card" href="#s-estrutural"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20V7M18 20V7M3.5 7h17M4.5 20h3M16.5 20h3"/></svg></span><span class="r-t">Estrutura de Concreto e Alvenaria</span><span class="r-d">Dimensionamento de concreto armado e alvenaria autoportante.</span><span class="r-n"><span>NBR 6118</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-hidrossanitarias"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 5.5 6.8 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9.8 9 7 12 3z"/></svg></span><span class="r-t">Instalações Hidrossanitárias</span><span class="r-d">Projetos de água fria, esgoto sanitário e drenagem predial.</span><span class="r-n"><span>NBR 8160</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-eletricas"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13h6l-1 9 8-11h-6l1-9z"/></svg></span><span class="r-t">Instalações Elétricas de Baixa Tensão</span><span class="r-d">Circuitos, quadros de distribuição e segurança elétrica.</span><span class="r-n"><span>NBR 5410</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></div>
  <div class="grp" data-g="vistoria"><div class="sh"><h2>Vistoria e Perícia</h2><p>Avaliações minuciosas e diagnósticos periciais com embasamento técnico e responsabilidade jurídica.</p></div>
-  <h3>Vistoria</h3><div class="cards"><a class="card" href="#s-reforma"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1zM14 7l3 3"/></svg></span><span class="r-t">Vistoria de Reforma</span><span class="r-d">Avaliação técnica para reformas conforme a NBR 16280.</span><span class="r-n"><span>NBR 16280</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-cautelar"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3zM9 12l2 2 4-4"/></svg></span><span class="r-t">Vistoria Cautelar</span><span class="r-d">Documentação de imóveis vizinhos para proteção legal.</span><span class="r-n"><span>NBR 13752</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-entrega"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg></span><span class="r-t">Vistoria de Entrega de Imóvel</span><span class="r-d">Verificação técnica na entrega de chaves de imóveis.</span><span class="r-n"><span>NBR 15575</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-nbr15575"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9zM7 5.5H5V21h14V5.5h-2M9 14l2 2 4-4"/></svg></span><span class="r-t">Vistoria de Atendimento à NBR 15575</span><span class="r-d">Avaliação de desempenho de edificações habitacionais.</span><span class="r-n"><span>NBR 15575</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><h3>Inspeção e perícia</h3><div class="cards"><a class="card" href="#s-inspecao"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2M8.5 11h5M11 8.5v5"/></svg></span><span class="r-t">Inspeção Predial</span><span class="r-d">Avaliação técnica das condições de uso, operação e manutenção.</span><span class="r-n"><span>NBR 16747</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-pericia"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V8l7-4 7 4v13M3 21h18M12 8l-2 4 3 2-2 4"/></svg></span><span class="r-t">Perícia Estrutural e Análise de Patologias</span><span class="r-d">Investigação de fissuras, patologias e laudos periciais conclusivos.</span><span class="r-n"><span>NBR 13752</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></div>
- <div class="grp" data-g="social"><div class="sh"><h2>Engenharia Social</h2></div><div class="cards"><a class="card" href="#s-engenharia-social"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M12 20v-5"/><circle cx="12" cy="12" r="1.5"/></svg></span><span class="r-t">Engenharia Social</span><span class="r-d">Projetos de engenharia com valores reduzidos para famílias de baixa renda.</span></a></div></div>
+  <h3>Vistoria</h3><div class="cards c2"><a class="card" href="#s-reforma"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7M5.5 9.5V20h13V9.5M9.5 14.5l2 2 3.5-3.5"/></svg></span><span class="r-t">Vistoria de Reforma</span><span class="r-d">Avaliação técnica para reformas conforme a NBR 16280.</span><span class="r-n"><span>NBR 16280</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-cautelar"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3zM9 12l2 2 4-4"/></svg></span><span class="r-t">Vistoria Cautelar</span><span class="r-d">Documentação de imóveis vizinhos para proteção legal.</span><span class="r-n"><span>NBR 13752</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-entrega"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg></span><span class="r-t">Vistoria de Entrega de Imóvel</span><span class="r-d">Verificação técnica na entrega de chaves de imóveis.</span><span class="r-n"><span>NBR 15575</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-nbr15575"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9zM7 5.5H5V21h14V5.5h-2M9 14l2 2 4-4"/></svg></span><span class="r-t">Vistoria de Atendimento à NBR 15575</span><span class="r-d">Avaliação de desempenho de edificações habitacionais.</span><span class="r-n"><span>NBR 15575</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><h3>Inspeção e perícia</h3><div class="cards c2"><a class="card" href="#s-inspecao"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2M8.5 11h5M11 8.5v5"/></svg></span><span class="r-t">Inspeção Predial</span><span class="r-d">Avaliação técnica das condições de uso, operação e manutenção.</span><span class="r-n"><span>NBR 16747</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="card" href="#s-pericia"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V8l7-4 7 4v13M3 21h18M12 8l-2 4 3 2-2 4"/></svg></span><span class="r-t">Perícia Estrutural e Análise de Patologias</span><span class="r-d">Investigação de fissuras, patologias e laudos periciais conclusivos.</span><span class="r-n"><span>NBR 13752</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></div>
+ <div class="grp" data-g="social"><div class="sh"><h2>Engenharia Social</h2></div><div class="cards c1"><a class="card" href="#s-engenharia-social"><span class="ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l4.5 3.7V12h-9V7.2zM3 15.5h3.2l3 1.8h4.3l4.5-2.3a1.2 1.2 0 0 1 1.2 2L15 20.5H9.2L6.2 19H3"/></svg></span><span class="r-t">Engenharia Social</span><span class="r-d">Projetos de engenharia com valores reduzidos para famílias de baixa renda.</span><svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
  <div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a></div>
-</div></section></div><div class="view" id="v-projetos" data-title="Projetos" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Projetos</b></nav><h1>Projetos</h1><p class="lead">Desenvolvimento de projetos estruturais completos para edificações residenciais e comerciais.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-estrutural"><h2>Projetos Estruturais</h2><p>Desenvolvimento de projetos estruturais completos para edificações residenciais e comerciais.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-instalacoes" data-title="Instalações" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Instalações</b></nav><h1>Instalações</h1><p class="lead">Projetos de instalações hidráulicas, sanitárias e elétricas seguras e eficientes para edificações.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-hidrossanitarias"><h2>Instalações Hidrossanitárias</h2><p>Projetos de instalações hidráulicas e sanitárias para edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-eletricas"><h2>Instalações Elétricas Prediais</h2><p>Projetos de instalações elétricas seguras e eficientes para edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-inspecao" data-title="Inspeção" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Inspeção</b></nav><h1>Inspeção</h1><p class="lead">Avaliação técnica das condições de uso, operação e manutenção de edificações.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-inspecao"><h2>Inspeção Predial</h2><p>Avaliação técnica das condições de uso, operação e manutenção de edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-vistorias" data-title="Vistorias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Vistorias</b></nav><h1>Vistorias</h1><p class="lead">Vistoria técnica e avaliação de imóveis: condições de edificações, reformas, entrega de obras e desempenho conforme normas brasileiras, com documentação para proteção legal e patrimonial.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-reforma"><h2>Vistoria de Reforma</h2><p>Avaliação técnica para reformas e modificações em edificações existentes.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-cautelar"><h2>Vistoria Cautelar</h2><p>Documentação técnica das condições de imóveis para proteção legal e patrimonial.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-entrega"><h2>Vistoria de Entrega de Imóvel</h2><p>Verificação técnica das condições de imóveis novos ou reformados na entrega.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-nbr15575"><h2>Vistoria de Atendimento à NBR 15575</h2><p>Avaliação de desempenho de edificações habitacionais conforme norma brasileira.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-pericias" data-title="Perícias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Perícias</b></nav><h1>Perícias</h1><p class="lead">Investigação técnica de problemas estruturais e diagnóstico de patologias construtivas.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-pericia"><h2>Perícia Estrutural e Análise de Patologias</h2><p>Investigação técnica de problemas estruturais e diagnóstico de patologias construtivas.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-s-estrutural" data-title="Estrutura de Concreto e Alvenaria" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Projetos Complementares</a> <span>/</span> <b>Estrutura de Concreto e Alvenaria</b></nav><h1>Estrutura de Concreto e Alvenaria</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 6118</span><span class="npill">NBR 6120</span><span class="npill">NBR 16868</span></div></div></header>
+</div></section></div><div class="view" id="v-projetos" data-title="Projetos" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Projetos</b></nav><h1>Projetos</h1><p class="lead">Desenvolvimento de projetos estruturais completos para edificações residenciais e comerciais.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-estrutural"><h2>Projetos Estruturais</h2><p>Desenvolvimento de projetos estruturais completos para edificações residenciais e comerciais.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-instalacoes" data-title="Instalações" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Instalações</b></nav><h1>Instalações</h1><p class="lead">Projetos de instalações hidráulicas, sanitárias e elétricas seguras e eficientes para edificações.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-hidrossanitarias"><h2>Instalações Hidrossanitárias</h2><p>Projetos de instalações hidráulicas e sanitárias para edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-eletricas"><h2>Instalações Elétricas Prediais</h2><p>Projetos de instalações elétricas seguras e eficientes para edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-inspecao" data-title="Inspeção" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Inspeção</b></nav><h1>Inspeção</h1><p class="lead">Avaliação técnica das condições de uso, operação e manutenção de edificações.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-inspecao"><h2>Inspeção Predial</h2><p>Avaliação técnica das condições de uso, operação e manutenção de edificações.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-vistorias" data-title="Vistorias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Vistorias</b></nav><h1>Vistorias</h1><p class="lead">Vistoria técnica e avaliação de imóveis: condições de edificações, reformas, entrega de obras e desempenho conforme normas brasileiras, com documentação para proteção legal e patrimonial.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-reforma"><h2>Vistoria de Reforma</h2><p>Avaliação técnica para reformas e modificações em edificações existentes.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-cautelar"><h2>Vistoria Cautelar</h2><p>Documentação técnica das condições de imóveis para proteção legal e patrimonial.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-entrega"><h2>Vistoria de Entrega de Imóvel</h2><p>Verificação técnica das condições de imóveis novos ou reformados na entrega.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="cat" href="#s-nbr15575"><h2>Vistoria de Atendimento à NBR 15575</h2><p>Avaliação de desempenho de edificações habitacionais conforme norma brasileira.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-pericias" data-title="Perícias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Perícias</b></nav><h1>Perícias</h1><p class="lead">Investigação técnica de problemas estruturais e diagnóstico de patologias construtivas.</p></div></header><section class="blk"><div class="in"><div class="cats"><a class="cat" href="#s-pericia"><h2>Perícia Estrutural e Análise de Patologias</h2><p>Investigação técnica de problemas estruturais e diagnóstico de patologias construtivas.</p><span class="more">Saiba Mais <svg class="arw" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div><div class="cta"><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Ver todos os serviços</a></div></div></section></div><div class="view" id="v-s-estrutural" data-title="Estrutura de Concreto e Alvenaria" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/projetos">Projetos Complementares</a> <span>/</span> <b>Estrutura de Concreto e Alvenaria</b></nav><h1>Estrutura de Concreto e Alvenaria</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 6118</span><span class="npill">NBR 6120</span><span class="npill">NBR 16868</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A elaboração de projetos estruturais é fundamental para a segurança e a durabilidade de qualquer edificação. Cada projeto é desenvolvido com base nas mais rigorosas normas técnicas, garantindo estabilidade estrutural e a otimização dos recursos investidos na obra.</p><p>A atuação abrange estruturas em concreto armado e alvenaria autoportante, com soluções personalizadas para diferentes tipos de construção — desde residências unifamiliares até edifícios comerciais de grande porte. Cada empreendimento recebe análise e dimensionamento próprios, respeitando suas características e necessidades específicas.</p><p>O objetivo é integrar a estrutura à arquitetura, unindo funcionalidade e estética, para que o projeto estrutural sustente a visão do projeto como um todo, sem comprometer a segurança nem a viabilidade técnica e econômica.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-hidrossanitarias" data-title="Instalações Hidrossanitárias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Projetos Complementares</a> <span>/</span> <b>Instalações Hidrossanitárias</b></nav><h1>Instalações Hidrossanitárias</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 8160</span><span class="npill">NBR 5626</span><span class="npill">NBR 7229</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 6118</span><span class="npill">NBR 6120</span><span class="npill">NBR 16868</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-hidrossanitarias" data-title="Instalações Hidrossanitárias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/projetos">Projetos Complementares</a> <span>/</span> <b>Instalações Hidrossanitárias</b></nav><h1>Instalações Hidrossanitárias</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 8160</span><span class="npill">NBR 5626</span><span class="npill">NBR 7229</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>Projetamos sistemas hidrossanitários eficientes e seguros, garantindo o correto abastecimento de água e o descarte adequado de efluentes. Nossos projetos visam a economia de água, a durabilidade dos sistemas e a conformidade com as normas de saúde e saneamento.</p><p>Incluímos dimensionamento de tubulações, reservatórios, sistemas de aquecimento de água, e soluções para reuso de água, sempre buscando a sustentabilidade e a funcionalidade para o usuário.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-eletricas" data-title="Instalações Elétricas de Baixa Tensão" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Projetos Complementares</a> <span>/</span> <b>Instalações Elétricas de Baixa Tensão</b></nav><h1>Instalações Elétricas de Baixa Tensão</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 5410</span><span class="npill">NBR 14039</span><span class="npill">NR 10</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 8160</span><span class="npill">NBR 5626</span><span class="npill">NBR 7229</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-eletricas" data-title="Instalações Elétricas de Baixa Tensão" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/projetos">Projetos Complementares</a> <span>/</span> <b>Instalações Elétricas de Baixa Tensão</b></nav><h1>Instalações Elétricas de Baixa Tensão</h1><p class="lead">Projetos Complementares</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 5410</span><span class="npill">NBR 14039</span><span class="npill">NR 10</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>Desenvolvemos projetos elétricos prediais que garantem a segurança dos usuários, a eficiência energética e a funcionalidade dos sistemas. Dimensionamos circuitos, quadros de distribuição, sistemas de aterramento e proteção contra surtos.</p><p>Nossos projetos consideram as necessidades específicas de cada edificação, desde residências até complexos comerciais, sempre em conformidade com as normas de segurança e as melhores práticas do setor.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-reforma" data-title="Vistoria de Reforma" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Reforma</b></nav><h1>Vistoria de Reforma</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 16280</span><span class="npill">ABNT NBR 14037</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 5410</span><span class="npill">NBR 14039</span><span class="npill">NR 10</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-reforma" data-title="Vistoria de Reforma" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Reforma</b></nav><h1>Vistoria de Reforma</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 16280</span><span class="npill">ABNT NBR 14037</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A vistoria de reforma é essencial para garantir que as modificações em edificações existentes sejam realizadas de forma segura e em conformidade com as normas técnicas. Avaliamos o impacto da reforma na estrutura, instalações e segurança do imóvel, emitindo um laudo técnico com as diretrizes e recomendações necessárias.</p><p>Nosso serviço abrange desde pequenas reformas residenciais até grandes intervenções em edifícios comerciais, protegendo o proprietário e garantindo a integridade da edificação e de seus vizinhos.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-cautelar" data-title="Vistoria Cautelar" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Vistoria Cautelar</b></nav><h1>Vistoria Cautelar</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">Código Civil Brasileiro</span><span class="npill">Código de Processo Civil</span><span class="npill">Resolução CONFEA 345/90</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 16280</span><span class="npill">ABNT NBR 14037</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-cautelar" data-title="Vistoria Cautelar" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Vistoria Cautelar</b></nav><h1>Vistoria Cautelar</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">Código Civil Brasileiro</span><span class="npill">Código de Processo Civil</span><span class="npill">Resolução CONFEA 345/90</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A Vistoria Cautelar é um documento técnico que registra as condições físicas de um imóvel em determinado momento, servindo como prova em processos judiciais, seguros ou para proteção patrimonial. Este serviço é fundamental para documentar o estado de conservação de imóveis antes de obras vizinhas, locações, compra e venda, ou qualquer situação que possa gerar questionamentos futuros sobre danos.</p><p>O laudo cautelar detalha fissuras, trincas, rachaduras, condições de pintura e revestimentos, funcionamento de instalações e inclui registro fotográfico detalhado, protegendo o proprietário contra futuras reclamações.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-entrega" data-title="Vistoria de Entrega de Imóvel" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Entrega de Imóvel</b></nav><h1>Vistoria de Entrega de Imóvel</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">Código de Defesa do Consumidor</span><span class="npill">Lei 4.591/64</span><span class="npill">NBR 5674</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">Código Civil Brasileiro</span><span class="npill">Código de Processo Civil</span><span class="npill">Resolução CONFEA 345/90</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-entrega" data-title="Vistoria de Entrega de Imóvel" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Entrega de Imóvel</b></nav><h1>Vistoria de Entrega de Imóvel</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">Código de Defesa do Consumidor</span><span class="npill">Lei 4.591/64</span><span class="npill">NBR 5674</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A Vistoria de Entrega de Imóvel é uma avaliação técnica realizada no momento da entrega de imóveis novos ou reformados, verificando se a obra foi executada conforme o projeto e as especificações técnicas. Este serviço protege o comprador ou locatário, identificando defeitos, não conformidades e itens que necessitam de correção antes da entrega definitiva do imóvel.</p><p>Verificamos acabamentos, revestimentos, funcionamento de instalações, esquadrias, vedações, sistemas elétricos e hidráulicos, e a conformidade com o memorial descritivo, garantindo que o imóvel seja entregue em perfeitas condições.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-nbr15575" data-title="Vistoria de Atendimento à NBR 15575" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Atendimento à NBR 15575</b></nav><h1>Vistoria de Atendimento à NBR 15575</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">NBR 15220</span><span class="npill">NBR 15292</span><span class="npill">Instruções Técnicas do Corpo de Bombeiros</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">Código de Defesa do Consumidor</span><span class="npill">Lei 4.591/64</span><span class="npill">NBR 5674</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-nbr15575" data-title="Vistoria de Atendimento à NBR 15575" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Vistoria de Atendimento à NBR 15575</b></nav><h1>Vistoria de Atendimento à NBR 15575</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">NBR 15220</span><span class="npill">NBR 15292</span><span class="npill">Instruções Técnicas do Corpo de Bombeiros</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A Vistoria de atendimento à NBR 15575 avalia o desempenho de edificações habitacionais, verificando se atendem aos requisitos mínimos de desempenho estrutural, segurança contra incêndio, estanqueidade, conforto térmico, acústico e durabilidade. Esta norma estabelece critérios e métodos para avaliação do desempenho de edificações habitacionais, sendo obrigatória para empreendimentos financiados pelo Sistema Financeiro da Habitação.</p><p>Avaliamos sistemas estruturais, pisos, vedações, coberturas e instalações, e verificamos o desempenho estrutural, segurança contra incêndio, segurança no uso e operação, estanqueidade à água, desempenho térmico, desempenho acústico, durabilidade e manutenibilidade.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-inspecao" data-title="Inspeção Predial" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Inspeção Predial</b></nav><h1>Inspeção Predial</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 16747</span><span class="npill">IBAPE</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 15575</span><span class="npill">NBR 15220</span><span class="npill">NBR 15292</span><span class="npill">Instruções Técnicas do Corpo de Bombeiros</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-inspecao" data-title="Inspeção Predial" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Inspeção Predial</b></nav><h1>Inspeção Predial</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 16747</span><span class="npill">IBAPE</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A inspeção predial é um diagnóstico técnico que avalia o estado geral de conservação de uma edificação, identificando anomalias, falhas e vícios construtivos. Nosso trabalho visa prevenir problemas maiores, otimizar a manutenção e garantir a segurança e a valorização do imóvel.</p><p>Realizamos vistorias detalhadas em todas as áreas da edificação, incluindo estrutura, instalações, acabamentos e sistemas de segurança, emitindo um laudo técnico com recomendações para as devidas correções e manutenções.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
-</div></section></div><div class="view" id="v-s-pericia" data-title="Perícia Estrutural e Análise de Patologias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos">Vistoria e Perícia</a> <span>/</span> <b>Perícia Estrutural e Análise de Patologias</b></nav><h1>Perícia Estrutural e Análise de Patologias</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">NBR 6118</span><span class="npill">NBR 8800</span><span class="npill">NBR 7190</span><span class="npill">Resolução CONFEA 345/90</span></div></div></header>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 16747</span><span class="npill">IBAPE</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+</div></section></div><div class="view" id="v-s-pericia" data-title="Perícia Estrutural e Análise de Patologias" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <a href="#servicos/vistoria">Vistoria e Perícia</a> <span>/</span> <b>Perícia Estrutural e Análise de Patologias</b></nav><h1>Perícia Estrutural e Análise de Patologias</h1><p class="lead">Vistoria e Perícia</p><div class="npills" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">NBR 6118</span><span class="npill">NBR 8800</span><span class="npill">NBR 7190</span><span class="npill">Resolução CONFEA 345/90</span></div></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>A Perícia Estrutural é uma investigação técnica especializada que visa identificar as causas de problemas estruturais, patologias construtivas e determinar as medidas corretivas necessárias para garantir a segurança da edificação. Este serviço é fundamental em casos de sinistros, processos judiciais, ou quando há suspeita de problemas estruturais que possam comprometer a segurança dos usuários.</p><p>Investigamos fissuras, trincas, rachaduras, problemas de fundação, corrosão de armaduras, infiltrações, umidade, deformações excessivas, falhas de execução e problemas de projeto, utilizando inspeção visual detalhada, ensaios não destrutivos, análise de projetos e documentos, e modelagem estrutural para emitir um relatório técnico conclusivo.</p>
   <h2>Por que escolher nossos serviços?</h2>
   <ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+ <aside><div class="npills npills-d" aria-label="Normas deste serviço"><span class="npill">NBR 13752</span><span class="npill">NBR 6118</span><span class="npill">NBR 8800</span><span class="npill">NBR 7190</span><span class="npill">Resolução CONFEA 345/90</span></div><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
 </div></section></div><div class="view" id="v-contato" data-title="Contato" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <b>Contato</b></nav><h1>Entre em Contato</h1><p class="lead">Estamos à disposição para atender seu projeto ou vistoria técnica</p></div></header>
 <section class="blk"><div class="in ct">
- <dl class="cdl"><div><dt>Telefone & WhatsApp</dt><dd><a href="tel:+5531988660712">+55 (31) 98866-0712</a></dd></div><div><dt>E-mail</dt><dd><a href="mailto:carla@cmgenge.com.br">carla@cmgenge.com.br</a></dd></div><div><dt>Localização</dt><dd>Avenida Del Rey, 111 - Sala 101 C<br>Bairro Caiçara — Belo Horizonte / MG</dd></div><div><dt>Horário de Atendimento</dt><dd>Segunda a Sexta: 08:00 às 18:00</dd></div><div><dt>Privacidade & LGPD</dt><dd>Consulte nossa <a class="ul" href="#privacidade">Política de Privacidade</a></dd></div></dl>
+ <dl class="cdl"><div><dt>Telefone</dt><dd><a class="cl" href="tel:+5531988660712"><svg class="ci" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>+55 (31) 98866-0712</span></a></dd></div><div class="cwa"><dt>WhatsApp</dt><dd><a class="cl" href="https://wa.me/5531988660712?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20CMG%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg class="ci" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>+55 (31) 98866-0712</span></a></dd></div><div><dt>E-mail</dt><dd><a class="cl" href="mailto:carla@cmgenge.com.br"><svg class="ci ci-d" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>carla@cmgenge.com.br</span></a></dd></div><div><dt>Localização</dt><dd class="ic-row"><svg class="ci ci-d" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Avenida Del Rey, 111 - Sala 101 C<br>Bairro Caiçara — Belo Horizonte / MG</span></dd></div><div><dt>Horário de Atendimento</dt><dd class="ic-row"><svg class="ci ci-d" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Segunda a Sexta: 08:00 às 18:00</span></dd></div><div><dt>Privacidade & LGPD</dt><dd class="ic-row"><svg class="ci ci-d" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Consulte nossa <a class="ul" href="#privacidade">Política de Privacidade</a></span></dd></div></dl>
  <form id="orc" action="https://formsubmit.co/carla@cmgenge.com.br" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="_subject" value="Novo orçamento — Site CMG"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://cmgenge.com.br/#contato">
+   <div class="hp" aria-hidden="true"><label>Deixe este campo em branco<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
   <h2>Solicite um Orçamento</h2>
-  <div id="ok" role="status" hidden>Solicitação enviada! Retornaremos em até 48 horas.</div>
-  <div class="f2"><div class="f"><label for="formNome">Nome Completo *</label><input type="text" id="formNome" name="nome" placeholder="Seu nome completo" required autocomplete="name"></div><div class="f"><label for="formEmail">E-mail *</label><input type="email" id="formEmail" name="email" placeholder="seu.email@exemplo.com" required autocomplete="email"></div></div>
-  <div class="f2"><div class="f"><label for="formTelefone">Telefone</label><input type="tel" id="formTelefone" name="telefone" placeholder="Ex: (31) 98888-8888" autocomplete="tel"></div><div class="f"><label for="formServico">Tipo de Serviço</label><select id="formServico" name="servico"><option value="">Selecione</option><option>Estrutura de Concreto e Alvenaria</option><option>Instalações Hidrossanitárias</option><option>Instalações Elétricas de Baixa Tensão</option><option>Vistoria de Reforma</option><option>Vistoria Cautelar</option><option>Vistoria de Entrega de Imóvel</option><option>Vistoria de Atendimento à NBR 15575</option><option>Inspeção Predial</option><option>Perícia Estrutural e Análise de Patologias</option><option>Engenharia Social</option><option>Outro</option></select></div></div>
-  <div class="f2"><div class="f"><label for="formEmpresa">Empresa</label><input type="text" id="formEmpresa" name="empresa" placeholder="Nome da empresa (opcional)" autocomplete="organization"></div><div class="f"><label for="formLocal">Localização do Projeto</label><input type="text" id="formLocal" name="localizacao" placeholder="Ex: Belo Horizonte e região metropolitana"></div></div>
+  <div id="ok" class="fmsg" role="status" hidden></div>
+   <div id="err" class="fmsg err" role="alert" hidden></div>
+  <div class="f"><label for="formNome">Nome Completo *</label><input type="text" id="formNome" name="nome" placeholder="Seu nome completo" required autocomplete="name"></div>
+  <div class="f"><label for="formEmail">E-mail *</label><input type="email" id="formEmail" name="email" placeholder="seu.email@exemplo.com" required autocomplete="email"></div>
+  <div class="f2"><div class="f"><label for="formTelefone">Telefone</label><input type="tel" id="formTelefone" name="telefone" placeholder="Ex: (31) 98888-8888" autocomplete="tel"></div><div class="f"><label for="formEmpresa">Empresa</label><input type="text" id="formEmpresa" name="empresa" placeholder="Nome da empresa (opcional)" autocomplete="organization"></div></div>
+  <div class="f"><label for="formServico">Tipo de Serviço</label><select id="formServico" name="servico"><option value="">Selecione</option><option>Estrutura de Concreto e Alvenaria</option><option>Instalações Hidrossanitárias</option><option>Instalações Elétricas de Baixa Tensão</option><option>Vistoria de Reforma</option><option>Vistoria Cautelar</option><option>Vistoria de Entrega de Imóvel</option><option>Vistoria de Atendimento à NBR 15575</option><option>Inspeção Predial</option><option>Perícia Estrutural e Análise de Patologias</option><option>Engenharia Social</option><option>Outro</option></select></div>
+  <div class="f"><label for="formLocal">Localização do Projeto</label><input type="text" id="formLocal" name="localizacao" placeholder="Ex.: Belo Horizonte/MG"></div>
   <div class="f"><label for="formDescricao">Descrição Detalhada do Projeto *</label><textarea id="formDescricao" name="descricao" required placeholder="Conte os detalhes do seu projeto: tipo de obra, dimensões, prazos, necessidades específicas..."></textarea></div>
-  <div class="f"><label for="anexo">Anexar arquivos (planta, projeto, fotos)</label><input type="file" id="anexo" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx" multiple></div>
-  <button class="btn btn-y" type="submit">Enviar Solicitação</button>
+  <div class="f"><label for="anexo">Anexar arquivos (planta, projeto, fotos)</label><input type="file" id="anexo" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx" multiple aria-describedby="anexoDica"><span class="fhint" id="anexoDica">Opcional. Até 10 MB no total (limite do serviço de envio). Formatos: PDF, JPG, PNG, DWG, DOC e DOCX. Com anexos, o envio passa pela página do serviço e volta ao site.</span></div>
+  <button class="btn btn-y fbtn" id="fsend" type="submit">Enviar Solicitação</button>
+   <p class="falt">Prefere falar direto?<br class="fbr"> <a href="https://wa.me/5531988660712?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20CMG%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp (31) 98866-0712</a> ou <a href="mailto:carla@cmgenge.com.br">carla@cmgenge.com.br</a>.</p>
  </form>
-</div></section></div><div class="view" id="v-privacidade" data-title="Política de Privacidade" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#contato">Contato</a> <span>/</span> <b>Política de Privacidade</b></nav><h1>Política de Privacidade</h1><p class="lead">Última atualização: 07/10/2026</p></div></header><section class="blk"><div class="in legal"><h2>1. Informações gerais</h2><p>A Engenharia &amp; Consultoria, com sede na Avenida Del Rey, 111 - Sala 101 C, Bairro Caiçara, Belo Horizonte / MG - CEP: 30775-240, está comprometida com a proteção da privacidade e dos dados pessoais de seus clientes, visitantes do site e usuários de nossos serviços.</p><p>Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD) - Lei nº 13.709/2018.</p><h2>2. Dados coletados</h2><p>Coletamos os seguintes tipos de informações:</p><ul><li>Dados de identificação: nome completo, CPF/CNPJ, RG</li><li>Dados de contato: e-mail, telefone, endereço</li><li>Dados profissionais: empresa, cargo, área de atuação</li><li>Dados do projeto: informações técnicas sobre projetos solicitados</li><li>Dados de navegação: cookies, logs de acesso, endereço IP</li></ul><h2>3. Finalidade do tratamento</h2><p>Utilizamos seus dados pessoais para:</p><ul><li>Prestação de serviços de engenharia e consultoria</li><li>Elaboração de orçamentos e propostas comerciais</li><li>Comunicação sobre projetos e serviços</li><li>Cumprimento de obrigações legais e regulamentares</li><li>Melhoria de nossos serviços e experiência do usuário</li><li>Marketing direto (com seu consentimento)</li></ul><h2>4. Base legal</h2><p>O tratamento de seus dados pessoais é fundamentado nas seguintes bases legais:</p><ul><li>Execução de contrato ou procedimentos preliminares</li><li>Cumprimento de obrigação legal ou regulatória</li><li>Legítimo interesse da empresa</li><li>Consentimento do titular (quando aplicável)</li></ul><h2>5. Compartilhamento de dados</h2><p>Seus dados pessoais podem ser compartilhados com:</p><ul><li>Parceiros técnicos e fornecedores necessários para execução dos projetos</li><li>Órgãos públicos, quando exigido por lei</li><li>Prestadores de serviços (contabilidade, advocacia, TI)</li><li>Autoridades competentes, mediante ordem judicial</li></ul><h2>6. Segurança dos dados</h2><p>Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais contra acesso não autorizado, alteração, divulgação ou destruição, incluindo:</p><ul><li>Criptografia de dados sensíveis</li><li>Controle de acesso restrito</li><li>Backup regular dos dados</li><li>Treinamento de funcionários</li><li>Monitoramento contínuo de segurança</li></ul><h2>7. Retenção de dados</h2><p>Mantemos seus dados pessoais pelo tempo necessário para cumprir as finalidades descritas nesta política, respeitando os prazos legais aplicáveis:</p><ul><li>Dados contratuais: 5 anos após o término do contrato</li><li>Dados fiscais: conforme legislação tributária</li><li>Dados de marketing: até a revogação do consentimento</li></ul><h2>8. Seus direitos</h2><p>Você tem os seguintes direitos em relação aos seus dados pessoais:</p><ul><li>Confirmação da existência de tratamento</li><li>Acesso aos dados</li><li>Correção de dados incompletos, inexatos ou desatualizados</li><li>Anonimização, bloqueio ou eliminação de dados desnecessários</li><li>Portabilidade dos dados</li><li>Eliminação dos dados tratados com consentimento</li><li>Revogação do consentimento</li></ul><h2>9. Cookies</h2><p>Nosso site utiliza cookies para melhorar sua experiência de navegação. Os cookies são pequenos arquivos de texto armazenados em seu dispositivo que nos ajudam a:</p><ul><li>Lembrar suas preferências</li><li>Analisar o tráfego do site</li><li>Personalizar conteúdo</li><li>Melhorar a funcionalidade do site</li></ul><h2>10. Alterações na política</h2><p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise regularmente. As alterações entrarão em vigor na data de sua publicação.</p><h2>11. Contato</h2><p>Para exercer seus direitos ou esclarecer dúvidas sobre esta Política de Privacidade, entre em contato conosco:</p><ul><li>E-mail: carla@cmgenge.com.br</li><li>Telefone: (31) 98866-0712</li><li>Endereço: Avenida Del Rey, 111 - Sala 101 C, Bairro Caiçara, Belo Horizonte / MG - CEP: 30775-240</li></ul><a class="back" href="#contato"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Voltar para Contato</a></div></section></div><div class="view" id="v-s-engenharia-social" data-title="Engenharia Social" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Engenharia Social</b></nav><h1>Engenharia Social</h1></div></header>
+</div></section></div><div class="view" id="v-privacidade" data-title="Política de Privacidade" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#contato">Contato</a> <span>/</span> <b>Política de Privacidade</b></nav><h1>Política de Privacidade</h1><p class="lead">Última atualização: 07/10/2026</p></div></header><section class="blk"><div class="in legal"><h2>1. Informações gerais</h2><p>A CMG Engenharia &amp; Consultoria, com sede na Avenida Del Rey, 111 - Sala 101 C, Bairro Caiçara, Belo Horizonte / MG - CEP: 30775-240, está comprometida com a proteção da privacidade e dos dados pessoais de seus clientes, visitantes do site e usuários de nossos serviços.</p><p>Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD) - Lei nº 13.709/2018.</p><h2>2. Dados coletados</h2><p>Coletamos os seguintes tipos de informações:</p><ul><li>Dados de identificação: nome completo, CPF/CNPJ, RG</li><li>Dados de contato: e-mail, telefone, endereço</li><li>Dados profissionais: empresa, cargo, área de atuação</li><li>Dados do projeto: informações técnicas sobre projetos solicitados</li><li>Dados de navegação: cookies, logs de acesso, endereço IP</li></ul><h2>3. Finalidade do tratamento</h2><p>Utilizamos seus dados pessoais para:</p><ul><li>Prestação de serviços de engenharia e consultoria</li><li>Elaboração de orçamentos e propostas comerciais</li><li>Comunicação sobre projetos e serviços</li><li>Cumprimento de obrigações legais e regulamentares</li><li>Melhoria de nossos serviços e experiência do usuário</li><li>Marketing direto (com seu consentimento)</li></ul><h2>4. Base legal</h2><p>O tratamento de seus dados pessoais é fundamentado nas seguintes bases legais:</p><ul><li>Execução de contrato ou procedimentos preliminares</li><li>Cumprimento de obrigação legal ou regulatória</li><li>Legítimo interesse da empresa</li><li>Consentimento do titular (quando aplicável)</li></ul><h2>5. Compartilhamento de dados</h2><p>Seus dados pessoais podem ser compartilhados com:</p><ul><li>Parceiros técnicos e fornecedores necessários para execução dos projetos</li><li>Órgãos públicos, quando exigido por lei</li><li>Prestadores de serviços (contabilidade, advocacia, TI)</li><li>Autoridades competentes, mediante ordem judicial</li></ul><h2>6. Segurança dos dados</h2><p>Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais contra acesso não autorizado, alteração, divulgação ou destruição, incluindo:</p><ul><li>Criptografia de dados sensíveis</li><li>Controle de acesso restrito</li><li>Backup regular dos dados</li><li>Treinamento de funcionários</li><li>Monitoramento contínuo de segurança</li></ul><h2>7. Retenção de dados</h2><p>Mantemos seus dados pessoais pelo tempo necessário para cumprir as finalidades descritas nesta política, respeitando os prazos legais aplicáveis:</p><ul><li>Dados contratuais: 5 anos após o término do contrato</li><li>Dados fiscais: conforme legislação tributária</li><li>Dados de marketing: até a revogação do consentimento</li></ul><h2>8. Seus direitos</h2><p>Você tem os seguintes direitos em relação aos seus dados pessoais:</p><ul><li>Confirmação da existência de tratamento</li><li>Acesso aos dados</li><li>Correção de dados incompletos, inexatos ou desatualizados</li><li>Anonimização, bloqueio ou eliminação de dados desnecessários</li><li>Portabilidade dos dados</li><li>Eliminação dos dados tratados com consentimento</li><li>Revogação do consentimento</li></ul><h2>9. Cookies</h2><p>Nosso site utiliza cookies para melhorar sua experiência de navegação. Os cookies são pequenos arquivos de texto armazenados em seu dispositivo que nos ajudam a:</p><ul><li>Lembrar suas preferências</li><li>Analisar o tráfego do site</li><li>Personalizar conteúdo</li><li>Melhorar a funcionalidade do site</li></ul><h2>10. Alterações na política</h2><p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise regularmente. As alterações entrarão em vigor na data de sua publicação.</p><h2>11. Contato</h2><p>Para exercer seus direitos ou esclarecer dúvidas sobre esta Política de Privacidade, entre em contato conosco:</p><ul><li>E-mail: carla@cmgenge.com.br</li><li>Telefone: (31) 98866-0712</li><li>Endereço: Avenida Del Rey, 111 - Sala 101 C, Bairro Caiçara, Belo Horizonte / MG - CEP: 30775-240</li></ul><a class="back" href="#contato"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Voltar para Contato</a></div></section></div><div class="view" id="v-s-engenharia-social" data-title="Engenharia Social" hidden><header class="ph"><div class="in"><nav class="crumbs" aria-label="Caminho"><a href="#home">Início</a> <span>/</span> <a href="#servicos">Serviços</a> <span>/</span> <b>Engenharia Social</b></nav><h1>Engenharia Social</h1></div></header>
 <section class="blk"><div class="in svc">
  <article><h2>Detalhes do Serviço</h2><p>Acreditamos que a engenharia deve ser acessível a todos. Por isso, oferecemos projetos de engenharia com valores reduzidos para famílias de baixa renda, contribuindo para que mais pessoas possam construir, reformar ou regularizar seus imóveis com segurança, qualidade e responsabilidade técnica.</p><p>Nosso objetivo é promover inclusão social por meio da engenharia, garantindo acesso a serviços profissionais essenciais, como projetos arquitetônicos, estruturais, elétricos, hidráulicos e documentações técnicas, sempre respeitando as normas vigentes e as necessidades de cada família.</p><p>Se você busca uma solução técnica confiável e com custo acessível, entre em contato conosco. Juntos, podemos transformar sonhos em realidade, tornando a construção civil mais justa, segura e acessível para todos.</p><blockquote class="hl"><p>Engenharia com responsabilidade social, construindo oportunidades e melhorando vidas.</p></blockquote><h2>Por que escolher nossos serviços?</h2><ul class="plain"><li>Mais de 35 anos de experiência no mercado</li><li>Conformidade com todas as normas técnicas vigentes</li><li>Atendimento personalizado e consultoria especializada</li><li>Prazos de entrega otimizados</li><li>Suporte técnico completo durante todo o projeto</li></ul></article>
- <aside><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
+ <aside><blockquote class="hl hl-d"><p>Engenharia com responsabilidade social, construindo oportunidades e melhorando vidas.</p></blockquote><div class="stamp"><h2>Informações Adicionais</h2><dl><dt>CREA:</dt><dd>60936/D — Registro ativo</dd><dt>Especialização:</dt><dd>Mestre em Engenharia de Estruturas</dd><dt>Área de Atuação:</dt><dd>Minas Gerais</dd><dt>Tempo de Resposta:</dt><dd>24-48 horas</dd></dl><a class="btn btn-y" href="#contato">Solicitar Orçamento</a><a class="btn btn-o" href="#servicos">Ver todos os serviços</a></div></aside>
 </div></section></div></main>
 
 <footer>
  <div class="in fg">
-  <div><div class="fl"><img src="assets/logo.png" alt="CMG Projetos & Consultoria" width="120" height="71" loading="lazy"></div><p class="nm">CMG Engenharia & Consultoria</p><p>CREA 60936/D — Ativo</p><p>Avenida Del Rey, 111 - Sala 101 C<br>Bairro Caiçara — Belo Horizonte / MG · CEP: 30775-240</p></div>
-  <div><h4>Navegação</h4><nav class="fn" aria-label="Rodapé"><a href="#home">Home</a><a href="#sobre">Sobre a Engenheira</a><a href="#servicos">Serviços</a><a href="#contato">Contato</a><a href="#privacidade">Política de Privacidade</a></nav>
-  <div class="fc"><a href="https://wa.me/5531988660712?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20CMG%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp (31) 98866-0712</a><a href="mailto:carla@cmgenge.com.br">carla@cmgenge.com.br</a></div></div>
+  <div><div class="fl"><img src="assets/logo-footer.png" alt="CMG Engenharia & Consultoria" width="130" height="66" loading="lazy" decoding="async"></div><p class="nm">CMG Engenharia & Consultoria</p><p>CREA 60936/D — Ativo</p><p class="fa-b">Avenida Del Rey, 111 - Sala 101 C<br>Bairro Caiçara — Belo Horizonte / MG · CEP: 30775-240</p></div>
+  <div class="fcol"><div class="fnc"><h4>Navegação</h4><nav class="fn" aria-label="Rodapé"><a href="#home">Home</a><a href="#sobre">Sobre a Engenheira</a><a href="#servicos">Serviços</a><a href="#contato">Contato</a></nav></div>
+  <div class="fc"><h4 class="fh">Contato</h4><a href="tel:+5531988660712"><svg class="fi" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Telefone (31) 98866-0712</span></a><a href="https://wa.me/5531988660712?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20CMG%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg class="fi" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp (31) 98866-0712</span></a><a href="mailto:carla@cmgenge.com.br"><svg class="fi fi-e" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>carla@cmgenge.com.br</span></a><p class="fa-c"><svg class="fi" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Avenida Del Rey, 111 - Sala 101 C<br>Bairro Caiçara — Belo Horizonte / MG · CEP: 30775-240</span></p></div></div>
  </div>
- <div class="rod"><div class="in"><span>© 2026 CMG Engenharia & Consultoria. Todos os direitos reservados. · <a href="#privacidade">Política de Privacidade</a></span><span><a href="https://vertice-digital-teste.gabrielmontanari62.workers.dev/#hero" target="_blank" rel="noopener">Site por Vértice Digital</a></span></div></div>
+ <div class="rod"><div class="in"><span>© 2026 CMG Engenharia & Consultoria. Todos os direitos reservados.</span><a href="#privacidade">Política de Privacidade</a></div></div>
 </footer>
 </div>
 
@@ -463,9 +963,27 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var isMobile=matchMedia('(max-width: 768px)').matches||matchMedia('(hover: none) and (pointer: coarse)').matches;
 var top=document.getElementById('top'),mn=document.getElementById('mn'),bgb=document.getElementById('bg'),base=document.title;
 var scrollY=0,dim=1,dimT=1;
-bgb.onclick=function(){var o=mn.classList.toggle('open');bgb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';document.body.classList.toggle('mo',o)};
+/* menu móvel: tela cheia sobre a página, então é modal: o conteúdo atrás fica inerte, Esc fecha e o foco volta ao botão */
+var outside=[].slice.call(document.querySelectorAll('#skip,main,#app>footer'));
+function setMenu(o,back){
+ mn.classList.toggle('open',o);bgb.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';document.body.classList.toggle('mo',o);
+ outside.forEach(function(x){if(o)x.setAttribute('inert','');else x.removeAttribute('inert')});
+ if(!o&&back)bgb.focus()}
+bgb.onclick=function(){setMenu(!mn.classList.contains('open'))};
+document.addEventListener('keydown',function(e){
+ if(!mn.classList.contains('open'))return;
+ if(e.key==='Escape'){setMenu(false,true);return}
+ if(e.key!=='Tab')return;
+ /* contenção de foco: o ciclo é logo, botão do menu e itens do menu */
+ var f=[].slice.call(document.querySelectorAll('.brand,#bg,#mn a[href],#mn button')).filter(function(x){return x.offsetParent!==null});
+ if(!f.length)return;var a=f[0],z=f[f.length-1];
+ if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+ else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
+addEventListener('resize',function(){if(innerWidth>980&&mn.classList.contains('open'))setMenu(false)});
+/* atalho "Ir para o conteúdo": mantém a rota atual e leva o foco ao conteúdo principal */
+document.getElementById('skip').addEventListener('click',function(e){e.preventDefault();var m=document.getElementById('conteudo');m.focus();m.scrollIntoView({block:'start'})});
 var fbEl=document.getElementById('fb');
-function onScroll(){scrollY=window.scrollY;if(fbEl&&!reduce)fbEl.style.transform='translate3d(0,'+(-scrollY*.035).toFixed(1)+'px,0)';top.classList.toggle('sc',scrollY>24);pT=Math.min(1,scrollY/380);pT=pT*pT*(3-2*pT);if(!pRaf){pRaf=1;requestAnimationFrame(pStep)}}
+function onScroll(){scrollY=window.scrollY;if(fbEl&&!reduce)fbEl.style.transform='translate3d(0,'+(-scrollY*.035).toFixed(1)+'px,0)';top.classList.toggle('sc',scrollY>24);pT=Math.min(1,scrollY/380);pT=pT*pT*(3-2*pT);if(pT>.55)top.classList.add('cp');else if(pT<.4)top.classList.remove('cp');if(!pRaf){pRaf=1;requestAnimationFrame(pStep)}}
 var pC=0,pT=0,pRaf=0;
 /* o cabeçalho acompanha a rolagem com atraso suave (sem trancos): constante de tempo de 130ms, independente da taxa de quadros */
 var pTm=0;
@@ -481,10 +999,24 @@ function reveal(v){
   if(!io||reduce){return}
   el.classList.remove('on');el.classList.add('rv');
   var sib=[].indexOf.call(el.parentNode.children,el),grid=el.matches('.card,.pillars>div,.npill');
-  el.style.setProperty('--d',(grid?(sib%3)*.12:Math.min(sib,6)*.1).toFixed(2)+'s');
+  el.style.setProperty('--d',(desk&&el.matches('.card')?cardRow(el)*.08:grid?(sib%3)*.12:Math.min(sib,6)*.1).toFixed(2)+'s');
+  if(desk&&el.matches('.card'))el.style.transition='none';
   io.observe(el);
  });
+ /* desktop: cartões já visíveis entram sozinhos, sem esperar a faixa inferior da janela */
+ if(desk&&io&&!reduce){void v.offsetWidth;requestAnimationFrame(function(){[].forEach.call(v.querySelectorAll('.card.rv'),function(c){c.style.transition='';if(c.classList.contains('on'))return;var r=c.getBoundingClientRect();if(r.height&&r.top<innerHeight){c.classList.add('on');io.unobserve(c)}})})}
 }
+/* cartões do catálogo: a linha inteira entra junta, com pequeno escalonamento entre linhas */
+var desk=matchMedia('(min-width: 981px)').matches;
+addEventListener('resize',function(){desk=matchMedia('(min-width: 981px)').matches});
+function cardRow(c){var cs=c.parentNode,n=cs.classList.contains('c3')?3:2,i=[].indexOf.call(cs.children,c);return Math.floor(i/n)}
+function cardsReplay(g){
+ var cs=[].slice.call(g.querySelectorAll('.card'));if(!cs.length||!io||reduce||!desk)return;
+ cs.forEach(function(c){c.style.transition='none';c.classList.remove('on');c.style.setProperty('--d',(cardRow(c)*.08).toFixed(2)+'s')});
+ void g.offsetWidth;
+ requestAnimationFrame(function(){cs.forEach(function(c){c.style.transition='';var r=c.getBoundingClientRect();if(r.top<innerHeight){c.classList.add('on');io.unobserve(c)}else io.observe(c)})})}
+/* botões revelados ao rolar: ao fim do fade, saem do regime de reveal para que hover/clique usem a transição rápida do botão */
+document.addEventListener('transitionend',function(e){var t=e.target;if(e.propertyName==='opacity'&&t.classList&&t.classList.contains('btn')&&t.classList.contains('rv')&&t.classList.contains('on')){t.classList.remove('rv');t.style.removeProperty('--d')}});
 /* abas da página Serviços: mostram um grupo por vez, com fade */
 var tabsEl=document.querySelector('.tabs'),tabTm=0;
 function svcTab(k,instant){if(!tabsEl)return;
@@ -494,18 +1026,19 @@ function svcTab(k,instant){if(!tabsEl)return;
  clearTimeout(tabTm);
  if(instant||reduce){apply();return}
  gs.forEach(function(g){if(!g.hidden)g.classList.add('out')});
- tabTm=setTimeout(function(){apply();gs.forEach(function(g){if(!g.hidden){g.classList.add('out');void g.offsetWidth;g.classList.remove('out')}})},260)}
-if(tabsEl)tabsEl.addEventListener('click',function(e){var b=e.target.closest('.tab');if(b)svcTab(b.getAttribute('data-t'))});
+ tabTm=setTimeout(function(){apply();gs.forEach(function(g){if(!g.hidden){if(desk&&io){cardsReplay(g)}else{g.classList.add('out');void g.offsetWidth;g.classList.remove('out')}}})},260)}
+if(tabsEl)tabsEl.addEventListener('click',function(e){var b=e.target.closest('.tab');if(b){var k=b.getAttribute('data-t');svcTab(k);try{history.replaceState(null,'','#servicos'+(k==='all'?'':'/'+k))}catch(_){}}});
 function route(){
- var h=(location.hash||'#home').slice(1),v=document.getElementById('v-'+h);
+ clearTimeout(navT);navT=null;
+ var hs=(location.hash||'#home').slice(1).split('/'),h=hs[0],cat=hs[1]||'',v=document.getElementById('v-'+h);
  if(!v){h='home';v=document.getElementById('v-home')}
  document.querySelectorAll('.view').forEach(function(x){x.hidden=x!==v});
  document.title=h==='home'?base:v.getAttribute('data-title')+' | '+base;
  var grp=(/^s-/.test(h)||['projetos','instalacoes','inspecao','vistorias','pericias'].indexOf(h)>-1)?'servicos':h;
  document.querySelectorAll('.menu [data-r]').forEach(function(a){a.getAttribute('data-r')===grp?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
- place(cur());mn.classList.remove('open');bgb.setAttribute('aria-expanded','false');if(typeof closeSubs==='function')closeSubs();document.body.style.overflow='';document.body.classList.remove('mo');
+ place(cur());setMenu(false);if(typeof closeSubs==='function')closeSubs();
  var back=(h==='servicos'&&/^s-/.test(lastH)&&navK!=='other')?lastH:null,card=back&&document.querySelector('#v-servicos .card[href="#'+back+'"]');
- if(h==='servicos')svcTab(card?card.closest('.grp').getAttribute('data-g'):'all',true);
+ if(h==='servicos'){var ck='all';[].forEach.call(document.querySelectorAll('.tab'),function(t){if(cat&&t.getAttribute('data-t')===cat)ck=cat});svcTab(card?'all':ck,true)}
  var sel=document.getElementById('formServico');
  if(h==='contato'&&sel){if(pendSvc){sel.value=pendSvc;autoSvc=sel.value}else if(autoSvc&&sel.value===autoSvc){sel.value='';autoSvc=''}}
  pendSvc='';navK=null;lastH=h;
@@ -513,18 +1046,25 @@ function route(){
  sweep();
  dimT=h==='home'?1:.75;window.scrollTo({top:0,left:0,behavior:'instant'});reveal(v);
  if(card){card.classList.add('on');var r=card.getBoundingClientRect();window.scrollTo({top:Math.max(0,Math.round(r.top+pageYOffset-(innerHeight-r.height)/2)),behavior:'instant'});card.classList.remove('hit');void card.offsetWidth;card.classList.add('hit');setTimeout(function(){card.classList.remove('hit')},2200)}
+ /* foco no título da nova página (não na carga inicial, para não roubar o foco nem anunciar o título de abertura) */
+ if(!firstRoute){var t=v.querySelector('h1')||v;if(!t.hasAttribute('tabindex'))t.setAttribute('tabindex','-1');t.focus({preventScroll:true})}
+ firstRoute=false;
 }
+var firstRoute=true;
 /* troca de página: linha azul técnica atravessa o topo; cliques normais ganham uma saída curta antes da entrada */
 var cur0=document.createElement('div');cur0.id='pgc';cur0.setAttribute('aria-hidden','true');document.body.appendChild(cur0);
 function sweep(){if(reduce)return;cur0.classList.remove('go');void cur0.offsetWidth;cur0.classList.add('go')}
+var navT=null;
 document.addEventListener('click',function(e){
  if(reduce||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
  var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||a.target)return;
- var id=a.getAttribute('href').slice(1),nv=id&&document.getElementById('v-'+id),cv=document.querySelector('.view:not([hidden])');
- if(!nv||!cv||nv===cv)return;
- e.preventDefault();cv.classList.add('leaving');
- setTimeout(function(){if(location.hash==='#'+id){cv.classList.remove('leaving');return}location.hash=a.getAttribute('href')},240);
- setTimeout(function(){cv.classList.remove('leaving')},1500)},false);
+ var id=a.getAttribute('href').slice(1),nv=id&&document.getElementById('v-'+id.split('/')[0]),cv=document.querySelector('.view:not([hidden])');
+ if(!nv||!cv)return;
+ if(nv===cv){if(navT){clearTimeout(navT);navT=null;cv.classList.remove('leaving');e.preventDefault()}return}
+ e.preventDefault();clearTimeout(navT);cv.classList.add('leaving');
+ var dl=(innerWidth>=981&&(cv.id==='v-sobre'||cv.id==='v-contato'||/^v-s-/.test(cv.id)))?170:240;
+ navT=setTimeout(function(){navT=null;if(location.hash==='#'+id){cv.classList.remove('leaving');return}location.hash=a.getAttribute('href')},dl);
+ setTimeout(function(){if(!navT)cv.classList.remove('leaving')},1500)},false);
 /* contexto de navegação: de onde veio o clique (voltar ao cartão do serviço; pré-selecionar o serviço no formulário) */
 var lastH='',navK=null,pendSvc='',autoSvc='';
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
@@ -549,8 +1089,8 @@ lk.addEventListener('focusout',function(e){if(!lk.contains(e.relatedTarget))plac
 addEventListener('resize',function(){place(cur())});
 /* submenus do dropdown de Serviços: abrem para a direita; viram para a esquerda se não couberem na tela */
 var canHover=matchMedia('(hover: hover)').matches,dd=document.querySelector('.dd'),sbs=[].slice.call(document.querySelectorAll('.dd-s'));
-function fit(s){s.classList.remove('flip');var r=s.getBoundingClientRect(),room=innerWidth-16-(r.right+8),w=Math.min(360,innerWidth-32);
- if(room>=260){w=Math.min(w,room)}else if(r.left-8-16>=260){s.classList.add('flip');w=Math.min(w,r.left-24)}
+function fit(s){s.classList.remove('flip');var r=s.parentNode.getBoundingClientRect(),room=innerWidth-16-r.right,w=Math.min(400,innerWidth-32);
+ if(room>=w){}else if(r.left-16>=w){s.classList.add('flip')}else if(room>=r.left-16){w=room}else{s.classList.add('flip');w=r.left-16}
  s.style.setProperty('--sw',w+'px')}
 sbs.forEach(function(s){var t=s.querySelector('.dd-t');
  s.addEventListener('mouseenter',function(){fit(s)});t.addEventListener('focus',function(){fit(s)});
@@ -559,146 +1099,193 @@ function closeSubs(){sbs.forEach(function(x){x.classList.remove('open');x.queryS
 if(dd){
  /* clicar em qualquer opção fecha o dropdown; só reabre depois que o mouse sair e voltar */
  dd.addEventListener('click',function(e){if(e.target.closest('a')){dd.classList.add('shut');closeSubs();if(document.activeElement&&dd.contains(document.activeElement))document.activeElement.blur()}});
- dd.addEventListener('mouseleave',function(){closeSubs();dd.classList.remove('shut')});
- document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classList.add('shut');closeSubs();var f=dd.querySelector(':focus');if(f)f.blur()}});
+ dd.addEventListener('mouseleave',function(){closeSubs();if(!dd.contains(document.activeElement))dd.classList.remove('shut')});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var had=dd.contains(document.activeElement);dd.classList.add('shut');closeSubs();if(had){var a=dd.querySelector(':scope>a');if(a)a.focus()}}
+  else if(e.key==='ArrowDown'&&document.activeElement===dd.querySelector(':scope>a')&&dd.classList.contains('shut')){dd.classList.remove('shut');e.preventDefault()}});
  dd.addEventListener('focusin',function(e){if(!dd.contains(e.relatedTarget))dd.classList.remove('shut')});
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){place(cur())});
 addEventListener('hashchange',route);route();
-/* o formulário envia por formsubmit; no ambiente de prévia só mostra a confirmação */
-var f=document.getElementById('orc');
-if(!/(cmgenge\.com\.br|netlify\.app)$/.test(location.hostname)){f.addEventListener('submit',function(e){e.preventDefault();var ok=document.getElementById('ok');ok.hidden=false;ok.scrollIntoView({block:'center'})})}
+/* formulário: envio por fetch ao FormSubmit; sucesso só aparece se o serviço confirmar */
+var frm=document.getElementById('orc'),okEl=document.getElementById('ok'),erEl=document.getElementById('err'),fsend=document.getElementById('fsend'),anexo=document.getElementById('anexo'),sending=false;
+var MAX_BYTES=10*1024*1024,EXT=/\.(pdf|jpe?g|png|dwg|docx?)$/i,AJAX=frm.action.replace('formsubmit.co/','formsubmit.co/ajax/');
+var ALT='Você também pode falar conosco pelo <a href="https://wa.me/5531988660712" target="_blank" rel="noopener">WhatsApp (31) 98866-0712</a> ou pelo e-mail <a href="mailto:carla@cmgenge.com.br">carla@cmgenge.com.br</a>.';
+function mb(n){return (n/1048576).toFixed(1).replace('.',',')+' MB'}
+function checkFiles(){
+ var fl=[].slice.call(anexo.files||[]),tot=0,bad='';
+ fl.forEach(function(x){tot+=x.size;if(!EXT.test(x.name)&&!bad)bad=x.name});
+ var m=bad?'O arquivo "'+bad+'" não é de um formato aceito (PDF, JPG, PNG, DWG, DOC ou DOCX).':(tot>MAX_BYTES?'Os anexos somam '+mb(tot)+'. O limite é de 10 MB no total; remova ou reduza algum arquivo.':'');
+ anexo.setCustomValidity(m);return m}
+anexo.addEventListener('change',function(){var m=checkFiles();if(m)anexo.reportValidity()});
+var vContato=document.getElementById('v-contato'),nextEl=frm.querySelector('[name=_next]');
+/* o resultado só rola a tela se Contato estiver visível; se o usuário saiu, a mensagem fica no formulário até ele voltar */
+function show(el,html){okEl.hidden=true;erEl.hidden=true;if(el){el.innerHTML=html;el.hidden=false;if(!vContato.hidden)el.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}}
+function busy(b){sending=b;fsend.setAttribute('aria-disabled',b?'true':'false');fsend.textContent=b?'Enviando…':'Enviar Solicitação';frm.setAttribute('aria-busy',b?'true':'false')}
+/* assinatura do conteúdo do formulário: distingue o que foi enviado do que o usuário editou depois */
+function sig(){var o=[];new FormData(frm).forEach(function(v,k){if(k==='_honey'||k==='_next')return;o.push(k+'='+(v&&v.name!==undefined?v.name+':'+v.size:v))});return o.join('\u0001')}
+var OKMSG='Solicitação enviada! Retornaremos em até 48 horas.';
+frm.addEventListener('submit',function(e){
+ if(sending){e.preventDefault();return}
+ if(checkFiles()){e.preventDefault();anexo.reportValidity();return}
+ /* com anexos: envio nativo (multipart), único caminho que a documentação do FormSubmit cobre para arquivos; o serviço redireciona de volta com ?enviado=1 */
+ if(anexo.files&&anexo.files.length){
+  var base=/(^|\.)(cmgenge\.com\.br|netlify\.app)$/.test(location.hostname)?location.origin:'https://cmgenge.com.br';
+  nextEl.value=base+'/?enviado=1#contato';busy(true);show(null);return}
+ e.preventDefault();
+ var snap=sig(),fd=new FormData(frm);fd.delete('attachment');fd.delete('_next');
+ busy(true);show(null);
+ var ctl=window.AbortController?new AbortController():null,tm=ctl&&setTimeout(function(){ctl.abort()},60000);
+ fetch(AJAX,{method:'POST',body:fd,headers:{'Accept':'application/json'},signal:ctl?ctl.signal:undefined})
+  .then(function(r){return r.json().then(function(d){return{ok:r.ok,d:d}},function(){return{ok:false,d:null}})})
+  .then(function(x){
+   if(x.ok&&x.d&&(x.d.success===true||x.d.success==='true')){
+    if(sig()===snap){frm.reset();show(okEl,OKMSG)}
+    else show(okEl,OKMSG+' Você editou o formulário depois de enviar; mantivemos o que está nos campos agora.')}
+   else show(erEl,'Não foi possível confirmar o envio. Seus dados continuam preenchidos; tente novamente em instantes. '+ALT)})
+  .catch(function(){show(erEl,'Não foi possível enviar agora (sem conexão ou o serviço não respondeu). Seus dados continuam preenchidos; tente novamente. '+ALT)})
+  .then(function(){if(tm)clearTimeout(tm);busy(false)})});
+/* voltar do envio nativo pelo botão "voltar" do navegador: libera o botão */
+addEventListener('pageshow',function(e){if(e.persisted)busy(false)});
+if(/[?&]enviado=1(&|$)/.test(location.search)){history.replaceState(null,'',location.pathname+'#contato');show(okEl,OKMSG)}
 
-/* ---- fundo 3D: esqueleto de aço em maquete digital. Carregado sob demanda, com fallback estático ---- */
+/* ---- fundo 3D: maquete de estrutura de concreto com fundação, montada peça a peça. Carregado em paralelo, com fallback estático ---- */
 var canvas=document.getElementById('bg3d');
 var weak=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.connection&&navigator.connection.saveData);
 function webgl(){try{var c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')))}catch(e){return false}}
 if(weak||!webgl())return;
 function load(){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=start;document.head.appendChild(s)}
-if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:1800});else setTimeout(load,600);
+load();   /* sem espera ociosa: o script é assíncrono e não bloqueia texto, botões nem navegação */
 
 function start(){
 if(typeof THREE==='undefined'){canvas.style.display='none';return}
 try{
  var C={bg:0xF4F6F8,navy:0x182A3A,graph:0x3F4A54,silver:0xA7B0B7,light:0xD9DEE2,tech:0x287D9B};
  var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:!isMobile,powerPreference:'default'});
- renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.75));
- renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.92;
+ renderer.setPixelRatio(Math.min(devicePixelRatio||1,isMobile?1:1.5));
+ renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
  var useShadow=!isMobile;
  if(useShadow){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap}
- var scene=new THREE.Scene();scene.fog=new THREE.Fog(C.bg,40,110);
- var camera=new THREE.PerspectiveCamera(32,1,.1,100);
- /* luz de estúdio natural: céu claro, sol levemente quente de um lado e preenchimento frio do outro */
- scene.add(new THREE.HemisphereLight(0xeef4fb,0x8d99a3,.5));
- var sun=new THREE.DirectionalLight(0xfff3e4,1.0);sun.position.set(-9,16,10);
- if(useShadow){sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.radius=5;sun.shadow.bias=-.0004;var sc=sun.shadow.camera;sc.left=-12;sc.right=12;sc.top=12;sc.bottom=-12;sc.near=1;sc.far=50}
+ var scene=new THREE.Scene();scene.fog=new THREE.Fog(C.bg,70,150);
+ var camera=new THREE.PerspectiveCamera(30,1,1,220);
+ /* luz de estúdio suave: céu claro, sol levemente quente de um lado e preenchimento frio do outro */
+ scene.add(new THREE.HemisphereLight(0xf2f6fa,0x8a96a0,.5));
+ var sun=new THREE.DirectionalLight(0xfff4e6,1.3);sun.position.set(-22,40,26);
+ if(useShadow){sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.radius=4;sun.shadow.bias=-.0006;sun.shadow.normalBias=.02;var sc=sun.shadow.camera;sc.left=-20;sc.right=20;sc.top=20;sc.bottom=-20;sc.near=10;sc.far=95}
  scene.add(sun);
- var fill=new THREE.DirectionalLight(0xdbe7f2,.3);fill.position.set(10,6,-6);scene.add(fill);
- /* reflexos muito sutis: mini ambiente de estúdio (painéis claros) convertido em mapa de ambiente */
- try{var envS=new THREE.Scene(),room=new THREE.Mesh(new THREE.BoxGeometry(30,20,30),new THREE.MeshBasicMaterial({color:0xaab5bf,side:THREE.BackSide}));envS.add(room);
-  [[0,9,0,14,.3,14,0xffffff],[-14,2,0,.3,8,14,0xf1f6fa],[14,3,4,.3,6,8,0xcfd9e1]].forEach(function(p){var m=new THREE.Mesh(new THREE.BoxGeometry(p[3],p[4],p[5]),new THREE.MeshBasicMaterial({color:p[6]}));m.position.set(p[0],p[1],p[2]);envS.add(m)});
+ var fill=new THREE.DirectionalLight(0xdbe7f2,.38);fill.position.set(26,10,-14);scene.add(fill);
+ /* reflexos discretos: mini estúdio de painéis claros convertido em mapa de ambiente */
+ try{var envS=new THREE.Scene(),room=new THREE.Mesh(new THREE.BoxGeometry(30,20,30),new THREE.MeshBasicMaterial({color:0x9ea9b3,side:THREE.BackSide}));envS.add(room);
+  [[0,9,0,14,.3,14,0xffffff],[-14,2,0,.3,8,14,0xeef3f7],[14,3,4,.3,6,8,0xc8d2da]].forEach(function(p){var m=new THREE.Mesh(new THREE.BoxGeometry(p[3],p[4],p[5]),new THREE.MeshBasicMaterial({color:p[6]}));m.position.set(p[0],p[1],p[2]);envS.add(m)});
   var pm0=new THREE.PMREMGenerator(renderer);scene.environment=pm0.fromScene(envS,.04).texture;pm0.dispose()}catch(e){}
  var root=new THREE.Group();scene.add(root);
- /* aço escovado: textura procedural de riscos finos usada como rugosidade e relevo */
- function brushed(){var c=document.createElement('canvas');c.width=c.height=256;var x=c.getContext('2d');x.fillStyle='#808080';x.fillRect(0,0,256,256);
-  for(var i=0;i<1400;i++){var v=110+Math.random()*60|0;x.strokeStyle='rgba('+v+','+v+','+v+','+(.1+Math.random()*.25)+')';x.lineWidth=Math.random()*1.2+.3;var y=Math.random()*256,l=40+Math.random()*180,x0=Math.random()*256;x.beginPath();x.moveTo(x0,y);x.lineTo(x0+l,y+(Math.random()-.5)*1.5);x.stroke()}
-  var t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(2,2);return t}
- var bt=brushed();
- var steel=new THREE.MeshStandardMaterial({color:0x4f5d69,metalness:.62,roughness:.46,roughnessMap:bt,bumpMap:bt,bumpScale:.35,envMapIntensity:.55});
- var steelD=new THREE.MeshStandardMaterial({color:0x2f3a44,metalness:.5,roughness:.5,roughnessMap:bt,bumpMap:bt,bumpScale:.3,envMapIntensity:.45});
- var alum=new THREE.MeshStandardMaterial({color:0x8d98a2,metalness:.55,roughness:.38,roughnessMap:bt,envMapIntensity:.6});
- var navyM=new THREE.MeshStandardMaterial({color:0x182A3A,metalness:.4,roughness:.55,envMapIntensity:.4});
- var lines=[];
- function lm(c,o){var m=new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o});m.userData.o=o;lines.push(m);return m}
- var mL=lm(C.silver,.8),mD=lm(C.graph,.45),mG=lm(C.silver,.35);
- /* pórtico: pilares e vigas em perfil I simplificado (alma + mesas) */
- var BX=isMobile?2:3,BZ=2,SP=2.6,FH=1.35,FL=isMobile?4:5,w=BX*SP,d=BZ*SP;
- var struct=new THREE.Group();root.add(struct);
- var buckets=new Map();
- function part(geo,mat,x,y,z){geo=geo.toNonIndexed();geo.translate(x,y,z);if(!buckets.has(mat))buckets.set(mat,[]);buckets.get(mat).push(geo)}
- function ibeam(len,axis,x,y,z,mat){
-  var B=THREE.BoxGeometry,t=.04,h=.2,fw=.14;
-  if(axis==='y'){part(new B(t,len,.1),mat,x,y,z);part(new B(fw,len,t),mat,x,y,z+.07);part(new B(fw,len,t),mat,x,y,z-.07)}
-  else if(axis==='x'){part(new B(len,h,t),mat,x,y,z);part(new B(len,t,fw),mat,x,y+h/2,z);part(new B(len,t,fw),mat,x,y-h/2,z)}
-  else{part(new B(t,h,len),mat,x,y,z);part(new B(fw,t,len),mat,x,y+h/2,z);part(new B(fw,t,len),mat,x,y-h/2,z)}}
- function flush(){buckets.forEach(function(list,mat){var n=0;list.forEach(function(g){n+=g.attributes.position.count});
-  var P=new Float32Array(n*3),N=new Float32Array(n*3),o=0;list.forEach(function(g){P.set(g.attributes.position.array,o*3);N.set(g.attributes.normal.array,o*3);o+=g.attributes.position.count});
-  var G=new THREE.BufferGeometry();G.setAttribute('position',new THREE.BufferAttribute(P,3));G.setAttribute('normal',new THREE.BufferAttribute(N,3));struct.add(new THREE.Mesh(G,mat))})}
- var nodes=[];
+ /* peças surgem com opacidade por instância (sem pontilhado); a sombra só aparece quando a peça já está quase opaca */
+ function fadeable(m,depth){m.onBeforeCompile=function(s){
+  s.vertexShader='attribute float aFade;\nvarying float vFade;\n'+s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvFade=aFade;');
+  s.fragmentShader='varying float vFade;\n'+(depth?s.fragmentShader.replace('void main() {','void main() {\nif(vFade<.6)discard;'):s.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a*=vFade;'))};return m}
+ var depthM=fadeable(new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking}),1);
+ /* concreto: cinza claro fosco, sem textura; a diferença entre faces vem só da luz */
+ function conc(c){return fadeable(new THREE.MeshStandardMaterial({color:c,metalness:0,roughness:.92,envMapIntensity:.35,transparent:true}))}
+ var mCol=conc(0x5c6369),mBeam=conc(0x545b62),mSlab=conc(0x6a7177),mFoot=conc(0x434a51);   /* valores lineares: na tela ficam cinza claro */
+ var mats=[mCol,mBeam,mSlab,mFoot];
+ /* malha da maquete em metros: 3×2 vãos de 6 m, 4 pavimentos de 3,6 m, sapatas isoladas abaixo do terreno (y=0) */
+ var BX=3,BZ=2,FL=isMobile?3:4,SP=6,FH=3.6,w=BX*SP,d=BZ*SP;
+ var CA=.4,CB=.5,VB=.2,VD=.5,LS=.12,FS=1.6,FT=.45,FD=1.3;   /* pilar 40×50, viga 20×50, laje 12 cm, sapata 1,6×1,6×0,45 com topo a 0,85 m de profundidade */
+ function Y(f){return f*FH}
+ var H=Y(FL),X=function(i){return -w/2+i*SP},Z=function(j){return -d/2+j*SP};
+ var B=THREE.BoxGeometry,types=[],all=[],ONE=new THREE.Vector3(1,1,1);
+ function kind(geo,mat){var t={geo:geo,mat:mat,list:[]};types.push(t);return t}
+ /* pilar de cada pavimento vai do topo da laje de baixo até o fundo da laje de cima: nada se sobrepõe */
+ var K={foot:kind(new B(FS,FT,FS),mFoot),ped:kind(new B(CA+.1,FD-FT,CB+.1),mFoot),
+  col:kind(new B(CA,FH-LS,CB),mCol),gir:kind(new B(SP-CA,VD,VB),mBeam),beam:kind(new B(VB,VD,SP-CB),mBeam),
+  slab:kind(new B(w+CA,LS,d+CB),mSlab)};
+ function add(k,x,y,z,from,t0,dur){var p={k:k,pos:new THREE.Vector3(x,y,z),q:new THREE.Quaternion(),sc:ONE,from:from||new THREE.Vector3(),t0:t0,dur:dur||.7};k.list.push(p);all.push(p);return p}
+ var DOWN=function(h){return new THREE.Vector3(0,h,0)};
+ /* cronograma (~9 s): eixos → sapatas e arranques → por pavimento: pilares, vigas, laje, com leve sobreposição */
+ var T_AX=0,T_BASE=.25,LV=1.85,T_L0=1.35,k;
+ k=0;for(var i=0;i<=BX;i++)for(var j=0;j<=BZ;j++){var tb=T_BASE+k*.035;k++;
+  add(K.foot,X(i),-FD+FT/2,Z(j),DOWN(.9),tb,.65);add(K.ped,X(i),-(FD-FT)/2,Z(j),DOWN(.9),tb+.3,.6)}
  for(var f=0;f<FL;f++){
-  var y0=f*FH;
-  for(var i=0;i<=BX;i++)for(var j=0;j<=BZ;j++){
-   if(f===FL-1&&(i===BX||(i===BX-1&&j===BZ)))continue;   // último pavimento incompleto: estrutura "em obra"
-   var x=-w/2+i*SP,z=-d/2+j*SP;
-   ibeam(FH,'y',x,y0+FH/2,z,steel);
-  }
-  var yb=y0+FH;
-  for(var j=0;j<=BZ;j++)for(var i=0;i<BX;i++){
-   if(f===FL-1&&i>=BX-1)continue;
-   ibeam(SP,'x',-w/2+i*SP+SP/2,yb,-d/2+j*SP,f%2?steel:steelD);
-  }
-  for(var i=0;i<=BX;i++)for(var j=0;j<BZ;j++){
-   if(f===FL-1&&i>=BX-1)continue;
-   ibeam(SP,'z',-w/2+i*SP,yb,-d/2+j*SP+SP/2,steel);
-  }
-  if(f<FL-1)nodes.push([-w/2+((f*2)%(BX+1))*SP,yb,-d/2+(f%(BZ+1))*SP]);
+  var L0=T_L0+f*LV,yt=Y(f+1)-LS;
+  /* pilares: descem verticalmente até assentar no arranque ou na laje */
+  k=0;for(var i=0;i<=BX;i++)for(var j=0;j<=BZ;j++){add(K.col,X(i),Y(f)+(FH-LS)/2,Z(j),DOWN(1.3),L0+k*.03,.7);k++}
+  /* vigas entre as faces dos pilares, com o topo no fundo da laje */
+  var vb=L0+.55;k=0;
+  for(var j=0;j<=BZ;j++)for(var i=0;i<BX;i++){add(K.gir,X(i)+SP/2,yt-VD/2,Z(j),DOWN(1.1),vb+k*.03,.7);k++}
+  for(var i=0;i<=BX;i++)for(var j=0;j<BZ;j++){add(K.beam,X(i),yt-VD/2,Z(j)+SP/2,DOWN(1.1),vb+k*.03,.7);k++}
+  /* laje: desce por cima, apoiando sobre vigas e pilares */
+  add(K.slab,0,yt+LS/2,0,DOWN(1.4),vb+k*.03+.35,.8);
  }
- /* chapas de base e de ligação: pequenas variações de material nos nós */
- for(var i=0;i<=BX;i++)for(var j=0;j<=BZ;j++){var x=-w/2+i*SP,z=-d/2+j*SP;part(new THREE.BoxGeometry(.42,.05,.42),navyM,x,.025,z);
-  for(var f=0;f<FL-1;f++)part(new THREE.BoxGeometry(.24,.035,.24),alum,x,(f+1)*FH+.11,z)}
- flush();var H=FL*FH;
- /* contraventamentos em linha fina (face frontal) */
- var br=[];for(var f=0;f<FL-1;f+=2){for(var i=0;i<BX;i++){var x0=-w/2+i*SP,x1=x0+SP;br.push(x0,f*FH,d/2,x1,(f+1)*FH,d/2,x1,f*FH,d/2,x0,(f+1)*FH,d/2)}}
- var bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.Float32BufferAttribute(br,3));struct.add(new THREE.LineSegments(bg,mL));
- /* lajes de vidro fosco, bem translúcidas */
- var glass=new THREE.MeshBasicMaterial({color:C.light,transparent:true,opacity:.32,depthWrite:false,side:THREE.DoubleSide});
- (isMobile?[]:[1,3]).forEach(function(k){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),glass);m.rotation.x=-Math.PI/2;m.position.y=k*FH+.02;struct.add(m)});
- /* pontos de conexão em azul técnico */
- var nodeMat=new THREE.MeshBasicMaterial({color:C.tech,transparent:true,opacity:.95}),halo=new THREE.MeshBasicMaterial({color:C.tech,transparent:true,opacity:.18,depthWrite:false});
- var pulse=[];nodes.forEach(function(n,k){var g=new THREE.Group();g.position.set(n[0],n[1],n[2]);g.add(new THREE.Mesh(new THREE.SphereGeometry(.07,12,10),nodeMat));var h=new THREE.Mesh(new THREE.SphereGeometry(.2,14,12),halo);g.add(h);g.userData.k=k;struct.add(g);pulse.push(h)});
- /* planta técnica no piso: grid + linhas dimensionais com marcadores */
- var grid=new THREE.GridHelper(40,40,C.silver,C.light);grid.position.y=-.02;grid.material=lm(C.silver,.36);root.add(grid);
- var gcv=document.createElement('canvas');gcv.width=gcv.height=128;var gx=gcv.getContext('2d'),gg=gx.createRadialGradient(64,64,6,64,64,64);gg.addColorStop(0,'rgba(24,42,58,.34)');gg.addColorStop(.55,'rgba(24,42,58,.12)');gg.addColorStop(1,'rgba(24,42,58,0)');gx.fillStyle=gg;gx.fillRect(0,0,128,128);
- var blob=new THREE.Mesh(new THREE.PlaneGeometry(w+7,d+7),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gcv),transparent:true,depthWrite:false}));blob.rotation.x=-Math.PI/2;blob.position.y=-.01;root.add(blob);
- if(useShadow){var catcher=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.ShadowMaterial({opacity:.16}));catcher.rotation.x=-Math.PI/2;catcher.position.y=0;catcher.receiveShadow=true;root.add(catcher);struct.traverse(function(o){if(o.isMesh&&o.material!==glass)o.castShadow=true})}
- var dm=[],off=d/2+1.4;
- dm.push(-w/2,0,off,w/2,0,off);for(var i=0;i<=BX;i++){var x=-w/2+i*SP;dm.push(x,0,off-.18,x,0,off+.18,x,0,d/2+.2,x,0,off)}
- var off2=w/2+1.4;dm.push(off2,0,-d/2,off2,0,d/2);for(var j=0;j<=BZ;j++){var z=-d/2+j*SP;dm.push(off2-.18,0,z,off2+.18,0,z,w/2+.2,0,z,off2,0,z)}
- dm.push(-w/2-1.2,0,d/2+.4,-w/2-1.2,H,d/2+.4,-w/2-1.4,0,d/2+.4,-w/2-1.0,0,d/2+.4,-w/2-1.4,H,d/2+.4,-w/2-1.0,H,d/2+.4);
- var dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.Float32BufferAttribute(dm,3));root.add(new THREE.LineSegments(dg,mD));
- /* peça de apoio ao fundo: poliedro técnico em arame, para profundidade */
- var poly=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.1,0)),lm(C.silver,.7));poly.position.set(-w/2-4,H*.95,-d/2-4);root.add(poly);
- var cube=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.4,2.4,2.4)),lm(C.graph,.35));cube.position.set(w/2+4.5,H*1.15,-d/2-5);root.add(cube);
- /* partículas quase imperceptíveis */
- var N=isMobile?8:30,pp=new Float32Array(N*3);for(var p=0;p<N;p++){pp[p*3]=(Math.random()-.5)*26;pp[p*3+1]=Math.random()*H*1.6;pp[p*3+2]=(Math.random()-.5)*20}
- var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
- var pm=new THREE.PointsMaterial({color:C.silver,size:.05,transparent:true,opacity:.7,depthWrite:false});var pts=new THREE.Points(pg,pm);root.add(pts);
- var wide=true,mx=0,my=0,smx=0,smy=0,aspect=1,running=true,vis=true,t0=performance.now(),cam={x:0,y:0};
- function size(){var W=innerWidth,Hh=innerHeight;renderer.setSize(W,Hh,false);aspect=W/Hh;camera.aspect=aspect;wide=W>980;
-  var dist=wide?25:31;camera.userData.dist=dist;camera.updateProjectionMatrix();
-  var half=Math.tan(16*Math.PI/180)*dist*aspect;root.position.x=wide?half*.7:half*.05;root.position.y=wide?-.6:-9;if(reduce)frame(3)}
+ var END=0;all.forEach(function(p){END=Math.max(END,p.t0+p.dur)});
+ /* instâncias por tipo de peça: poucas chamadas de desenho, animadas pela matriz e pela opacidade */
+ types.forEach(function(t){var n=t.list.length;
+  var a=new THREE.InstancedBufferAttribute(new Float32Array(n),1);a.setUsage(THREE.DynamicDrawUsage);t.geo.setAttribute('aFade',a);t.fade=a;
+  var m=new THREE.InstancedMesh(t.geo,t.mat,n);m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);m.frustumCulled=false;
+  if(useShadow){m.castShadow=true;m.receiveShadow=true;m.customDepthMaterial=depthM}
+  t.mesh=m;root.add(m)});
+ var M4=new THREE.Matrix4(),PV=new THREE.Vector3();
+ function ease(x){return 1-Math.pow(1-x,3)}
+ var built=false;
+ function assemble(T){
+  if(built)return;
+  types.forEach(function(t){t.list.forEach(function(p,n){
+   var x=Math.min(1,Math.max(0,(T-p.t0)/p.dur)),e=ease(x);
+   PV.copy(p.from).multiplyScalar(1-e).add(p.pos);M4.compose(PV,p.q,p.sc);t.mesh.setMatrixAt(n,M4);t.fade.array[n]=Math.min(1,x*2.2)});
+   t.mesh.instanceMatrix.needsUpdate=true;t.fade.needsUpdate=true});
+  axM.forEach(function(m){m.opacity=m.userData.o*Math.min(1,Math.max(0,(T-T_AX)/.8))});
+  /* montagem concluída: materiais voltam a opacos e a sombra é calculada uma última vez */
+  if(T>=END){built=true;mats.forEach(function(m){m.transparent=false;m.needsUpdate=true});if(useShadow){renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true}}
+ }
+ /* chão técnico: malha discreta, eixos de projeto em azul técnico e cotas em grafite */
+ var lines=[],axM=[];
+ function lm(c,o){var m=new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o,depthWrite:false});m.userData.o=o;lines.push(m);return m}
+ var grid=new THREE.GridHelper(96,48,C.silver,C.light);grid.position.y=0;grid.material=lm(C.silver,.3);root.add(grid);
+ var gcv=document.createElement('canvas');gcv.width=gcv.height=128;var gx=gcv.getContext('2d'),gg=gx.createRadialGradient(64,64,6,64,64,64);gg.addColorStop(0,'rgba(24,42,58,.22)');gg.addColorStop(.6,'rgba(24,42,58,.07)');gg.addColorStop(1,'rgba(24,42,58,0)');gx.fillStyle=gg;gx.fillRect(0,0,128,128);
+ var blob=new THREE.Mesh(new THREE.PlaneGeometry(w+16,d+16),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gcv),transparent:true,depthWrite:false}));blob.rotation.x=-Math.PI/2;blob.position.y=0;root.add(blob);
+ if(useShadow){var catcher=new THREE.Mesh(new THREE.PlaneGeometry(90,90),new THREE.ShadowMaterial({opacity:.09}));catcher.rotation.x=-Math.PI/2;catcher.position.y=.005;catcher.receiveShadow=true;root.add(catcher)}
+ /* terreno: véu claro translúcido no nível 0 (a fundação continua visível por baixo) e linha de corte com hachura na frente e na lateral */
+ var veil=new THREE.Mesh(new THREE.PlaneGeometry(w+9,d+9),new THREE.MeshBasicMaterial({color:C.bg,transparent:true,opacity:.42,depthWrite:false}));veil.rotation.x=-Math.PI/2;veil.position.y=.002;veil.renderOrder=5;root.add(veil);
+ var tr=[],ex=w/2+4.5,ez=d/2+4.5;tr.push(-ex,0,ez,ex,0,ez,ex,0,ez,ex,0,-ez);
+ for(var q=-ex;q<=ex;q+=.9)tr.push(q,0,ez,q-.35,-.4,ez);for(var q=-ez;q<=ez;q+=.9)tr.push(ex,0,q,ex,-.4,q+.35);
+ var trL=lm(C.graph,.3);axM.push(trL);var trG=new THREE.BufferGeometry();trG.setAttribute('position',new THREE.Float32BufferAttribute(tr,3));root.add(new THREE.LineSegments(trG,trL));
+ var ax=[],E=2.6,R=.55;
+ function bubble(cx,cz){for(var s=0;s<20;s++){var a0=s/20*Math.PI*2,a1=(s+1)/20*Math.PI*2;ax.push(cx+Math.cos(a0)*R,.02,cz+Math.sin(a0)*R,cx+Math.cos(a1)*R,.02,cz+Math.sin(a1)*R)}}
+ for(var i=0;i<=BX;i++){ax.push(X(i),.02,-d/2-E,X(i),.02,d/2+E);bubble(X(i),d/2+E+R)}
+ for(var j=0;j<=BZ;j++){ax.push(-w/2-E,.02,Z(j),w/2+E,.02,Z(j));bubble(w/2+E+R,Z(j))}
+ var axG=new THREE.BufferGeometry();axG.setAttribute('position',new THREE.Float32BufferAttribute(ax,3));var axL=lm(C.tech,.55);axM.push(axL);root.add(new THREE.LineSegments(axG,axL));
+ var dm=[],off=d/2+E+2.2;
+ dm.push(-w/2,.02,off,w/2,.02,off);for(var i=0;i<=BX;i++){var x=X(i);dm.push(x-.25,.02,off+.25,x+.25,.02,off-.25)}
+ var off2=w/2+E+2.2;dm.push(off2,.02,-d/2,off2,.02,d/2);for(var j=0;j<=BZ;j++){var z=Z(j);dm.push(off2-.25,.02,z+.25,off2+.25,.02,z-.25)}
+ var dmL=lm(C.graph,.38);axM.push(dmL);var dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.Float32BufferAttribute(dm,3));root.add(new THREE.LineSegments(dg,dmL));
+ /* enquadramento: no computador a maquete fica à direita (deslocamento do centro óptico), sem cortar nas bordas */
+ var wide=true,mx=0,my=0,smx=0,smy=0,running=true,vis=true,T=0,last=0,W=1,Hh=1,DIST=60,tgt=new THREE.Vector3(0,(H-FD)*.45,0);
+ var RAD=Math.sqrt(w*w+d*d+(H+FD)*(H+FD))/2,TAN=Math.tan(15*Math.PI/180);
+ function size(){W=innerWidth;Hh=innerHeight;renderer.setSize(W,Hh,false);var asp=W/Hh;camera.aspect=asp;wide=W>980;
+  if(wide){DIST=Math.max(RAD/(TAN*.74),RAD/(TAN*asp*.42));camera.setViewOffset(W,Hh,-W*.26,-Hh*.03,W,Hh)}
+  else{DIST=Math.max(RAD/(TAN*.6),RAD/(TAN*asp*.86));camera.setViewOffset(W,Hh,0,-Hh*.32,W,Hh)}
+  scene.fog.near=DIST+12;scene.fog.far=DIST+95;camera.far=DIST+140;camera.updateProjectionMatrix();if(reduce)render()}
  addEventListener('resize',size);
  addEventListener('mousemove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
- function frame(t){
+ var AZ=.62,EL=.3;
+ function place(t,s){
+  /* movimento lento e de pequena amplitude: ~±3,5° de órbita em ciclo de 46 s, leve respiração vertical e um toque do mouse */
+  var k=Math.min(1,Math.max(0,(t-END)/6)),kk=k*k*(3-2*k),tt=Math.max(0,t-END);
+  var a=AZ+kk*(Math.sin(tt*2*Math.PI/46)*.06)+smx*.05,el=EL+kk*Math.sin(tt*2*Math.PI/63)*.022-smy*.02-Math.min(s,1.2)*.05;
+  var dist=DIST*(1+.05*(1-ease(Math.min(1,t/END))))*(1-Math.min(s,1.2)*.04);
+  camera.position.set(tgt.x+Math.sin(a)*Math.cos(el)*dist,tgt.y+Math.sin(el)*dist,tgt.z+Math.cos(a)*Math.cos(el)*dist);camera.lookAt(tgt)}
+ function frame(dt){
   dim+=(dimT-dim)*.04;var s=scrollY/innerHeight,fade=Math.max(.45,1-s*.6)*dim;
-  canvas.style.opacity=reduce?fade:'';canvas.style.opacity=fade;
-  smx+=(mx-smx)*.035;smy+=(my-smy)*.035;
-  var dist=(camera.userData.dist||30)*(1-Math.min(s,1.2)*.05),a=.62+Math.sin(t*.06)*.1+smx*.16;
-  cam.x+=((Math.sin(a)*dist*.62)-cam.x)*.05;cam.y+=((H*.9+8-smy*1.1-s*2)-cam.y)*.05;
-  camera.position.set(cam.x,cam.y,Math.cos(a)*dist*.62+dist*.5);camera.lookAt(root.position.x*.3,H*.38,0);
-  root.rotation.y=smx*.08;              /* alguns graus com o mouse */
-  grid.position.x=-smx*.7;grid.position.z=smy*.5+scrollY*.0016;   /* grid em camada própria: parallax discreto */
-  poly.position.y=H*.95+s*.9;cube.position.y=H*1.15+s*1.4;        /* profundidade no scroll */
-  poly.rotation.y=t*.06;poly.rotation.x=t*.035;cube.rotation.y=-t*.04;cube.rotation.z=t*.03;
-  pulse.forEach(function(h,k){var q=.96+Math.sin(t*.8+k*1.3)*.07;h.scale.setScalar(q);h.material.opacity=.13+Math.sin(t*.8+k*1.3)*.035});
-  pts.rotation.y=t*.008;pts.position.y=Math.sin(t*.1)*.3;
-  renderer.render(scene,camera);
- }
- size();canvas.classList.add('on');
- function loop(){if(!running||!vis||document.hidden){running=false;return}frame((performance.now()-t0)/1000);requestAnimationFrame(loop)}
- function wake(){if(reduce||running)return;running=true;loop()}
- if(reduce){frame(3)}else{loop()}
- /* para de renderizar quando o hero já saiu bastante da tela ou a aba está oculta */
+  canvas.style.opacity=fade;
+  T+=dt;smx+=(mx-smx)*.035;smy+=(my-smy)*.035;
+  assemble(T);place(T,s);
+  grid.position.z=scrollY*.004;
+  renderer.render(scene,camera)}
+ function render(){dim=dimT;var s=scrollY/innerHeight;canvas.style.opacity=Math.max(.45,1-s*.6)*dim;T=END+2;assemble(T);place(T,s);renderer.render(scene,camera)}
+ size();canvas.classList.add('on');document.documentElement.classList.add('g3d');
+ function loop(now){if(!running||!vis||document.hidden){running=false;return}var dt=last?Math.min(.05,(now-last)/1000):0;last=now;frame(dt);requestAnimationFrame(loop)}
+ function wake(){if(reduce||running)return;running=true;last=0;requestAnimationFrame(loop)}
+ /* movimento reduzido: só a composição final, estática */
+ if(reduce){render();addEventListener('hashchange',function(){requestAnimationFrame(render)})}else{requestAnimationFrame(loop)}
+ /* para de renderizar quando o hero já saiu bastante da tela ou a aba está oculta; o relógio da montagem também para */
  addEventListener('scroll',function(){var v=scrollY<innerHeight*2.2;if(v&&!vis){vis=true;wake()}else if(!v)vis=false},{passive:true});
  document.addEventListener('visibilitychange',function(){if(!document.hidden)wake()});
 }catch(err){canvas.style.display='none'}
