@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.min.css?v=202611231625">
+<link rel="stylesheet" href="assets/css/home.min.css?v=202611231644">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"CMG Engenharia & Consultoria","description":"Engenharia civil: projetos estruturais e complementares, vistorias, inspeção predial e perícia.","telephone":"+55-31-98866-0712","email":"carla@cmgenge.com.br","address":{"@type":"PostalAddress","streetAddress":"Avenida Del Rey, 111 - Sala 101 C","addressLocality":"Belo Horizonte","addressRegion":"MG","postalCode":"30775-240","addressCountry":"BR"},"areaServed":"Minas Gerais","openingHours":"Mo-Fr 08:00-18:00"}
 </script>
@@ -260,11 +260,10 @@
         </div>
         <div class="rv hero-cta" style="margin-top:32px"><a class="btn btn-primary" href="tel:+5531988660712">Ligar agora</a><a class="btn btn-wa" href="https://wa.me/5531988660712?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a></div>
       </div>
-      <form class="rv c-form" id="orc" name="orcamento" action="/enviado.html" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="rv c-form" id="orc" name="orcamento" action="/enviado.html" method="POST" enctype="multipart/form-data" data-netlify="true">
       <h3>Solicitar orçamento</h3>
       <input type="hidden" name="form-name" value="orcamento">
       <input type="hidden" name="subject" value="Novo pedido de orçamento pelo site CMG">
-      <input class="hp" type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="row">
         <label>Nome completo *<input type="text" name="nome" required autocomplete="name"></label>
         <label>Telefone<input type="tel" name="telefone" autocomplete="tel"></label>
@@ -637,6 +636,6 @@ var io = new IntersectionObserver(function(es){
 },{threshold:.15});
 $$('.rv').forEach(function(el){ io.observe(el); });
 </script>
-<script src="assets/js/nav.js?v=202611231625"></script>
+<script src="assets/js/nav.js?v=202611231644"></script>
 </body>
 </html>
