@@ -9,7 +9,7 @@
 .bc-m{white-space:nowrap;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--teal-hover)}
 .bc-m b{font-weight:500;text-transform:uppercase}
 .bc-t{font-family:var(--f-head);font-weight:800;font-size:1.2rem;line-height:1.25;color:var(--navy)}
-.bc-p{font-size:var(--t-sm);color:var(--steel)}
+.bc-p{font-size:var(--t-sm);color:var(--ink-soft)}
 .bc-l{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;font-weight:600;color:var(--navy)}
 .bc-l svg{transition:transform .4s var(--ease),color .3s}
 .bcard:hover .bc-l svg{transform:translateX(5px);color:var(--teal-hover)}
@@ -28,5 +28,5 @@
   .bc-m{font-size:.7rem}
   .post-im{aspect-ratio:16/10;margin-bottom:var(--s3)}
 }
-.post-by{margin-top:var(--s4);padding-top:var(--s2);border-top:1px solid var(--line-light);font-size:var(--t-sm);color:var(--steel)}
-.blog-vazio{grid-column:1/-1;text-align:center;padding:var(--s6) 0;color:var(--steel);font-size:1.1rem}
+.post-by{margin-top:var(--s4);padding-top:var(--s2);border-top:1px solid var(--line-light);font-size:var(--t-sm);color:var(--ink-soft)}
+.blog-vazio{grid-column:1/-1;text-align:center;padding:var(--s6) 0;color:var(--ink-soft);font-size:1.1rem}

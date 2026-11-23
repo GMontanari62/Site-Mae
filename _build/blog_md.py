@@ -2,6 +2,7 @@
 """Le os artigos que a Carla escreve no painel (content/blog/*.md) e converte para HTML.
 Executado de dentro do blog.py (usa ROOT, os e e = html.escape)."""
 import re as _re, math as _math
+from urllib.parse import quote as _quote
 
 
 def _inline(t):
@@ -87,6 +88,7 @@ def _load_posts():
             img = img[len("assets/img/"):]
         if not img:
             img = "projeto.webp"
+        img = _quote(img)
         posts.append({"slug": fn[:-3], "data": br, "iso": dt, "min": max(1, _math.ceil(len(body.split()) / 200)),
                       "cat": fm.get("categoria") or "Blog", "img": (img, fm["titulo"]),
                       "titulo": fm["titulo"], "resumo": fm.get("resumo") or "", "html": _md(body)})
