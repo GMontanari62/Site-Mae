@@ -1,0 +1,4 @@
+dist/
+assets/raw/
+__pycache__/
+.netlify

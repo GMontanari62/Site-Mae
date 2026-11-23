@@ -1,0 +1,37 @@
+# Painel do blog (Sveltia CMS). Os artigos viram arquivos em content/blog e o site se refaz sozinho.
+backend:
+  name: github
+  repo: GMontanari62/Site-Mae
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+site_url: https://cmgenge.com.br
+display_url: https://cmgenge.com.br/blog/index.html
+locale: pt
+media_folder: assets/img/blog
+public_folder: /assets/img/blog
+
+collections:
+  - name: blog
+    label: Artigos do blog
+    label_singular: Artigo
+    folder: content/blog
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{titulo}} · {{data}}"
+    sortable_fields: ["data", "titulo"]
+    fields:
+      - { name: titulo, label: Título, widget: string }
+      - { name: data, label: Data, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - { name: categoria, label: Categoria, widget: select, options: ["Patologias", "Vistoria", "Inspeção predial", "Projetos", "Normas", "Dicas"], default: "Dicas" }
+      - { name: resumo, label: Resumo (uma ou duas frases que aparecem na lista), widget: text }
+      - { name: imagem, label: Foto de capa, widget: image, required: false }
+      - { name: publicado, label: Publicado (desmarque para guardar como rascunho), widget: boolean, default: true }
+      - name: body
+        label: Texto do artigo
+        widget: markdown
+        buttons: ["bold", "italic", "heading-two", "bulleted-list", "link"]
+        editor_components: []

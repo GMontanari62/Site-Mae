@@ -1,0 +1,7 @@
+# O Netlify refaz o site a cada mudança no GitHub (inclusive quando a Carla publica um artigo no painel).
+[build]
+  command = "DEPLOY_OUT=dist python _build/build.py && DEPLOY_OUT=dist python _build/make_deploy.py"
+  publish = "dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"

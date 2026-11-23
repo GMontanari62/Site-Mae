@@ -1,0 +1,86 @@
+/* ===================================================================
+   Página individual de serviço no CELULAR (layout de referência).
+   Vale só para <body class="sub ref"> (hoje: Vistoria Cautelar).
+   Para estender às demais, adicione os slugs em REF no _build/build.py.
+   O desktop não muda.
+   =================================================================== */
+/* painéis com abas: só existem no celular; no desktop o painel de informações fica oculto
+   (o cartão lateral continua sendo o aside) e "Por que escolher" segue em linha */
+.pn-tabs,.pn-info{display:none}
+.pn-slides{display:contents}
+/* o título passou a ser o 1º filho do painel: devolve a margem que ele tinha antes (desktop idêntico) */
+.svc-layout article .pn-why>h2:first-child{margin-top:var(--s5)}
+
+@media (max-width:768px){
+
+  /* "Por que escolher" e "Informações" em 2 painéis com abas e deslize, como no Contato */
+  body.ref .svc-layout>aside{display:none}
+  body.ref .pn-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:16px 0 12px;background:rgba(14,28,46,.07);border-radius:999px}
+  body.ref .pn-tabs button{border:0;border-radius:999px;padding:9px 10px;background:none;color:var(--navy);font:600 .85rem var(--f-head);cursor:pointer;transition:background-color .3s ease,color .3s ease}
+  body.ref .pn-tabs button[aria-selected="true"]{background:var(--navy);color:var(--white)}
+  body.ref .pn-slides{display:flex;align-items:flex-start;gap:16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;transition:height .3s var(--ease)}
+  body.ref .pn-slides::-webkit-scrollbar{display:none}
+  body.ref .pn-slides>*{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+  body.ref .pn-why h2,body.ref .pn-info h2{display:none}   /* a aba já diz o que é */
+  body.ref .pn-info{display:block;position:static;box-shadow:none}
+  body.ref .pn .cta-row{margin-top:12px}
+
+  /* cabeçalho da página: breadcrumb em uma linha, normas numa linha rolável */
+  body.ref .pg-hero{padding:calc(var(--header-h) + 12px) 0 14px}
+  body.ref .pg-hero .crumbs{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;margin-bottom:8px;font-size:.78rem;scrollbar-width:none}
+  body.ref .pg-hero .crumbs::-webkit-scrollbar{display:none}
+  body.ref .pg-hero .crumbs b,body.ref .pg-hero .crumbs span:last-of-type{display:none}   /* a página atual já é o título logo abaixo */
+  body.ref .pg-hero h1{font-size:1.7rem;margin:2px 0 10px}
+  body.ref .npills{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin:0 -24px;padding:0 24px 2px;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 90%,transparent);mask-image:linear-gradient(90deg,#000 90%,transparent)}
+  body.ref .npills::-webkit-scrollbar{display:none}
+  body.ref .npill{flex:none;white-space:nowrap;scroll-snap-align:start;font-size:.75rem;padding:5px 12px}
+
+  /* conteúdo */
+  body.ref .blk{padding:18px 0 22px}
+  body.ref .svc-layout{gap:18px}
+  body.ref .svc-img{margin-bottom:14px;border-radius:14px}
+  body.ref .svc-img img{aspect-ratio:16/7}
+  body.ref .svc-layout article h2{font-size:1.2rem;margin:18px 0 8px}
+  body.ref .svc-layout article p{font-size:.92rem;line-height:1.6;margin-bottom:10px}
+
+  /* por que escolher: cartões em 2 colunas */
+  body.ref .why{grid-template-columns:1fr 1fr;gap:8px;max-width:none;margin-bottom:14px}
+  body.ref .why li{padding:10px 10px 10px 28px;border:1px solid var(--line-light);border-radius:12px;background:var(--white);font-size:.8rem;line-height:1.35}
+  body.ref .why li:first-child{border-top:1px solid var(--line-light)}
+  body.ref .why li::before{left:10px;top:15px;width:8px;height:8px}
+  body.ref .why li:last-child:nth-child(odd){grid-column:1/-1}
+
+  /* botões lado a lado */
+  body.ref .cta-row{flex-wrap:nowrap;gap:8px}
+  body.ref .cta-row .btn{flex:1;width:auto;padding:11px 10px;font-size:.84rem;justify-content:center;white-space:nowrap}
+
+  /* informações adicionais: grade 2x2, sem o botão repetido */
+  body.ref .info-card h2{padding:10px 14px;font-size:.78rem}
+  body.ref .info-card dl{display:grid;grid-template-columns:1fr 1fr;column-gap:14px;padding:4px 14px 12px}
+  body.ref .info-card dt{margin-top:10px;font-size:.75rem}
+  body.ref .info-card dd{font-size:.85rem;line-height:1.35;padding-bottom:8px}
+  body.ref .info-card dt:nth-of-type(1){grid-area:1/1}
+  body.ref .info-card dd:nth-of-type(1){grid-area:2/1}
+  body.ref .info-card dt:nth-of-type(2){grid-area:1/2}
+  body.ref .info-card dd:nth-of-type(2){grid-area:2/2}
+  body.ref .info-card dt:nth-of-type(3){grid-area:3/1}
+  body.ref .info-card dd:nth-of-type(3){grid-area:4/1}
+  body.ref .info-card dt:nth-of-type(4){grid-area:3/2}
+  body.ref .info-card dd:nth-of-type(4){grid-area:4/2}
+  body.ref .info-card .btn{display:none}
+
+  /* veja também: carrossel com pontinhos */
+  body.ref .rel{padding:20px 0}
+  body.ref .rel .head{margin-bottom:10px}
+  body.ref .rel .head h2{font-size:1.2rem;margin:0}
+  body.ref .rel .scards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-24px;padding-right:24px;-webkit-overflow-scrolling:touch}
+  body.ref .rel .scards::-webkit-scrollbar{display:none}
+  body.ref .rel .scard{flex:0 0 82%;scroll-snap-align:start}
+  body.ref .rel .sc-im{aspect-ratio:16/9}
+  body.ref .rel .sc-b{padding:10px 14px 12px;gap:6px}
+  body.ref .rel .sc-t{font-size:.98rem}
+  body.ref .rel .sc-p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.82rem;line-height:1.4}
+  body.ref .rel .sc-n{padding-top:8px}
+  body.ref .rel .back{margin-top:0}
+  body.ref .rel p[style]{margin-top:12px!important}
+}

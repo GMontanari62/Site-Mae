@@ -1,0 +1,9 @@
+/* Sem o quadrado azul de toque no celular. O anel de foco continua aparecendo
+   só para quem navega pelo teclado (Tab), por acessibilidade. */
+html{-webkit-tap-highlight-color:transparent}
+a,button,summary,label,select,[role="tab"],[role="button"]{-webkit-tap-highlight-color:transparent}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus:not(:focus-visible),
+[role="tab"]:focus:not(:focus-visible){outline:none}
+a:focus-visible,button:focus-visible,summary:focus-visible,[role="tab"]:focus-visible{outline:2px solid var(--teal-glow);outline-offset:3px;border-radius:6px}

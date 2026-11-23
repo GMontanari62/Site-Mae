@@ -1,0 +1,20 @@
+# Netlify: cabeçalhos de segurança e cache. (O .htaccess só vale em servidores Apache.)
+# O Netlify já comprime em Brotli/gzip e atende vídeos com requisições parciais (Range) sozinho.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# CSS e JS levam ?v=carimbo no link: pode guardar por 1 ano
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# imagens e vídeos: 30 dias (se um dia trocar o arquivo, em até 30 dias todos recebem a nova versão)
+/assets/img/*
+  Cache-Control: public, max-age=2592000
+/assets/video/*
+  Cache-Control: public, max-age=2592000
