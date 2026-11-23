@@ -230,7 +230,7 @@ def footer(R):
         <li>Seg a sex, 8h às 18h</li></ul></div>
     </div>
     <div class="legal">
-      <span>© 2026 CMG Engenharia &amp; Consultoria. Todos os direitos reservados. · <a href="{R}politica-de-privacidade.html">Política de Privacidade</a></span>
+      <span>© 2026 CMG Engenharia &amp; Consultoria. Todos os direitos reservados. · <a href="{R}politica-de-privacidade.html">Política de Privacidade</a> · <a href="{R}admin/" rel="nofollow">Área da editora</a></span>
       <span>Site por <a href="https://verticedigitalbr.com" target="_blank" rel="noopener">Vértice Digital</a></span>
     </div>
   </div>
