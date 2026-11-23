@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.min.css?v=202611231616">
+<link rel="stylesheet" href="assets/css/home.min.css?v=202611231625">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"CMG Engenharia & Consultoria","description":"Engenharia civil: projetos estruturais e complementares, vistorias, inspeção predial e perícia.","telephone":"+55-31-98866-0712","email":"carla@cmgenge.com.br","address":{"@type":"PostalAddress","streetAddress":"Avenida Del Rey, 111 - Sala 101 C","addressLocality":"Belo Horizonte","addressRegion":"MG","postalCode":"30775-240","addressCountry":"BR"},"areaServed":"Minas Gerais","openingHours":"Mo-Fr 08:00-18:00"}
 </script>
@@ -260,11 +260,11 @@
         </div>
         <div class="rv hero-cta" style="margin-top:32px"><a class="btn btn-primary" href="tel:+5531988660712">Ligar agora</a><a class="btn btn-wa" href="https://wa.me/5531988660712?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a></div>
       </div>
-      <form class="rv c-form" id="orc" action="https://formsubmit.co/carla@cmgenge.com.br" method="POST" enctype="multipart/form-data">
+      <form class="rv c-form" id="orc" name="orcamento" action="/enviado.html" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
       <h3>Solicitar orçamento</h3>
-      <input type="hidden" name="_subject" value="Novo pedido de orçamento pelo site CMG">
-      <input type="hidden" name="_captcha" value="false">
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="form-name" value="orcamento">
+      <input type="hidden" name="subject" value="Novo pedido de orçamento pelo site CMG">
+      <input class="hp" type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="row">
         <label>Nome completo *<input type="text" name="nome" required autocomplete="name"></label>
         <label>Telefone<input type="tel" name="telefone" autocomplete="tel"></label>
@@ -566,18 +566,11 @@ new IntersectionObserver(function(es, o){
   window.addEventListener('resize', keepVisible);
 })();
 
-/* ===== envio do formulário sem sair da página: animação de sucesso ou aviso de erro =====
-   O envio é o normal do FormSubmit (aceita anexos), feito dentro de um quadro invisível. Quando dá certo, o FormSubmit
-   redireciona o quadro para /enviado.html (do mesmo site), e é isso que confirma o sucesso. Qualquer outra página = erro. */
+/* ===== envio do formulário (Netlify Forms) sem sair da página: animação de sucesso ou aviso de erro ===== */
 (function(){
   var f = $('#orc'), btn = f.querySelector('button[type=submit]'), fs = $('#fs'), fe = $('#fe'), feMsg = $('#feMsg'), novo = $('#fsNovo');
-  var rotulo = btn.textContent, padrao = feMsg.textContent, busy = false, to = null;
-  var fr = document.createElement('iframe');
-  fr.name = 'fsframe'; fr.title = 'Envio do formulário'; fr.hidden = true; fr.tabIndex = -1; fr.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(fr);
-  var nx = document.createElement('input');
-  nx.type = 'hidden'; nx.name = '_next'; nx.value = location.origin + '/enviado.html'; f.appendChild(nx);
-  function volta(){ busy = false; clearTimeout(to); btn.disabled = false; btn.classList.remove('loading'); btn.textContent = rotulo; f.removeAttribute('target'); }
+  var rotulo = btn.textContent, padrao = feMsg.textContent, busy = false;
+  function volta(){ busy = false; btn.disabled = false; btn.classList.remove('loading'); btn.textContent = rotulo; }
   function erro(msg){
     volta();
     feMsg.textContent = msg || padrao;
@@ -590,17 +583,17 @@ new IntersectionObserver(function(es, o){
     fs.classList.remove('go'); void fs.offsetWidth; fs.classList.add('go');
     f.scrollIntoView({block:'start', behavior:'smooth'}); fs.focus({preventScroll:true});
   }
-  fr.addEventListener('load', function(){
-    if (!busy) return;                                       /* carga inicial do quadro vazio */
-    var certo = false;
-    try { certo = fr.contentWindow.location.pathname.indexOf('enviado') > -1; } catch (e) { certo = false; }   /* página de outro site = não confirmou */
-    if (certo) ok(); else erro();
-  });
   f.addEventListener('submit', function(ev){
-    if (busy){ ev.preventDefault(); return; }
+    if (!window.fetch || !window.FormData) return;          /* navegador antigo: envio normal da página (volta para /enviado.html) */
+    ev.preventDefault();
+    if (busy) return;
     busy = true; fe.hidden = true; btn.disabled = true; btn.classList.add('loading'); btn.textContent = 'Enviando…';
-    f.target = 'fsframe';
-    to = setTimeout(function(){ if (busy) erro('O envio demorou demais. Verifique sua conexão e tente de novo.'); }, 90000);
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var to = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 40000);
+    /* sem Content-Type: o navegador monta o multipart com os anexos */
+    fetch('/', {method:'POST', body:new FormData(f), signal: ctrl ? ctrl.signal : undefined})
+      .then(function(r){ clearTimeout(to); if (r.ok) ok(); else erro(); })
+      .catch(function(err){ clearTimeout(to); erro(err && err.name === 'AbortError' ? 'O envio demorou demais. Verifique sua conexão e tente de novo.' : 'Sem conexão com o servidor. Verifique sua internet e tente de novo.'); });
   });
   novo.addEventListener('click', function(){
     f.classList.remove('done'); fs.hidden = true;
@@ -644,6 +637,6 @@ var io = new IntersectionObserver(function(es){
 },{threshold:.15});
 $$('.rv').forEach(function(el){ io.observe(el); });
 </script>
-<script src="assets/js/nav.js?v=202611231616"></script>
+<script src="assets/js/nav.js?v=202611231625"></script>
 </body>
 </html>
