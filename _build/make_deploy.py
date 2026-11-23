@@ -33,7 +33,7 @@ for h in htmls:
     copia(os.path.relpath(h, ROOT))
 for r in sorted(refs):
     copia(r)
-for extra in ("robots.txt", "_headers", "enviado.html", "assets/video/hero-m.mp4", "assets/video/cena2-m.mp4"):
+for extra in ("robots.txt", "sitemap.xml", "_headers", "enviado.html", "assets/video/hero-m.mp4", "assets/video/cena2-m.mp4"):
     copia(extra)
 
 # fotos enviadas pelo painel (nomes podem ter espaco, que a busca por links nao pega)

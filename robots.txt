@@ -4,3 +4,5 @@ Disallow: /_build/
 Disallow: /assets/raw/
 
 Disallow: /admin/
+
+Sitemap: https://cmgenge.com.br/sitemap.xml

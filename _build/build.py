@@ -456,4 +456,19 @@ hs2 = re.sub(r'assets/js/nav\.js(?:\?v=\d+)?', 'assets/js/nav.js?v=%s' % VER, hs
 if hs2 != hs:
     open(hp, 'w', encoding='utf8').write(hs2)
 
+# ---------- 8) sitemap.xml (home, servicos, blog, artigos, privacidade) ----------
+SITE = "https://cmgenge.com.br"
+hoje = time.strftime("%Y-%m-%d")
+urls = [("/", hoje, "1.0"), ("/servicos/", hoje, "0.9")]
+urls += [("/servicos/" + x["slug"], hoje, "0.8") for x in S]
+urls += [("/blog/", (POSTS[0]["iso"] if POSTS else hoje), "0.7")]
+urls += [("/blog/" + q["slug"], (q["iso"] or hoje), "0.6") for q in POSTS]
+urls += [("/politica-de-privacidade", hoje, "0.3")]
+NL = chr(10)
+xml = '<?xml version="1.0" encoding="UTF-8"?>' + NL + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + NL
+xml += "".join("  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>%s" % (SITE, u, d, pr, NL) for u, d, pr in urls)
+xml += "</urlset>" + NL
+open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf8").write(xml)
+print("sitemap:", len(urls), "enderecos")
+
 print("paginas geradas:", len(S) + 2)
