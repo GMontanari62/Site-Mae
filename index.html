@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.min.css?v=202611231606">
+<link rel="stylesheet" href="assets/css/home.min.css?v=202611231616">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"CMG Engenharia & Consultoria","description":"Engenharia civil: projetos estruturais e complementares, vistorias, inspeção predial e perícia.","telephone":"+55-31-98866-0712","email":"carla@cmgenge.com.br","address":{"@type":"PostalAddress","streetAddress":"Avenida Del Rey, 111 - Sala 101 C","addressLocality":"Belo Horizonte","addressRegion":"MG","postalCode":"30775-240","addressCountry":"BR"},"areaServed":"Minas Gerais","openingHours":"Mo-Fr 08:00-18:00"}
 </script>
@@ -566,12 +566,18 @@ new IntersectionObserver(function(es, o){
   window.addEventListener('resize', keepVisible);
 })();
 
-/* ===== envio do formulário sem sair da página: animação de sucesso ou aviso de erro ===== */
+/* ===== envio do formulário sem sair da página: animação de sucesso ou aviso de erro =====
+   O envio é o normal do FormSubmit (aceita anexos), feito dentro de um quadro invisível. Quando dá certo, o FormSubmit
+   redireciona o quadro para /enviado.html (do mesmo site), e é isso que confirma o sucesso. Qualquer outra página = erro. */
 (function(){
   var f = $('#orc'), btn = f.querySelector('button[type=submit]'), fs = $('#fs'), fe = $('#fe'), feMsg = $('#feMsg'), novo = $('#fsNovo');
-  var rotulo = btn.textContent, busy = false, ENDPOINT = 'https://formsubmit.co/ajax/carla@cmgenge.com.br';
-  var padrao = feMsg.textContent;
-  function volta(){ busy = false; btn.disabled = false; btn.classList.remove('loading'); btn.textContent = rotulo; }
+  var rotulo = btn.textContent, padrao = feMsg.textContent, busy = false, to = null;
+  var fr = document.createElement('iframe');
+  fr.name = 'fsframe'; fr.title = 'Envio do formulário'; fr.hidden = true; fr.tabIndex = -1; fr.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(fr);
+  var nx = document.createElement('input');
+  nx.type = 'hidden'; nx.name = '_next'; nx.value = location.origin + '/enviado.html'; f.appendChild(nx);
+  function volta(){ busy = false; clearTimeout(to); btn.disabled = false; btn.classList.remove('loading'); btn.textContent = rotulo; f.removeAttribute('target'); }
   function erro(msg){
     volta();
     feMsg.textContent = msg || padrao;
@@ -584,17 +590,17 @@ new IntersectionObserver(function(es, o){
     fs.classList.remove('go'); void fs.offsetWidth; fs.classList.add('go');
     f.scrollIntoView({block:'start', behavior:'smooth'}); fs.focus({preventScroll:true});
   }
+  fr.addEventListener('load', function(){
+    if (!busy) return;                                       /* carga inicial do quadro vazio */
+    var certo = false;
+    try { certo = fr.contentWindow.location.pathname.indexOf('enviado') > -1; } catch (e) { certo = false; }   /* página de outro site = não confirmou */
+    if (certo) ok(); else erro();
+  });
   f.addEventListener('submit', function(ev){
-    if (!window.fetch || !window.FormData) return;          /* navegador antigo: envio normal da página */
-    ev.preventDefault();
-    if (busy) return;
+    if (busy){ ev.preventDefault(); return; }
     busy = true; fe.hidden = true; btn.disabled = true; btn.classList.add('loading'); btn.textContent = 'Enviando…';
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var to = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 45000);
-    fetch(ENDPOINT, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}, signal: ctrl ? ctrl.signal : undefined})
-      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
-      .then(function(x){ clearTimeout(to); if (x.ok && String(x.j.success) !== 'false') ok(); else erro(); })
-      .catch(function(err){ clearTimeout(to); erro(err && err.name === 'AbortError' ? 'O envio demorou demais. Verifique sua conexão e tente de novo.' : 'Sem conexão com o servidor. Verifique sua internet e tente de novo.'); });
+    f.target = 'fsframe';
+    to = setTimeout(function(){ if (busy) erro('O envio demorou demais. Verifique sua conexão e tente de novo.'); }, 90000);
   });
   novo.addEventListener('click', function(){
     f.classList.remove('done'); fs.hidden = true;
@@ -638,6 +644,6 @@ var io = new IntersectionObserver(function(es){
 },{threshold:.15});
 $$('.rv').forEach(function(el){ io.observe(el); });
 </script>
-<script src="assets/js/nav.js?v=202611231606"></script>
+<script src="assets/js/nav.js?v=202611231616"></script>
 </body>
 </html>
