@@ -28,7 +28,7 @@ collections:
       - { name: data, label: Data, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
       - { name: categoria, label: Categoria, widget: select, options: ["Patologias", "Vistoria", "Inspeção predial", "Projetos", "Normas", "Dicas"], default: "Dicas" }
       - { name: resumo, label: Resumo (uma ou duas frases que aparecem na lista), widget: text }
-      - { name: imagem, label: Foto de capa, widget: image, required: false }
+      - { name: imagem, label: Foto de capa (de preferência na horizontal), widget: image, required: false }
       - { name: publicado, label: Publicado (desmarque para guardar como rascunho), widget: boolean, default: true }
       - name: body
         label: Texto do artigo
