@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.min.css?v=202611231602">
+<link rel="stylesheet" href="assets/css/home.min.css?v=202611231606">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"CMG Engenharia & Consultoria","description":"Engenharia civil: projetos estruturais e complementares, vistorias, inspeção predial e perícia.","telephone":"+55-31-98866-0712","email":"carla@cmgenge.com.br","address":{"@type":"PostalAddress","streetAddress":"Avenida Del Rey, 111 - Sala 101 C","addressLocality":"Belo Horizonte","addressRegion":"MG","postalCode":"30775-240","addressCountry":"BR"},"areaServed":"Minas Gerais","openingHours":"Mo-Fr 08:00-18:00"}
 </script>
@@ -294,8 +294,23 @@
       </div>
       <label>Anexar arquivos (planta, projeto, fotos · até 5 MB)<input type="file" name="attachment" id="anexo" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.dwg,.doc,.docx,.zip"></label>
       <label>Descrição detalhada *<textarea name="mensagem" required></textarea></label>
+      <div class="fe" id="fe" hidden role="alert" tabindex="-1">
+        <svg class="fe-ic" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.1"/></svg>
+        <div class="fe-tx"><strong>Não foi possível enviar</strong><span id="feMsg">Tente novamente em instantes ou fale com a gente pelo WhatsApp.</span></div>
+        <a class="btn btn-wa" href="https://wa.me/5531988660712?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
       <button class="btn btn-primary" type="submit">Enviar pedido</button>
       <p class="note">Retornamos em até 48 horas. Seus dados são usados apenas para responder ao seu contato, conforme a <a href="politica-de-privacidade.html" style="text-decoration:underline">Política de Privacidade</a>.</p>
+    <div class="fs" id="fs" hidden role="status" aria-live="polite" tabindex="-1">
+        <div class="fs-ck" aria-hidden="true">
+          <svg viewBox="0 0 52 52" width="96" height="96"><circle class="fs-c" cx="26" cy="26" r="24"/><path class="fs-t" d="M14.5 27.5l8 8 15-17"/></svg>
+          <span class="fs-ring"></span>
+          <i style="--a:0deg"></i><i style="--a:36deg"></i><i style="--a:72deg"></i><i style="--a:108deg"></i><i style="--a:144deg"></i><i style="--a:180deg"></i><i style="--a:216deg"></i><i style="--a:252deg"></i><i style="--a:288deg"></i><i style="--a:324deg"></i>
+        </div>
+        <strong class="fs-h">Pedido enviado com sucesso!</strong>
+        <p>Recebemos sua mensagem. Retornamos em até 48 horas, no e-mail que você informou.</p>
+        <button type="button" class="btn btn-ghost" id="fsNovo">Enviar outro pedido</button>
+      </div>
     </form>
     </div>
     <div class="map rv c-map"><iframe title="Mapa: Avenida Del Rey, 111, Caiçara, Belo Horizonte" loading="lazy" src="https://www.google.com/maps?q=Avenida+Del+Rey+111+Cai%C3%A7ara+Belo+Horizonte&output=embed"></iframe></div>
@@ -551,6 +566,42 @@ new IntersectionObserver(function(es, o){
   window.addEventListener('resize', keepVisible);
 })();
 
+/* ===== envio do formulário sem sair da página: animação de sucesso ou aviso de erro ===== */
+(function(){
+  var f = $('#orc'), btn = f.querySelector('button[type=submit]'), fs = $('#fs'), fe = $('#fe'), feMsg = $('#feMsg'), novo = $('#fsNovo');
+  var rotulo = btn.textContent, busy = false, ENDPOINT = 'https://formsubmit.co/ajax/carla@cmgenge.com.br';
+  var padrao = feMsg.textContent;
+  function volta(){ busy = false; btn.disabled = false; btn.classList.remove('loading'); btn.textContent = rotulo; }
+  function erro(msg){
+    volta();
+    feMsg.textContent = msg || padrao;
+    fe.hidden = false; fe.classList.remove('shake'); void fe.offsetWidth; fe.classList.add('shake');
+    fe.scrollIntoView({block:'center', behavior:'smooth'}); fe.focus({preventScroll:true});
+  }
+  function ok(){
+    volta(); f.reset(); fe.hidden = true;
+    f.classList.add('done'); fs.hidden = false;
+    fs.classList.remove('go'); void fs.offsetWidth; fs.classList.add('go');
+    f.scrollIntoView({block:'start', behavior:'smooth'}); fs.focus({preventScroll:true});
+  }
+  f.addEventListener('submit', function(ev){
+    if (!window.fetch || !window.FormData) return;          /* navegador antigo: envio normal da página */
+    ev.preventDefault();
+    if (busy) return;
+    busy = true; fe.hidden = true; btn.disabled = true; btn.classList.add('loading'); btn.textContent = 'Enviando…';
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var to = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 45000);
+    fetch(ENDPOINT, {method:'POST', body:new FormData(f), headers:{'Accept':'application/json'}, signal: ctrl ? ctrl.signal : undefined})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
+      .then(function(x){ clearTimeout(to); if (x.ok && String(x.j.success) !== 'false') ok(); else erro(); })
+      .catch(function(err){ clearTimeout(to); erro(err && err.name === 'AbortError' ? 'O envio demorou demais. Verifique sua conexão e tente de novo.' : 'Sem conexão com o servidor. Verifique sua internet e tente de novo.'); });
+  });
+  novo.addEventListener('click', function(){
+    f.classList.remove('done'); fs.hidden = true;
+    var p = f.querySelector('input[name=nome]'); if (p) p.focus();
+  });
+})();
+
 /* ===== anexos: limite de 5 MB no total ===== */
 $('#anexo').addEventListener('change', function(){
   var tot = 0; Array.prototype.forEach.call(this.files, function(f){ tot += f.size; });
@@ -587,6 +638,6 @@ var io = new IntersectionObserver(function(es){
 },{threshold:.15});
 $$('.rv').forEach(function(el){ io.observe(el); });
 </script>
-<script src="assets/js/nav.js?v=202611231602"></script>
+<script src="assets/js/nav.js?v=202611231606"></script>
 </body>
 </html>
