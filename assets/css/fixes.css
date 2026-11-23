@@ -186,3 +186,6 @@ html{scrollbar-color:#087A74 #0e1c2e}
   .fs.go .fs-ck svg,.fs.go .fs-h,.fs.go p,.fs.go .btn,.c-form .fe.shake{animation:none;opacity:1}
 }
 .c-form{scroll-margin-top:calc(var(--header-h,72px) + 16px)}
+/* "Enviar outro pedido": o botão ghost do site é branco (feito para fundo escuro); aqui o cartão é claro */
+.c-form .fs .btn-ghost{color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)}
+.c-form .fs .btn-ghost:hover{background:rgba(14,28,46,.06)}
