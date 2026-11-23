@@ -1,0 +1,105 @@
+/* ===================================================================
+   Cabeçalho e menu (revisão)
+   O vidro do cabeçalho passa para um pseudo-elemento: assim o cabeçalho
+   não cria um "contêiner" para o menu fixo e o visual do desktop é o mesmo.
+   =================================================================== */
+header.top{transition:none}
+header.top::before{content:"";position:absolute;inset:0;z-index:0;background:rgba(9,19,31,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-dark);opacity:0;transition:opacity .4s ease}
+header.top.solid{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+header.top.solid::before{opacity:1}
+header.top .wrap{position:relative;z-index:1}
+.nav-foot{display:none}
+
+@media (max-width:768px){
+  :root{--header-h:72px}
+  html.menu-open,html.menu-open body{overflow:hidden}
+
+  /* cabeçalho: logo menor ao rolar e barra de progresso de leitura */
+  .brand{position:relative;z-index:2}
+  .brand img{height:52px;transition:height .35s var(--ease)}
+  .top.solid:not(.menu-open) .brand img{height:42px}
+  .top::after{content:"";position:absolute;left:0;bottom:0;z-index:1;height:2px;width:var(--sp,0%);background:linear-gradient(90deg,var(--teal),var(--teal-glow));box-shadow:0 0 10px rgba(20,184,166,.6);opacity:0;transition:opacity .3s ease}
+  .top.solid:not(.menu-open)::after{opacity:1}
+  .top.menu-open::before{opacity:0}
+
+  /* botão: vidro + vira "X" */
+  .burger{position:relative;z-index:2;display:block;width:46px;height:46px;padding:0;border-radius:14px;border:1px solid var(--line-dark);background:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background-color .35s ease,border-color .35s ease}
+  .burger span{position:absolute;left:13px;right:13px;width:auto;height:2px;margin:0;border-radius:2px;background:var(--white);transition:top .45s var(--ease),transform .45s var(--ease)}
+  .burger span:nth-child(1){top:18px}
+  .burger span:nth-child(2){top:26px}
+  .burger.is-open{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)}
+  .burger.is-open span:nth-child(1){top:22px;transform:rotate(45deg)}
+  .burger.is-open span:nth-child(2){top:22px;transform:rotate(-45deg)}
+
+  /* painel do menu: tela cheia, página embaçada ao fundo */
+  nav.main{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:calc(var(--header-h) + 20px) 24px 28px;border:0;transform:none;
+    background:radial-gradient(circle at 88% 6%,rgba(20,184,166,.2),transparent 46%),linear-gradient(180deg,rgba(9,19,31,.66),rgba(9,19,31,.82));
+    -webkit-backdrop-filter:blur(0px) saturate(1);backdrop-filter:blur(0px) saturate(1);opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .38s ease,visibility 0s linear .38s,backdrop-filter .5s ease,-webkit-backdrop-filter .5s ease;counter-reset:n}
+  nav.main.open{opacity:1;visibility:visible;pointer-events:auto;-webkit-backdrop-filter:blur(18px) saturate(1.25);backdrop-filter:blur(18px) saturate(1.25);transition-delay:0s}
+
+  /* itens entram em cascata e saem juntos, mais rápido */
+  nav.main>*{opacity:0;transform:translateY(22px);transition:opacity .2s ease,transform .25s ease}
+  nav.main.open>*{opacity:1;transform:none;transition:opacity .55s var(--ease) calc(.14s + var(--i,0)*.065s),transform .75s var(--ease) calc(.14s + var(--i,0)*.065s)}
+  nav.main>:nth-child(1){--i:0}
+  nav.main>:nth-child(2){--i:1}
+  nav.main>:nth-child(3){--i:2}
+  nav.main>:nth-child(4){--i:3}
+  nav.main>:nth-child(5){--i:4}
+  nav.main>:nth-child(6){--i:5}
+
+  nav.main a.lnk{counter-increment:n;display:flex;align-items:center;gap:16px;width:100%;padding:16px 0;font:700 1.6rem/1.1 var(--f-head);letter-spacing:-.01em;color:var(--white);border-bottom:1px solid rgba(255,255,255,.12)}
+  nav.main a.lnk::before{content:"0" counter(n);min-width:26px;font:500 .78rem var(--f-mono);letter-spacing:.14em;color:var(--teal-glow)}
+  nav.main a.lnk::after{display:none}
+  nav.main a.lnk:active{color:var(--teal-glow)}
+
+  /* Serviços: fechado, com seta e dropdown em acordeão */
+  nav.main .dd{width:100%}
+  nav.main .dd>a.lnk .chev{display:inline-block;margin-left:auto;width:10px;height:10px;opacity:.85;border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);transform:rotate(45deg) translateY(-2px);transition:transform .45s var(--ease)}
+  nav.main .dd:hover>a.lnk .chev,nav.main .dd:focus-within>a.lnk .chev{transform:rotate(45deg) translateY(-2px)}
+  nav.main .dd.open>a.lnk .chev,nav.main .dd.open:hover>a.lnk .chev{transform:rotate(225deg) translateY(-2px)}
+  nav.main .dd.open>a.lnk{color:var(--teal-glow)}
+  nav.main .dd-p{position:static;display:grid;grid-template-rows:0fr;width:auto;padding:0 0 0 42px;background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;opacity:1;visibility:visible;transform:none;transition:grid-template-rows .6s var(--ease)}
+  nav.main .dd.open>.dd-p{grid-template-rows:1fr}
+  nav.main .dd-t{display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px 0;border-radius:0;background:none;font:600 1.05rem var(--f-head);color:var(--steel);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav.main .dd-t:hover,nav.main .dd-s:hover>.dd-t{background:none;color:var(--white)}
+  nav.main .dd-s.open>.dd-t,nav.main .dd-s:focus-within>.dd-t{background:none;color:var(--teal-glow)}
+  nav.main button.dd-t::after{width:8px;height:8px;opacity:.7;border-top:0;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .45s var(--ease)}
+  nav.main .dd-s.open>button.dd-t::after{transform:rotate(225deg) translateY(-2px)}
+  nav.main .dd-sp{position:static;display:grid;grid-template-rows:0fr;width:auto;padding:0 0 0 14px;background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;opacity:1;visibility:visible;transform:none;transition:grid-template-rows .5s var(--ease)}
+  nav.main .dd-s.open>.dd-sp{grid-template-rows:1fr}
+  nav.main .dd-sp::before{display:none}
+  nav.main .dd-sp a{padding:11px 0;border-radius:0;font-size:.98rem;line-height:1.35;color:var(--steel)}
+  nav.main .dd-sp a:hover{background:none;color:var(--white)}
+  nav.main .dd-all{margin:0;padding:14px 0 12px;border:0;font:700 1rem var(--f-head);color:var(--teal-glow)}
+
+  /* dropdown: altura exata, linha-guia que cresce e itens em cascata */
+  nav.main .dd-in,nav.main .dd-sin{min-height:0;overflow:hidden}
+  nav.main .dd-in{position:relative;padding:0 12px 0 16px}
+  nav.main .dd-in::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--teal-glow),rgba(20,184,166,0));transform:scaleY(0);transform-origin:top;transition:transform .25s ease}
+  nav.main .dd.open .dd-in::before{transform:scaleY(1);transition:transform .8s var(--ease) .1s}
+  nav.main .dd-in>*{opacity:0;transform:translateX(-14px);transition:opacity .18s ease,transform .22s ease}
+  nav.main .dd.open .dd-in>*{opacity:1;transform:none;transition:opacity .5s var(--ease) calc(.14s + var(--k,0)*.07s),transform .65s var(--ease) calc(.14s + var(--k,0)*.07s)}
+  nav.main .dd-in>:nth-child(1){--k:0}
+  nav.main .dd-in>:nth-child(2){--k:1}
+  nav.main .dd-in>:nth-child(3){--k:2}
+  nav.main .dd-in>:nth-child(4){--k:3}
+  nav.main .dd-sin>a{opacity:0;transform:translateX(-12px);transition:opacity .15s ease,transform .2s ease}
+  nav.main .dd-s.open .dd-sin>a{opacity:1;transform:none;transition:opacity .45s var(--ease) calc(.1s + var(--k,0)*.05s),transform .55s var(--ease) calc(.1s + var(--k,0)*.05s)}
+  nav.main .dd-sin>:nth-child(1){--k:0}
+  nav.main .dd-sin>:nth-child(2){--k:1}
+  nav.main .dd-sin>:nth-child(3){--k:2}
+  nav.main .dd-sin>:nth-child(4){--k:3}
+  nav.main .dd-sin>:nth-child(5){--k:4}
+  nav.main .dd-sin>:nth-child(6){--k:5}
+  nav.main .dd>a.lnk{transition:color .3s ease}
+  nav.main .dd>a.lnk .chev,nav.main button.dd-t::after{transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+
+  /* botão e contatos no rodapé do menu */
+  nav.main>.btn{margin-top:26px;width:100%;justify-content:center;padding:15px 24px;font-size:1rem}
+  nav.main .nav-foot{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:auto;padding-top:26px;font-size:.9rem;color:var(--steel)}
+  nav.main .nav-foot a{color:var(--white);font-weight:600;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  nav.main,nav.main>*,nav.main .dd-p,nav.main .dd-sp,.burger span{transition-duration:.01ms!important;transition-delay:0s!important}
+}
