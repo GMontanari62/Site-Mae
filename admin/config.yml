@@ -3,7 +3,7 @@ backend:
   name: github
   repo: GMontanari62/Site-Mae
   branch: main
-  base_url: https://site-mae.pages.dev
+  base_url: https://cmgenge.com.br
   auth_endpoint: auth
 
 site_url: https://cmgenge.com.br
