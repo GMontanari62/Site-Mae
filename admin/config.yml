@@ -3,7 +3,7 @@ backend:
   name: github
   repo: GMontanari62/Site-Mae
   branch: main
-  base_url: https://api.netlify.com
+  base_url: https://site-mae.pages.dev
   auth_endpoint: auth
 
 site_url: https://cmgenge.com.br
